@@ -1,825 +1,887 @@
 <html>
-<head>
-<link rel="stylesheet" href="css/jquery-ui.css" />
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/d3.min.js"></script>
-<link rel="stylesheet" href="css/maze.css" />
-<link rel="stylesheet" href="css/expert.css" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Keep Clicking and No One Explodes - Version 241</title>
-<script> // Init Actions
-function hideAllModules(){
-        
-        $('#modButton').hide();
-        $('#modComplex').hide();
-        $('#modFirst').hide();
-        $('#modKnobs').hide();
-        $('#modMazes').hide();
-        $('#modMemory').hide();
-        $('#modMorse').hide();
-        $('#modPasswords').hide();
-        $('#modSimon').hide();
-        $('#modSimple').hide();
-        $('#modSymbols').hide();
-        $('#modSeq').hide();
-};
-
-    $( document ).ready(function() {
-        $( "#numBatteriesButtons" ).buttonset();
-        $( "#serialSuffix" ).buttonset();
-        $( "#serialVowel" ).buttonset();
-        $( "#parallelPort" ).buttonset();
-        $( "#indicatorCARLit" ).buttonset();
-        $( "#indicatorFRKLit" ).buttonset();
-        $( "#numStrikes" ).buttonset();
-        $( "#selectedModuleButtons" ).buttonset();
-        hideAllModules();
-        
-    });
-// Globals
-var simonSequence = [];
-var memoryDB = [];
-var wsequencesDB = {'red':0,'blue':0,'black':0};
-
-
-
-
-
-</script>
-
-</head>
-
-
-<body>
-<fieldset>
-<legend>Bomb Info</legend>
-
-
-
-<form id='bombInfo'>
-
-<fieldset>
-<legend>Serial Vowel?</legend>
-<div id='serialVowel'>
-    <input type='radio' id='serialVowelNo'  name='serialVowel' value=false checked/>
-    <label for='serialVowelNo'>NO</label>
-    <input type='radio' id='serialVowelYes'  name='serialVowel' value=true/>
-    <label for='serialVowelYes'>YES</label>  
-</div>
-</fieldset>
-
-<fieldset>
-<legend>Serial Suffix?</legend>
-<div id='serialSuffix'>
-    <input type='radio' id='serialEven'  name='serialSuffix' value='even' checked/>
-    <label for='serialEven'>EVEN</label>
-    <input type='radio' id='serialOdd'  name='serialSuffix' value='odd'/>
-    <label for='serialOdd'>ODD</label>  
-</div>
-</fieldset>
-
-
-<fieldset>
-<legend>Batteries</legend>
-<div id='numBatteriesButtons'>
-    <input type='radio' name='numBatteries' id='batteries0'  id='numBatteries' value=0 checked='checked'/>
-    <label for='batteries0'>0</label>
-    <input type='radio' id='batteries1'  id='numBatteries'  value=1 name='numBatteries'/>
-    <label for='batteries1'>1</label>
-    <input type='radio' id='batteries2'  id='numBatteries' value=2 name='numBatteries'/>
-    <label for='batteries2'>2</label>
-    <input type='radio' id='batteries2_'  id='numBatteries' value=3 name='numBatteries'/>
-    <label for='batteries2_' name='numBatteries'>+</label>
-</div>
-</fieldset>
-
-<fieldset>
-<legend>Parallel Port?</legend>
-<div id='parallelPort'>
-    <input type='radio' id='parallelPortNo'  name='parallelPort' value=false checked/>
-    <label for='parallelPortNo'>NO</label>
-    <input type='radio' id='parallelPortYes'  name='parallelPort' value=true/>
-    <label for='parallelPortYes'>YES</label>  
-</div>
-</fieldset>
-
-<fieldset>
-<legend>CAR Indicator Lit?</legend>
-<div id='indicatorCARLit'>
-    <input type='radio' id='indicatorCARNo'  name='indicatorCARLit' value=false checked/>
-    <label for='indicatorCARNo'>NO</label>
-    <input type='radio' id='indicatorCARYes'  name='indicatorCARLit' value=true/>
-    <label for='indicatorCARYes'>YES</label>  
-</div>
-</fieldset>
-
-<fieldset>
-<legend>FRK Indicator Lit?</legend>
-<div id='indicatorFRKLit'>
-    <input type='radio' id='indicatorFRKNo'  name='indicatorFRKLit' value=false checked/>
-    <label for='indicatorFRKNo'>NO</label>
-    <input type='radio' id='indicatorFRKYes'  name='indicatorFRKLit' value=true/>
-    <label for='indicatorFRKYes'>YES</label>  
-</div>
-</fieldset>
-
-<fieldset>
-<legend>Number of Strikes</legend>
-<div id='numStrikes'>
-    <input type='radio' id='numStrikes0' name='numStrikes' value=0 checked/>
-    <label for='numStrikes0'>0</label>
-    <input type='radio' id='numStrikes1' name='numStrikes' value=1/>
-    <label for='numStrikes1'>1</label>
-    <input type='radio' id='numStrikes2' name='numStrikes' value=2/>
-    <label for='numStrikes2'>2</label>
-</div>
-</fieldset>
-
-</form>
-
-
-</fieldset>
-<fieldset>
-<legend>Modules</legend>
-<form id='selectedModuleButtons'>
-    
-    <input type='radio' id='modButtonShow' id='selectedModule' name='selectedModule' value='modButton'/>
-    <label for='modButtonShow'>Button</label>
-    
-    <input type='radio' id='modComplexShow' id='selectedModule' name='selectedModule'  value='modComplex'/>
-    <label for='modComplexShow'>Complex</label>
-
-    <input type='radio' id='modFirstShow' id='selectedModule' name='selectedModule' value='modFirst'/>
-    <label for='modFirstShow'>First</label>
-    
-    <input type='radio' id='modKnobsShow' id='selectedModule' name='selectedModule' value='modKnobs'/>
-    <label for='modKnobsShow'>Knobs</label>
-
-    <input type='radio' id='modMazesShow' id='selectedModule' name='selectedModule' value='modMazes'/>
-    <label for='modMazesShow'>Mazes</label>
-    
-    <input type='radio' id='modMemoryShow' id='selectedModule' name='selectedModule' value='modMemory'/>
-    <label for='modMemoryShow'>Memory</label>  
-
-    <input type='radio' id='modMorseShow' id='selectedModule' name='selectedModule' value='modMorse'/>
-    <label for='modMorseShow'>Morse</label>
-
-    <input type='radio' id='modPasswordsShow' id='selectedModule' name='selectedModule' value='modPasswords'/>
-    <label for='modPasswordsShow'>Passwords</label>
-    
-    <input type='radio' id='modSimonShow' id='selectedModule' name='selectedModule' value='modSimon'/>
-    <label for='modSimonShow'>Simon</label>
-
-    <input type='radio' id='modSimpleShow' id='selectedModule' name='selectedModule' value='modSimple'/>
-    <label for='modSimpleShow'>Simple</label>
-
-    <input type='radio' id='modSymbolsShow' id='selectedModule' name='selectedModule' value='modSymbols'/>
-    <label for='modSymbolsShow'>Symbols</label>
- 
-    <input type='radio' id='modSeqShow' id='selectedModule' name='selectedModule' value='modSeq'/>
-    <label for='modSeqShow'>Sequences</label>
-
-
-
-</form>
-</fieldset>
-<hr/>
-<!-- Module Panels -->
-<script>
-$('input[name=selectedModule]').change(function(){
-    hideAllModules();
-    // Get Selected Module.
-    var selectedModuleCode = $('input[name=selectedModule]:checked').val();
-    $("#"+selectedModuleCode).show();
-});
-</script>
-
-<div id='modSimple' > <!-- Wires -->
-<h4>Simple Wires Module</h4>
-
-Instructions: What are the wire colors in order from top to bottom?<br/>
-<form id='wiresForm'>
-<table border='1'>
-<tr>
-<td>Wire 1</td>
-<td>
-    <input type="radio" name="wiresWire1" value="none" checked>None
-    <input type="radio" name="wiresWire1" value="black">Black
-    <input type="radio" name="wiresWire1" value="blue">Blue
-    <input type="radio" name="wiresWire1" value="red">Red
-    <input type="radio" name="wiresWire1" value="white">White
-    <input type="radio" name="wiresWire1" value="yellow">Yellow
-</td>
-</tr>
-<tr>
-<td>Wire 2</td>
-<td>
-    <input type="radio" name="wiresWire2" value="none" checked>None
-    <input type="radio" name="wiresWire2" value="black">Black
-    <input type="radio" name="wiresWire2" value="blue">Blue
-    <input type="radio" name="wiresWire2" value="red">Red
-    <input type="radio" name="wiresWire2" value="white">White
-    <input type="radio" name="wiresWire2" value="yellow">Yellow
-</td>
-</tr>
-<tr>
-<td>Wire 3</td>
-<td>
-    <input type="radio" name="wiresWire3" value="none" checked>None
-    <input type="radio" name="wiresWire3" value="black">Black
-    <input type="radio" name="wiresWire3" value="blue">Blue
-    <input type="radio" name="wiresWire3" value="red">Red
-    <input type="radio" name="wiresWire3" value="white">White
-    <input type="radio" name="wiresWire3" value="yellow">Yellow
-</td>
-</tr>
-<tr>
-<td>Wire 4</td>
-<td>
-    <input type="radio" name="wiresWire4" value="none" checked>None
-    <input type="radio" name="wiresWire4" value="black">Black
-    <input type="radio" name="wiresWire4" value="blue">Blue
-    <input type="radio" name="wiresWire4" value="red">Red
-    <input type="radio" name="wiresWire4" value="white">White
-    <input type="radio" name="wiresWire4" value="yellow">Yellow
-</td>
-</tr>
-<tr>
-<td>Wire 5</td>
-<td>
-    <input type="radio" name="wiresWire5" value="none" checked>None
-    <input type="radio" name="wiresWire5" value="black">Black
-    <input type="radio" name="wiresWire5" value="blue">Blue
-    <input type="radio" name="wiresWire5" value="red">Red
-    <input type="radio" name="wiresWire5" value="white">White
-    <input type="radio" name="wiresWire5" value="yellow">Yellow
-</td>
-</tr>
-<tr>
-<td>Wire 6</td>
-<td>
-    <input type="radio" name="wiresWire6" value="none" checked>None
-    <input type="radio" name="wiresWire6" value="black">Black
-    <input type="radio" name="wiresWire6" value="blue">Blue
-    <input type="radio" name="wiresWire6" value="red">Red
-    <input type="radio" name="wiresWire6" value="white">White
-    <input type="radio" name="wiresWire6" value="yellow">Yellow
-</td>
-</tr>
-</table>
-</form>
-<br/>
-<input type='button' id='wiresCompute' value='Solve'/>  <input id='wiresReset' type='button' value='Reset'/><br/>
-<p id='wiresOutput'/>
-<hr/>
-</div>
-
-<div id='modButton'> <!-- Button -->
-<h4>Button Module</h4>
-
-<p id='modButtonOutput'/></p>
-<table border=1 cellspacing="10">
-<tr>
-<td><button class = 'redButton' width='100%' id='modButtonRedAbort' >Abort</button></td>
-<td><button class = 'blueButton' id='modButtonBlueAbort' >Abort</button></td>
-</tr><tr>
-<td><button class = 'yellowButton' id='modButtonYellowAbort' >Abort</button></td>
-<td><button class = 'whiteButton' id='modButtonWhiteAbort' >Abort</button></td>
-</tr><tr>
-<td><button class = 'redButton' id='modButtonRedHold' >Hold</button></td>
-<td><button class = 'blueButton' id='modButtonBlueHold' >Hold</button></td>
-</tr><tr>
-<td><button class = 'yellowButton' id='modButtonYellowHold' >Hold</button></td>
-<td><button class = 'whiteButton' id='modButtonWhiteHold' >Hold</button></td>
-</tr><tr>
-<td><button class = 'redButton' id='modButtonRedDetonate' >Detonate</button></td>
-<td><button class = 'blueButton' id='modButtonBlueDetonate' >Detonate</button></td>
-</tr><tr>
-<td><button class = 'yellowButton' id='modButtonYellowDetonate' >Detonate</button></td>
-<td><button class = 'whiteButton' id='modButtonWhiteDetonate' >Detonate</button></td>
-</tr><tr>
-<td><button class = 'redButton' id='modButtonRedPress' >Press</button></td>
-<td><button class = 'blueButton' id='modButtonBluePress' >Press</button></td>
-</tr><tr>
-<td><button class = 'yellowButton' id='modButtonYellowPress' >Press</button></td>
-<td><button class = 'whiteButton' id='modButtonWhitePress' >Press</button></td>
-</tr><tr>
-<td><button class = 'redButton' id='modButtonRedOther' >Other</button></td>
-<td><button class = 'blueButton' id='modButtonBlueOther' >Other</button></td>
-</tr><tr>
-<td><button class = 'yellowButton' id='modButtonYellowOther' >Other</button></td>
-<td><button class = 'whiteButton' id='modButtonWhiteOther' >Other</button></td>
-</tr>
-</table>
-</div>
-
-<div id='modSymbols'> <!-- Symbols -->
-<h4>Symbols Module</h4>
-<!-- fun fact: Look these up at http://unicodelookup.com/ for the real names. -->
-<form id='symbolsForm'>
-<table border='1'>
-    <tr> <!-- Row 1 -->
-    <td>
-    <input type="checkbox" id="symbols1" value="01"><font size=20>&#984;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols2" value="02"><font size=20>&#x4EC;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols3" value="03"><font size=20>&copy;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols4" value="04"><font size=20>&#1004;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols5" value="05"><font size=20>&Psi;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols6" value="06"><font size=20>&#1126;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols7" value="07"><font size=20>&#1148;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols8" value="08"><font size=20>&para;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols9" value="09"><font size=20>&#1660;</font>
-    </td>
-    </tr>
-    
-    <tr> <!-- Row 2 -->
-    <td>
-    <input type="checkbox" id="symbols10" value="10"><font size=20>&#411;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols11" value="11"><font size=20>&#1023;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols12" value="12"><font size=20>&#1192;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols13" value="13"><font size=20>&#1123;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols14" value="14"><font size=20>&#1154;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols15" value="15"><font size=20>&#990;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols16" value="16"><font size=20>&#1174;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols17" value="17"><font size=20>&#1132;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols18" value="18"><font size=20>&#1022;</font>
-    </td>
-    </tr>
-
-    <tr> <!-- Row 3 -->
-    <td>
-    <input type="checkbox" id="symbols19" value="19"><font size=20>&#1237;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols20" value="20"><font size=20>&#9734;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols21" value="21"><font size=20>&#1286;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols22" value="22"><font size=20>&#983;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols23" value="23"><font size=20>&iquest;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols24" value="24"><font size=20>&#1135;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols25" value="25"><font size=20>&#1162;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols26" value="26"><font size=20>&#9733;</font>
-    </td>
-    <td>
-    <input type="checkbox" id="symbols27" value="27"><font size=20>&Omega;</font>
-    </td>
-    </tr>
-</table>
-</form>
-<br/>
-<input type='button' id='symbolsCompute' value='Solve'/>  <input id='symbolsReset' type='button' value='Reset'/><br/>
-<p id='symbolsOutput'/>
-<hr/>
-</div>
-
-<div id='modSimon'> <!-- Simon Says -->
-<h4>Simon Says Module</h4>
-<form id='simonForm'>
-<table border=1>
-    <tr><td>Current Color</td>
-        <td>
-            <input type="radio" name="simonColor" value="none" checked>None
-            <input type="radio" name="simonColor" value="red">Red
-            <input type="radio" name="simonColor" value="blue">Blue
-            <input type="radio" name="simonColor" value="green">Green
-            <input type="radio" name="simonColor" value="yellow">Yellow
-        </td>
-    </tr>
-</table>
-</form>
-
-<br/>
-<input type='button' id='simonCompute' value='Solve'/>  <input id='simonReset' type='button' value='Reset'/><br/>
-<p id='simonOutput'/>
-<hr/>
-</div>
-
-<div id='modFirst'> <!-- Who's on First -->
-<h4>Who's on First Module</h4>
-What's The Word on the Display?<br/>
-<form id='firstForm'>
-<table border=1>
-<!-- Step 1 -->
-    <tr><!-- Row 1 -->
-        <td><input type="radio" name="firstStep1" value="    "></td>
-        <td><input type="radio" name="firstStep1" value="BLANK">BLANK</td>
-        <td><input type="radio" name="firstStep1" value="C">C</td>
-        <td><input type="radio" name="firstStep1" value="CEE">CEE</td>
-        <td><input type="radio" name="firstStep1" value="DISPLAY">DISPLAY</td>
-        <td><input type="radio" name="firstStep1" value="FIRST">FIRST</td>
-        <td><input type="radio" name="firstStep1" value="HOLD ON">HOLD ON</td>
-        <td><input type="radio" name="firstStep1" value="LEAD">LEAD</td>
-        <td><input type="radio" name="firstStep1" value="LED">LED</td>
-    </tr><tr><!-- Row 2 -->
-        <td><input type="radio" name="firstStep1" value="LEED">LEED</td>
-        <td><input type="radio" name="firstStep1" value="NO">NO</td>
-        <td><input type="radio" name="firstStep1" value="NOTHING">NOTHING</td>
-        <td><input type="radio" name="firstStep1" value="OKAY">OKAY</td>
-        <td><input type="radio" name="firstStep1" value="READ">READ</td>
-        <td><input type="radio" name="firstStep1" value="RED">RED</td>
-        <td><input type="radio" name="firstStep1" value="REED">REED</td>
-        <td><input type="radio" name="firstStep1" value="SAYS">SAYS</td>
-        <td><input type="radio" name="firstStep1" value="SEE">SEE</td>
-    </tr><tr><!-- Row 3 -->
-        <td><input type="radio" name="firstStep1" value="THEIR">THEIR</td>
-        <td><input type="radio" name="firstStep1" value="THERE">THERE</td>
-        <td><input type="radio" name="firstStep1" value="THEY ARE">THEY ARE</td>
-        <td><input type="radio" name="firstStep1" value="THEY'RE">THEY'RE</td>
-        <td><input type="radio" name="firstStep1" value="UR">UR</td>
-        <td><input type="radio" name="firstStep1" value="YES">YES</td>
-        <td><input type="radio" name="firstStep1" value="YOU ARE">YOU ARE</td>
-        <td><input type="radio" name="firstStep1" value="YOU">YOU</td>
-        <td><input type="radio" name="firstStep1" value="YOU'RE">YOU'RE</td>
-        <td><input type="radio" name="firstStep1" value="YOUR">YOUR</td>
-    </tr>
-</table><br/>
-    <input type='button' id='firstStage1' value='Get Position'/><br/>
-    <p id='firstStage1Output'></p><br/>
-What word is in that position?<br/>
-<table border='1'>
-    <!-- Step 2 -->
-    <tr> <!-- Row 1 -->
-        <td><input type="radio" name="firstWord" value="BLANK"> BLANK</td>
-        <td><input type="radio" name="firstWord" value="DONE"> DONE</td>
-        <td><input type="radio" name="firstWord" value="FIRST"> FIRST</td>
-        <td><input type="radio" name="firstWord" value="HOLD"> HOLD</td>
-        <td><input type="radio" name="firstWord" value="LEFT"> LEFT</td>
-        <td><input type="radio" name="firstWord" value="LIKE"> LIKE</td>
-        <td><input type="radio" name="firstWord" value="MIDDLE"> MIDDLE</td>
-        <td><input type="radio" name="firstWord" value="NEXT"> NEXT</td>
-        <td><input type="radio" name="firstWord" value="NO"> NO</td>
-    </tr><tr> <!-- Row 2 -->
-        <td><input type="radio" name="firstWord" value="NOTHING"> NOTHING</td>
-        <td><input type="radio" name="firstWord" value="OKAY"> OKAY</td>
-        <td><input type="radio" name="firstWord" value="PRESS"> PRESS</td>
-        <td><input type="radio" name="firstWord" value="READY"> READY</td>
-        <td><input type="radio" name="firstWord" value="RIGHT"> RIGHT</td>
-        <td><input type="radio" name="firstWord" value="SURE"> SURE</td>
-        <td><input type="radio" name="firstWord" value="U"> U</td>
-        <td><input type="radio" name="firstWord" value="UH HUH"> UH HUH</td>
-        <td><input type="radio" name="firstWord" value="UH UH"> UH UH</td>
-    </tr><tr> <!-- Row 3 -->
-        <td><input type="radio" name="firstWord" value="UHHH"> UHHH</td>
-        <td><input type="radio" name="firstWord" value="UR"> UR</td>
-        <td><input type="radio" name="firstWord" value="WAIT"> WAIT</td>
-        <td><input type="radio" name="firstWord" value="WHAT"> WHAT</td>
-        <td><input type="radio" name="firstWord" value="WHAT?"> WHAT?</td>
-        <td><input type="radio" name="firstWord" value="YES"> YES</td>
-        <td><input type="radio" name="firstWord" value="YOU ARE"> YOU ARE</td>
-        <td><input type="radio" name="firstWord" value="YOU"> YOU</td>
-        <td><input type="radio" name="firstWord" value="YOU'RE"> YOU'RE</td>
-        <td><input type="radio" name="firstWord" value="YOUR"> YOUR</td>
-    </tr>
-</table>
-</form>
-<br/>
-<input type='button' id='firstCompute' value='Solve'/>  <input id='firstReset' type='button' value='Reset'/><br/>
-<p id='firstOutput'/>
-<hr/>
-</div>
-
-<div id='modMemory'> <!-- Memory -->
-<h4>Memory Module</h4>
-<p id='memoryStage'>Stage 1</p><br/>
-<form id='memoryForm'>
-<table border='1'>
-    <tr><td>Number on Screen</td><td>
-    <input type="radio" name="memoryNum" value="1">1
-    <input type="radio" name="memoryNum" value="2">2
-    <input type="radio" name="memoryNum" value="3">3
-    <input type="radio" name="memoryNum" value="4">4
-    </td></tr>
-    <tr><td>Button Number Sequence</td><td>
-    <input type="number" size=1 min=1 max=4 name="memorySeq0" value=1/>
-    <input type="number" size=1 min=1 max=4 name="memorySeq1" value=2/>
-    <input type="number" size=1 min=1 max=4 name="memorySeq2" value=3/>
-    <input type="number" size=1 min=1 max=4 name="memorySeq3" value=4/>
-    </td>
-    </tr>
-</table>
-</form>
-<br/>
-<input type='button' id='memoryCompute' value='Solve'/>  <input id='memoryReset' type='button' value='Reset'/><br/>
-<p id='memoryOutput'/>
-<hr/>
-</div>
-
-<div id='modMorse'> <!-- Morse Code -->
-<h4>Morse Code Module</h4>
-Enter the morse code ('.-') you hear in each of the boxes: leave any blank to get current possible results. <br/>
-<form id='morseForm'>
-<table border=1>
-<tr>
-    <td>1:<input type='text' id='morseChar0' value=''/></td>
-</tr><tr>
-    <td>2:<input type='text' id='morseChar1' value=''/></td>
-</tr><tr>
-    <td>3:<input type='text' id='morseChar2' value=''/></td>
-</tr><tr>
-    <td>4:<input type='text' id='morseChar3' value=''/></td>
-</tr><tr>
-    <td>5:<input type='text' id='morseChar4' value=''/></td>
-</tr><tr>
-    <td>6:<input type='text' id='morseChar5' value=''/></td>
-</tr>
-</table>
-</form>
-<br/>
-<input type='button' id='morseCompute' value='Solve'/>  <input id='morseReset' type='button' value='Reset'/><br/>
-<p id='morseOutput'/>
-<hr/>
-</div>
-
-<div id = 'modComplex'> <!-- Complex Wires -->
-<h4>Complex Wires Module</h4>
-Ask if each wire has red, blue, a star, and a lit LED.<br/>
-<form id='complexForm'>
-<table border=1>
-    <tr>
-    <td>Wire 1</td>
-    <td>Has Red<input type="checkbox" id="complex0HasRed"></td>
-    <td>Has Blue<input type="checkbox" id="complex0HasBlue"></td>
-    <td>Has Star<input type="checkbox" id="complex0HasStar"></td>
-    <td>Has Lit LED<input type="checkbox" id="comp0ex1HasLit"></td>
-    </tr>
-    
-    <tr>
-    <td>Wire 2</td>
-    <td>Has Red<input type="checkbox" id="complex1HasRed"></td>
-    <td>Has Blue<input type="checkbox" id="complex1HasBlue"></td>
-    <td>Has Star<input type="checkbox" id="complex1HasStar"></td>
-    <td>Has Lit LED<input type="checkbox" id="complex1HasLit"></td>
-    </tr>
-    
-    <tr>
-    <td>Wire 3</td>
-    <td>Has Red<input type="checkbox" id="complex2HasRed"></td>
-    <td>Has Blue<input type="checkbox" id="complex2HasBlue"></td>
-    <td>Has Star<input type="checkbox" id="complex2HasStar"></td>
-    <td>Has Lit LED<input type="checkbox" id="complex2HasLit"></td>
-    </tr>
-    
-    <tr>
-    <td>Wire 4</td>
-    <td>Has Red<input type="checkbox" id="complex3HasRed"></td>
-    <td>Has Blue<input type="checkbox" id="complex3HasBlue"></td>
-    <td>Has Star<input type="checkbox" id="complex3HasStar"></td>
-    <td>Has Lit LED<input type="checkbox" id="complex3HasLit"></td>
-    </tr>
-    
-    <tr>
-    <td>Wire 5</td>
-    <td>Has Red<input type="checkbox" id="complex4HasRed"></td>
-    <td>Has Blue<input type="checkbox" id="complex4HasBlue"></td>
-    <td>Has Star<input type="checkbox" id="complex4HasStar"></td>
-    <td>Has Lit LED<input type="checkbox" id="complex4HasLit"></td>
-    </tr>
-    
-    <tr>
-    <td>Wire 6</td>
-    <td>Has Red<input type="checkbox" id="complex5HasRed"></td>
-    <td>Has Blue<input type="checkbox" id="complex5HasBlue"></td>
-    <td>Has Star<input type="checkbox" id="complex5HasStar"></td>
-    <td>Has Lit LED<input type="checkbox" id="complex5HasLit"></td>
-    </tr>
-</table>
-</form>
-<br/>
-<input type='button' id='complexCompute' value='Solve'/>  <input id='complexReset' type='button' value='Reset'/><br/>
-<p id='complexOutput'/>
-<hr/>
-</div>
-
-<div id = 'modSeq'> <!-- Wire Sequences -->
-<h4>Wire Sequences Module</h4>
-<form id='wsequencesForm'>
-<table border='1'>
-<tr>
-    <td>1</td>
-    <td>
-    <select id='wsequencesWire1Color'>
-    <option value='red'>red</option>
-    <option value='blue'>blue</option>
-    <option value='black'>black</option>
-    </select>
-    </td>
-    <td>
-    <input type="radio" name="wsequencesWire1Connect" value="a">A
-    <input type="radio" name="wsequencesWire1Connect" value="b">B
-    <input type="radio" name="wsequencesWire1Connect" value="c">C   
-    </td>
-</tr>
-
-<tr>
-    <td>2</td>
-    <td>
-    <select id='wsequencesWire2Color'>
-    <option value='red'>red</option>
-    <option value='blue'>blue</option>
-    <option value='black'>black</option>
-    </select>
-    </td>
-    <td>
-    <input type="radio" name="wsequencesWire2Connect" value="a">A
-    <input type="radio" name="wsequencesWire2Connect" value="b">B
-    <input type="radio" name="wsequencesWire2Connect" value="c">C   
-    </td>
-</tr>
-
-<tr>
-    <td>3</td>
-    <td>
-    <select id='wsequencesWire3Color'>
-    <option value='red'>red</option>
-    <option value='blue'>blue</option>
-    <option value='black'>black</option>
-    </select>
-    </td>
-    <td>
-    <input type="radio" name="wsequencesWire3Connect" value="a">A
-    <input type="radio" name="wsequencesWire3Connect" value="b">B
-    <input type="radio" name="wsequencesWire3Connect" value="c">C   
-    </td>
-</tr>
-</table>
-</form>
-<br/>
-<input type='button' id='wsequencesCompute' value='Solve'/>  <input id='wsequencesReset' type='button' value='Reset'/><br/>
-<p id='wsequencesOutput'/>
-<hr/>
-</div>
-
-<div id = 'modMazes'> <!-- Mazes -->
-<h4>Mazes Module</h4>
-
-    <div id="mazePane">
-        <table id="mazeTable">
-        <tr>
-            <td class="mazeCell" data-x="0" data-y="0" id="mazeCell_0_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="1" data-y="0" id="mazeCell_1_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="2" data-y="0" id="mazeCell_2_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="3" data-y="0" id="mazeCell_3_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="4" data-y="0" id="mazeCell_4_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="5" data-y="0" id="mazeCell_5_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-        </tr>
-        <tr>
-            <td class="mazeCell" data-x="0" data-y="1" id="mazeCell_0_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="1" data-y="1" id="mazeCell_1_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="2" data-y="1" id="mazeCell_2_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="3" data-y="1" id="mazeCell_3_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="4" data-y="1" id="mazeCell_4_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="5" data-y="1" id="mazeCell_5_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-        </tr>
-        <tr>
-            <td class="mazeCell" data-x="0" data-y="2" id="mazeCell_0_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="1" data-y="2" id="mazeCell_1_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="2" data-y="2" id="mazeCell_2_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="3" data-y="2" id="mazeCell_3_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="4" data-y="2" id="mazeCell_4_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="5" data-y="2" id="mazeCell_5_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-        </tr>
-        <tr>
-            <td class="mazeCell" data-x="0" data-y="3" id="mazeCell_0_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="1" data-y="3" id="mazeCell_1_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="2" data-y="3" id="mazeCell_2_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="3" data-y="3" id="mazeCell_3_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="4" data-y="3" id="mazeCell_4_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="5" data-y="3" id="mazeCell_5_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-        </tr>
-        <tr>
-            <td class="mazeCell" data-x="0" data-y="4" id="mazeCell_0_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="1" data-y="4" id="mazeCell_1_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="2" data-y="4" id="mazeCell_2_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="3" data-y="4" id="mazeCell_3_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="4" data-y="4" id="mazeCell_4_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="5" data-y="4" id="mazeCell_5_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-        </tr>
-        <tr>
-            <td class="mazeCell" data-x="0" data-y="5" id="mazeCell_0_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="1" data-y="5" id="mazeCell_1_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="2" data-y="5" id="mazeCell_2_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="3" data-y="5" id="mazeCell_3_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="4" data-y="5" id="mazeCell_4_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-            <td class="mazeCell" data-x="5" data-y="5" id="mazeCell_5_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
-        </tr>
-        </table>
-    </div>
-</div>
-
-<div id = 'modPasswords'> <!-- Passwords -->
-<h4>Passwords Module</h4>
-Enter all letters from each block (e.g. asdvx)<br/>
-<form id='passwordsForm'>
-Block 1: <input id='passwordsBlock1' type='text' value=''/><br/>
-Block 2: <input id='passwordsBlock2' type='text' value=''/><br/>
-Block 3: <input id='passwordsBlock3' type='text' value=''/><br/>
-Block 4: <input id='passwordsBlock4' type='text' value=''/><br/>
-Block 5: <input id='passwordsBlock5' type='text' value=''/><br/>
-</form>
-<br/>
-<input type='button' id='passwordsCompute' value='Solve'/>  <input id='passwordsReset' type='button' value='Reset'/><br/>
-<p id='passwordsOutput'/>
-<hr/>
-</div>
-
-<div id = 'modKnobs'> <!-- Knobs -->
-<h4>Knobs Module</h4>
-Enter binary AND for all light pairs (e.g. 001010)<br/>
-Binary AND = (off+off:0, off+on:0, on+off:0, on+on:1)<br/>
-<form id='knobsForm'>
-LED Config <input id='ledConfig' type='text' value=''/><br/>
-</form>
-<br/>
-<input type='button' id='knobsCompute' value='Solve'/>  <input id='knobsReset' type='button' value='Reset'/><br/>
-<p id='knobsOutput'/>
-<hr/>
-</div>
-
-<!-- Module Scripts -->
-
-<!-- Wires -->
-<script src="js/wires_241.js"></script>
-
-<!-- Button -->
-<script src="js/button_241.js"></script>
-
-<!-- Symbols -->
-<script src="js/symbols_241.js"></script>
-
-<!-- Simon -->
-<script src="js/simon_241.js"></script>
-
-<!-- Who's on First -->
-<script src="js/first_241.js"></script>
-
-<!-- Memory -->
-<script src="js/memory_241.js"></script>
-
-<!-- Morse Code -->
-<script src="js/morse_241.js"></script>
-
-<!-- Complex Wires -->
-<script src="js/complex_241.js"></script>
-
-<!-- Wire Sequences -->
-<script src="js/wsequences_241.js"></script>
-
-<!-- Mazes -->
-<script src="js/mazes_241.js"></script>
-
-<!-- Passwords -->
-<script src="js/passwords_241.js"></script>
-
-<!-- Knobs -->
-<script src="js/knobs_241.js"></script>
-
-
-
-
-</body>
+   <head>
+      <link rel="stylesheet" href="css/jquery-ui.css" />
+      <script src="js/jquery-1.11.3.min.js"></script>
+      <script src="js/jquery-ui.min.js"></script>
+      <script src="js/d3.min.js"></script>
+      <link rel="stylesheet" href="css/maze.css" />
+      <link rel="stylesheet" href="css/expert.css" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>KCNE241</title>
+
+   </head>
+   <body>
+      <!-- Bomb Info Section -->
+      <fieldset>
+         <legend>Bomb Info</legend>
+         <fieldset>
+            <legend>Serial Vowel?</legend>
+            <div id='serialVowel'>
+               <input type='radio' id='serialVowelNo'  name='serialVowel' value=false checked/>
+               <label for='serialVowelNo'>NO</label>
+               <input type='radio' id='serialVowelYes'  name='serialVowel' value=true/>
+               <label for='serialVowelYes'>YES</label>  
+            </div>
+         </fieldset>
+         <fieldset>
+            <legend>Serial Suffix?</legend>
+            <div id='serialSuffix'>
+               <input type='radio' id='serialEven'  name='serialSuffix' value='even' checked/>
+               <label for='serialEven'>EVEN</label>
+               <input type='radio' id='serialOdd'  name='serialSuffix' value='odd'/>
+               <label for='serialOdd'>ODD</label>  
+            </div>
+         </fieldset>
+         <fieldset>
+            <legend>Batteries</legend>
+            <div id='numBatteriesButtons'>
+               <input type='radio' name='numBatteries' id='batteries0'  id='numBatteries' value=0 checked='checked'/>
+               <label for='batteries0'>0</label>
+               <input type='radio' id='batteries1'  id='numBatteries'  value=1 name='numBatteries'/>
+               <label for='batteries1'>1</label>
+               <input type='radio' id='batteries2'  id='numBatteries' value=2 name='numBatteries'/>
+               <label for='batteries2'>2</label>
+               <input type='radio' id='batteries2_'  id='numBatteries' value=3 name='numBatteries'/>
+               <label for='batteries2_' name='numBatteries'>+</label>
+            </div>
+         </fieldset>
+         <fieldset>
+            <legend>Parallel Port?</legend>
+            <div id='parallelPort'>
+               <input type='radio' id='parallelPortNo'  name='parallelPort' value=false checked/>
+               <label for='parallelPortNo'>NO</label>
+               <input type='radio' id='parallelPortYes'  name='parallelPort' value=true/>
+               <label for='parallelPortYes'>YES</label>  
+            </div>
+         </fieldset>
+         <fieldset>
+            <legend>CAR Indicator Lit?</legend>
+            <div id='indicatorCARLit'>
+               <input type='radio' id='indicatorCARNo'  name='indicatorCARLit' value=false checked/>
+               <label for='indicatorCARNo'>NO</label>
+               <input type='radio' id='indicatorCARYes'  name='indicatorCARLit' value=true/>
+               <label for='indicatorCARYes'>YES</label>  
+            </div>
+         </fieldset>
+         <fieldset>
+            <legend>FRK Indicator Lit?</legend>
+            <div id='indicatorFRKLit'>
+               <input type='radio' id='indicatorFRKNo'  name='indicatorFRKLit' value=false checked/>
+               <label for='indicatorFRKNo'>NO</label>
+               <input type='radio' id='indicatorFRKYes'  name='indicatorFRKLit' value=true/>
+               <label for='indicatorFRKYes'>YES</label>  
+            </div>
+         </fieldset>
+         <fieldset>
+            <legend>Number of Strikes</legend>
+            <div id='numStrikes'>
+               <input type='radio' id='numStrikes0' name='numStrikes' value=0 checked/>
+               <label for='numStrikes0'>0</label>
+               <input type='radio' id='numStrikes1' name='numStrikes' value=1/>
+               <label for='numStrikes1'>1</label>
+               <input type='radio' id='numStrikes2' name='numStrikes' value=2/>
+               <label for='numStrikes2'>2</label>
+            </div>
+         </fieldset>
+      </fieldset>
+      
+      <!-- Module UI Buttons -->
+      <fieldset>
+         <legend>Modules</legend>
+         <form id='selectedModuleButtons'>
+            <input type='radio' id='modButtonShow' id='selectedModule' name='selectedModule' value='modButton'/>
+            <label for='modButtonShow'>Button</label>
+            <input type='radio' id='modComplexShow' id='selectedModule' name='selectedModule'  value='modComplex'/>
+            <label for='modComplexShow'>Complex</label>
+            <input type='radio' id='modFirstShow' id='selectedModule' name='selectedModule' value='modFirst'/>
+            <label for='modFirstShow'>First</label>
+            <input type='radio' id='modKnobsShow' id='selectedModule' name='selectedModule' value='modKnobs'/>
+            <label for='modKnobsShow'>Knobs</label>
+            <input type='radio' id='modMazesShow' id='selectedModule' name='selectedModule' value='modMazes'/>
+            <label for='modMazesShow'>Mazes</label>
+            <input type='radio' id='modMemoryShow' id='selectedModule' name='selectedModule' value='modMemory'/>
+            <label for='modMemoryShow'>Memory</label>  
+            <input type='radio' id='modMorseShow' id='selectedModule' name='selectedModule' value='modMorse'/>
+            <label for='modMorseShow'>Morse</label>
+            <input type='radio' id='modPasswordsShow' id='selectedModule' name='selectedModule' value='modPasswords'/>
+            <label for='modPasswordsShow'>Passwords</label>
+            <input type='radio' id='modSimonShow' id='selectedModule' name='selectedModule' value='modSimon'/>
+            <label for='modSimonShow'>Simon</label>
+            <input type='radio' id='modSimpleShow' id='selectedModule' name='selectedModule' value='modSimple'/>
+            <label for='modSimpleShow'>Simple</label>
+            <input type='radio' id='modSymbolsShow' id='selectedModule' name='selectedModule' value='modSymbols'/>
+            <label for='modSymbolsShow'>Symbols</label>
+            <input type='radio' id='modSeqShow' id='selectedModule' name='selectedModule' value='modSeq'/>
+            <label for='modSeqShow'>Sequences</label>
+         </form>
+      </fieldset>
+      <hr/>
+      <!-- Module Panels -->
+      <div id='modSimple' >
+         <!-- Wires -->
+         <h4>Simple Wires Module</h4>
+         Instructions: What are the wire colors in order from top to bottom?<br/>
+         <form id='wiresForm'>
+            <table border='1'>
+               <tr>
+                  <td>Wire 1</td>
+                  <td>
+                     <input type="radio" name="wiresWire1" value="none" checked>None
+                     <input type="radio" name="wiresWire1" value="black">Black
+                     <input type="radio" name="wiresWire1" value="blue">Blue
+                     <input type="radio" name="wiresWire1" value="red">Red
+                     <input type="radio" name="wiresWire1" value="white">White
+                     <input type="radio" name="wiresWire1" value="yellow">Yellow
+                  </td>
+               </tr>
+               <tr>
+                  <td>Wire 2</td>
+                  <td>
+                     <input type="radio" name="wiresWire2" value="none" checked>None
+                     <input type="radio" name="wiresWire2" value="black">Black
+                     <input type="radio" name="wiresWire2" value="blue">Blue
+                     <input type="radio" name="wiresWire2" value="red">Red
+                     <input type="radio" name="wiresWire2" value="white">White
+                     <input type="radio" name="wiresWire2" value="yellow">Yellow
+                  </td>
+               </tr>
+               <tr>
+                  <td>Wire 3</td>
+                  <td>
+                     <input type="radio" name="wiresWire3" value="none" checked>None
+                     <input type="radio" name="wiresWire3" value="black">Black
+                     <input type="radio" name="wiresWire3" value="blue">Blue
+                     <input type="radio" name="wiresWire3" value="red">Red
+                     <input type="radio" name="wiresWire3" value="white">White
+                     <input type="radio" name="wiresWire3" value="yellow">Yellow
+                  </td>
+               </tr>
+               <tr>
+                  <td>Wire 4</td>
+                  <td>
+                     <input type="radio" name="wiresWire4" value="none" checked>None
+                     <input type="radio" name="wiresWire4" value="black">Black
+                     <input type="radio" name="wiresWire4" value="blue">Blue
+                     <input type="radio" name="wiresWire4" value="red">Red
+                     <input type="radio" name="wiresWire4" value="white">White
+                     <input type="radio" name="wiresWire4" value="yellow">Yellow
+                  </td>
+               </tr>
+               <tr>
+                  <td>Wire 5</td>
+                  <td>
+                     <input type="radio" name="wiresWire5" value="none" checked>None
+                     <input type="radio" name="wiresWire5" value="black">Black
+                     <input type="radio" name="wiresWire5" value="blue">Blue
+                     <input type="radio" name="wiresWire5" value="red">Red
+                     <input type="radio" name="wiresWire5" value="white">White
+                     <input type="radio" name="wiresWire5" value="yellow">Yellow
+                  </td>
+               </tr>
+               <tr>
+                  <td>Wire 6</td>
+                  <td>
+                     <input type="radio" name="wiresWire6" value="none" checked>None
+                     <input type="radio" name="wiresWire6" value="black">Black
+                     <input type="radio" name="wiresWire6" value="blue">Blue
+                     <input type="radio" name="wiresWire6" value="red">Red
+                     <input type="radio" name="wiresWire6" value="white">White
+                     <input type="radio" name="wiresWire6" value="yellow">Yellow
+                  </td>
+               </tr>
+            </table>
+         </form>
+         <br/>
+         <input type='button' id='wiresCompute' value='Solve'/>  <input id='wiresReset' type='button' value='Reset'/><br/>
+         <p id='wiresOutput'>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/></p>
+         <hr/>
+      </div>
+      <div id='modButton'>
+         <!-- Button -->
+         <h4>Button Module</h4>
+         <p id='modButtonOutput'/></p>
+         <table border=1 cellspacing="10">
+            <tr>
+               <td><button class = 'redButton' width='100%' id='modButtonRedAbort' >Abort</button></td>
+               <td><button class = 'blueButton' id='modButtonBlueAbort' >Abort</button></td>
+            </tr>
+            <tr>
+               <td><button class = 'yellowButton' id='modButtonYellowAbort' >Abort</button></td>
+               <td><button class = 'whiteButton' id='modButtonWhiteAbort' >Abort</button></td>
+            </tr>
+            <tr>
+               <td><button class = 'redButton' id='modButtonRedHold' >Hold</button></td>
+               <td><button class = 'blueButton' id='modButtonBlueHold' >Hold</button></td>
+            </tr>
+            <tr>
+               <td><button class = 'yellowButton' id='modButtonYellowHold' >Hold</button></td>
+               <td><button class = 'whiteButton' id='modButtonWhiteHold' >Hold</button></td>
+            </tr>
+            <tr>
+               <td><button class = 'redButton' id='modButtonRedDetonate' >Detonate</button></td>
+               <td><button class = 'blueButton' id='modButtonBlueDetonate' >Detonate</button></td>
+            </tr>
+            <tr>
+               <td><button class = 'yellowButton' id='modButtonYellowDetonate' >Detonate</button></td>
+               <td><button class = 'whiteButton' id='modButtonWhiteDetonate' >Detonate</button></td>
+            </tr>
+            <tr>
+               <td><button class = 'redButton' id='modButtonRedPress' >Press</button></td>
+               <td><button class = 'blueButton' id='modButtonBluePress' >Press</button></td>
+            </tr>
+            <tr>
+               <td><button class = 'yellowButton' id='modButtonYellowPress' >Press</button></td>
+               <td><button class = 'whiteButton' id='modButtonWhitePress' >Press</button></td>
+            </tr>
+            <tr>
+               <td><button class = 'redButton' id='modButtonRedOther' >Other</button></td>
+               <td><button class = 'blueButton' id='modButtonBlueOther' >Other</button></td>
+            </tr>
+            <tr>
+               <td><button class = 'yellowButton' id='modButtonYellowOther' >Other</button></td>
+               <td><button class = 'whiteButton' id='modButtonWhiteOther' >Other</button></td>
+            </tr>
+         </table>
+      </div>
+      <div id='modSymbols'>
+         <!-- Symbols -->
+         <h4>Symbols Module</h4>
+         <!-- fun fact: Look these up at http://unicodelookup.com/ for the real names. -->
+         <form id='symbolsForm'>
+            <table border='1'>
+               <tr>
+                  <!-- Row 1 -->
+                  <td>
+                     <input type="checkbox" id="symbols1" value="01"><font size=20>&#984;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols2" value="02"><font size=20>&#x4EC;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols3" value="03"><font size=20>&copy;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols4" value="04"><font size=20>&#1004;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols5" value="05"><font size=20>&Psi;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols6" value="06"><font size=20>&#1126;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols7" value="07"><font size=20>&#1148;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols8" value="08"><font size=20>&para;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols9" value="09"><font size=20>&#1660;</font>
+                  </td>
+               </tr>
+               <tr>
+                  <!-- Row 2 -->
+                  <td>
+                     <input type="checkbox" id="symbols10" value="10"><font size=20>&#411;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols11" value="11"><font size=20>&#1023;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols12" value="12"><font size=20>&#1192;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols13" value="13"><font size=20>&#1123;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols14" value="14"><font size=20>&#1154;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols15" value="15"><font size=20>&#990;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols16" value="16"><font size=20>&#1174;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols17" value="17"><font size=20>&#1132;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols18" value="18"><font size=20>&#1022;</font>
+                  </td>
+               </tr>
+               <tr>
+                  <!-- Row 3 -->
+                  <td>
+                     <input type="checkbox" id="symbols19" value="19"><font size=20>&#1237;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols20" value="20"><font size=20>&#9734;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols21" value="21"><font size=20>&#1286;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols22" value="22"><font size=20>&#983;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols23" value="23"><font size=20>&iquest;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols24" value="24"><font size=20>&#1135;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols25" value="25"><font size=20>&#1162;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols26" value="26"><font size=20>&#9733;</font>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="symbols27" value="27"><font size=20>&Omega;</font>
+                  </td>
+               </tr>
+            </table>
+         </form>
+         <br/>
+         <input type='button' id='symbolsCompute' value='Solve'/>  <input id='symbolsReset' type='button' value='Reset'/><br/>
+         <p id='symbolsOutput'/>
+         <hr/>
+      </div>
+      <div id='modSimon'>
+         <!-- Simon Says -->
+         <h4>Simon Says Module</h4>
+         <form id='simonForm'>
+            <table border=1>
+               <tr>
+                  <td>Current Color</td>
+                  <td>
+                     <input type="radio" name="simonColor" value="none" checked>None
+                     <input type="radio" name="simonColor" value="red">Red
+                     <input type="radio" name="simonColor" value="blue">Blue
+                     <input type="radio" name="simonColor" value="green">Green
+                     <input type="radio" name="simonColor" value="yellow">Yellow
+                  </td>
+               </tr>
+            </table>
+         </form>
+         <br/>
+         <input type='button' id='simonCompute' value='Solve'/>  <input id='simonReset' type='button' value='Reset'/><br/>
+         <p id='simonOutput'/>
+         <hr/>
+      </div>
+      <div id='modFirst'>
+         <!-- Who's on First -->
+         <h4>Who's on First Module</h4>
+         What's The Word on the Display?<br/>
+         <form id='firstForm'>
+            <table border=1>
+               <!-- Step 1 -->
+               <tr>
+                  <!-- Row 1 -->
+                  <td><input type="radio" name="firstStep1" value="    "></td>
+                  <td><input type="radio" name="firstStep1" value="BLANK">BLANK</td>
+                  <td><input type="radio" name="firstStep1" value="C">C</td>
+                  <td><input type="radio" name="firstStep1" value="CEE">CEE</td>
+                  <td><input type="radio" name="firstStep1" value="DISPLAY">DISPLAY</td>
+                  <td><input type="radio" name="firstStep1" value="FIRST">FIRST</td>
+                  <td><input type="radio" name="firstStep1" value="HOLD ON">HOLD ON</td>
+                  <td><input type="radio" name="firstStep1" value="LEAD">LEAD</td>
+                  <td><input type="radio" name="firstStep1" value="LED">LED</td>
+               </tr>
+               <tr>
+                  <!-- Row 2 -->
+                  <td><input type="radio" name="firstStep1" value="LEED">LEED</td>
+                  <td><input type="radio" name="firstStep1" value="NO">NO</td>
+                  <td><input type="radio" name="firstStep1" value="NOTHING">NOTHING</td>
+                  <td><input type="radio" name="firstStep1" value="OKAY">OKAY</td>
+                  <td><input type="radio" name="firstStep1" value="READ">READ</td>
+                  <td><input type="radio" name="firstStep1" value="RED">RED</td>
+                  <td><input type="radio" name="firstStep1" value="REED">REED</td>
+                  <td><input type="radio" name="firstStep1" value="SAYS">SAYS</td>
+                  <td><input type="radio" name="firstStep1" value="SEE">SEE</td>
+               </tr>
+               <tr>
+                  <!-- Row 3 -->
+                  <td><input type="radio" name="firstStep1" value="THEIR">THEIR</td>
+                  <td><input type="radio" name="firstStep1" value="THERE">THERE</td>
+                  <td><input type="radio" name="firstStep1" value="THEY ARE">THEY ARE</td>
+                  <td><input type="radio" name="firstStep1" value="THEY'RE">THEY'RE</td>
+                  <td><input type="radio" name="firstStep1" value="UR">UR</td>
+                  <td><input type="radio" name="firstStep1" value="YES">YES</td>
+                  <td><input type="radio" name="firstStep1" value="YOU ARE">YOU ARE</td>
+                  <td><input type="radio" name="firstStep1" value="YOU">YOU</td>
+                  <td><input type="radio" name="firstStep1" value="YOU'RE">YOU'RE</td>
+                  <td><input type="radio" name="firstStep1" value="YOUR">YOUR</td>
+               </tr>
+            </table>
+            <br/>
+            <input type='button' id='firstStage1' value='Get Position'/><br/>
+            <p id='firstStage1Output'></p>
+            <br/>
+            What word is in that position?<br/>
+            <table border='1'>
+               <!-- Step 2 -->
+               <tr>
+                  <!-- Row 1 -->
+                  <td><input type="radio" name="firstWord" value="BLANK"> BLANK</td>
+                  <td><input type="radio" name="firstWord" value="DONE"> DONE</td>
+                  <td><input type="radio" name="firstWord" value="FIRST"> FIRST</td>
+                  <td><input type="radio" name="firstWord" value="HOLD"> HOLD</td>
+                  <td><input type="radio" name="firstWord" value="LEFT"> LEFT</td>
+                  <td><input type="radio" name="firstWord" value="LIKE"> LIKE</td>
+                  <td><input type="radio" name="firstWord" value="MIDDLE"> MIDDLE</td>
+                  <td><input type="radio" name="firstWord" value="NEXT"> NEXT</td>
+                  <td><input type="radio" name="firstWord" value="NO"> NO</td>
+               </tr>
+               <tr>
+                  <!-- Row 2 -->
+                  <td><input type="radio" name="firstWord" value="NOTHING"> NOTHING</td>
+                  <td><input type="radio" name="firstWord" value="OKAY"> OKAY</td>
+                  <td><input type="radio" name="firstWord" value="PRESS"> PRESS</td>
+                  <td><input type="radio" name="firstWord" value="READY"> READY</td>
+                  <td><input type="radio" name="firstWord" value="RIGHT"> RIGHT</td>
+                  <td><input type="radio" name="firstWord" value="SURE"> SURE</td>
+                  <td><input type="radio" name="firstWord" value="U"> U</td>
+                  <td><input type="radio" name="firstWord" value="UH HUH"> UH HUH</td>
+                  <td><input type="radio" name="firstWord" value="UH UH"> UH UH</td>
+               </tr>
+               <tr>
+                  <!-- Row 3 -->
+                  <td><input type="radio" name="firstWord" value="UHHH"> UHHH</td>
+                  <td><input type="radio" name="firstWord" value="UR"> UR</td>
+                  <td><input type="radio" name="firstWord" value="WAIT"> WAIT</td>
+                  <td><input type="radio" name="firstWord" value="WHAT"> WHAT</td>
+                  <td><input type="radio" name="firstWord" value="WHAT?"> WHAT?</td>
+                  <td><input type="radio" name="firstWord" value="YES"> YES</td>
+                  <td><input type="radio" name="firstWord" value="YOU ARE"> YOU ARE</td>
+                  <td><input type="radio" name="firstWord" value="YOU"> YOU</td>
+                  <td><input type="radio" name="firstWord" value="YOU'RE"> YOU'RE</td>
+                  <td><input type="radio" name="firstWord" value="YOUR"> YOUR</td>
+               </tr>
+            </table>
+         </form>
+         <br/>
+         <input type='button' id='firstCompute' value='Solve'/>  <input id='firstReset' type='button' value='Reset'/><br/>
+         <p id='firstOutput'/>
+         <hr/>
+      </div>
+      <div id='modMemory'>
+         <!-- Memory -->
+         <h4>Memory Module</h4>
+         <p id='memoryStage'>Stage 1</p>
+         <br/>
+         <form id='memoryForm'>
+            <table border='1'>
+               <tr>
+                  <td>Number on Screen</td>
+                  <td>
+                     <input type="radio" name="memoryNum" value="1">1
+                     <input type="radio" name="memoryNum" value="2">2
+                     <input type="radio" name="memoryNum" value="3">3
+                     <input type="radio" name="memoryNum" value="4">4
+                  </td>
+               </tr>
+               <tr>
+                  <td>Button Number Sequence</td>
+                  <td>
+                     <input type="number" size=1 min=1 max=4 name="memorySeq0" value=1/>
+                     <input type="number" size=1 min=1 max=4 name="memorySeq1" value=2/>
+                     <input type="number" size=1 min=1 max=4 name="memorySeq2" value=3/>
+                     <input type="number" size=1 min=1 max=4 name="memorySeq3" value=4/>
+                  </td>
+               </tr>
+            </table>
+         </form>
+         <br/>
+         <input type='button' id='memoryCompute' value='Solve'/>  <input id='memoryReset' type='button' value='Reset'/><br/>
+         <p id='memoryOutput'/>
+         <hr/>
+      </div>
+      <div id='modMorse'>
+         <!-- Morse Code -->
+         <h4>Morse Code Module</h4>
+         Enter the morse code ('.-') you hear in each of the boxes: leave any blank to get current possible results. <br/>
+         <form id='morseForm'>
+            <table border=1>
+               <tr>
+                  <td>1:<input type='text' id='morseChar0' value=''/></td>
+               </tr>
+               <tr>
+                  <td>2:<input type='text' id='morseChar1' value=''/></td>
+               </tr>
+               <tr>
+                  <td>3:<input type='text' id='morseChar2' value=''/></td>
+               </tr>
+               <tr>
+                  <td>4:<input type='text' id='morseChar3' value=''/></td>
+               </tr>
+               <tr>
+                  <td>5:<input type='text' id='morseChar4' value=''/></td>
+               </tr>
+               <tr>
+                  <td>6:<input type='text' id='morseChar5' value=''/></td>
+               </tr>
+            </table>
+         </form>
+         <br/>
+         <input type='button' id='morseCompute' value='Solve'/>  <input id='morseReset' type='button' value='Reset'/><br/>
+         <p id='morseOutput'/>
+         <hr/>
+      </div>
+      <div id = 'modComplex'>
+         <!-- Complex Wires -->
+         <h4>Complex Wires Module</h4>
+         Ask if each wire has red, blue, a star, and a lit LED.<br/>
+         <form id='complexForm'>
+            <table border=1>
+               <tr>
+                  <td>Wire 1</td>
+                  <td>Has Red<input type="checkbox" id="complex0HasRed"></td>
+                  <td>Has Blue<input type="checkbox" id="complex0HasBlue"></td>
+                  <td>Has Star<input type="checkbox" id="complex0HasStar"></td>
+                  <td>Has Lit LED<input type="checkbox" id="comp0ex1HasLit"></td>
+               </tr>
+               <tr>
+                  <td>Wire 2</td>
+                  <td>Has Red<input type="checkbox" id="complex1HasRed"></td>
+                  <td>Has Blue<input type="checkbox" id="complex1HasBlue"></td>
+                  <td>Has Star<input type="checkbox" id="complex1HasStar"></td>
+                  <td>Has Lit LED<input type="checkbox" id="complex1HasLit"></td>
+               </tr>
+               <tr>
+                  <td>Wire 3</td>
+                  <td>Has Red<input type="checkbox" id="complex2HasRed"></td>
+                  <td>Has Blue<input type="checkbox" id="complex2HasBlue"></td>
+                  <td>Has Star<input type="checkbox" id="complex2HasStar"></td>
+                  <td>Has Lit LED<input type="checkbox" id="complex2HasLit"></td>
+               </tr>
+               <tr>
+                  <td>Wire 4</td>
+                  <td>Has Red<input type="checkbox" id="complex3HasRed"></td>
+                  <td>Has Blue<input type="checkbox" id="complex3HasBlue"></td>
+                  <td>Has Star<input type="checkbox" id="complex3HasStar"></td>
+                  <td>Has Lit LED<input type="checkbox" id="complex3HasLit"></td>
+               </tr>
+               <tr>
+                  <td>Wire 5</td>
+                  <td>Has Red<input type="checkbox" id="complex4HasRed"></td>
+                  <td>Has Blue<input type="checkbox" id="complex4HasBlue"></td>
+                  <td>Has Star<input type="checkbox" id="complex4HasStar"></td>
+                  <td>Has Lit LED<input type="checkbox" id="complex4HasLit"></td>
+               </tr>
+               <tr>
+                  <td>Wire 6</td>
+                  <td>Has Red<input type="checkbox" id="complex5HasRed"></td>
+                  <td>Has Blue<input type="checkbox" id="complex5HasBlue"></td>
+                  <td>Has Star<input type="checkbox" id="complex5HasStar"></td>
+                  <td>Has Lit LED<input type="checkbox" id="complex5HasLit"></td>
+               </tr>
+            </table>
+         </form>
+         <br/>
+         <input type='button' id='complexCompute' value='Solve'/>  <input id='complexReset' type='button' value='Reset'/><br/>
+         <p id='complexOutput'/>
+         <hr/>
+      </div>
+      <div id = 'modSeq'>
+         <!-- Wire Sequences -->
+         <h4>Wire Sequences Module</h4>
+         <form id='wsequencesForm'>
+            <table border='1'>
+               <tr>
+                  <td>1</td>
+                  <td>
+                     <select id='wsequencesWire1Color'>
+                        <option value='red'>red</option>
+                        <option value='blue'>blue</option>
+                        <option value='black'>black</option>
+                     </select>
+                  </td>
+                  <td>
+                     <input type="radio" name="wsequencesWire1Connect" value="a">A
+                     <input type="radio" name="wsequencesWire1Connect" value="b">B
+                     <input type="radio" name="wsequencesWire1Connect" value="c">C   
+                  </td>
+               </tr>
+               <tr>
+                  <td>2</td>
+                  <td>
+                     <select id='wsequencesWire2Color'>
+                        <option value='red'>red</option>
+                        <option value='blue'>blue</option>
+                        <option value='black'>black</option>
+                     </select>
+                  </td>
+                  <td>
+                     <input type="radio" name="wsequencesWire2Connect" value="a">A
+                     <input type="radio" name="wsequencesWire2Connect" value="b">B
+                     <input type="radio" name="wsequencesWire2Connect" value="c">C   
+                  </td>
+               </tr>
+               <tr>
+                  <td>3</td>
+                  <td>
+                     <select id='wsequencesWire3Color'>
+                        <option value='red'>red</option>
+                        <option value='blue'>blue</option>
+                        <option value='black'>black</option>
+                     </select>
+                  </td>
+                  <td>
+                     <input type="radio" name="wsequencesWire3Connect" value="a">A
+                     <input type="radio" name="wsequencesWire3Connect" value="b">B
+                     <input type="radio" name="wsequencesWire3Connect" value="c">C   
+                  </td>
+               </tr>
+            </table>
+         </form>
+         <br/>
+         <input type='button' id='wsequencesCompute' value='Solve'/>  <input id='wsequencesReset' type='button' value='Reset'/><br/>
+         <p id='wsequencesOutput'/>
+         <hr/>
+      </div>
+      <div id = 'modMazes'>
+         <!-- Mazes -->
+         <h4>Mazes Module</h4>
+         <div id="mazePane">
+            <table id="mazeTable">
+               <tr>
+                  <td class="mazeCell" data-x="0" data-y="0" id="mazeCell_0_0">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="1" data-y="0" id="mazeCell_1_0">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="2" data-y="0" id="mazeCell_2_0">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="3" data-y="0" id="mazeCell_3_0">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="4" data-y="0" id="mazeCell_4_0">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="5" data-y="0" id="mazeCell_5_0">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="mazeCell" data-x="0" data-y="1" id="mazeCell_0_1">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="1" data-y="1" id="mazeCell_1_1">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="2" data-y="1" id="mazeCell_2_1">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="3" data-y="1" id="mazeCell_3_1">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="4" data-y="1" id="mazeCell_4_1">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="5" data-y="1" id="mazeCell_5_1">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="mazeCell" data-x="0" data-y="2" id="mazeCell_0_2">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="1" data-y="2" id="mazeCell_1_2">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="2" data-y="2" id="mazeCell_2_2">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="3" data-y="2" id="mazeCell_3_2">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="4" data-y="2" id="mazeCell_4_2">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="5" data-y="2" id="mazeCell_5_2">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="mazeCell" data-x="0" data-y="3" id="mazeCell_0_3">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="1" data-y="3" id="mazeCell_1_3">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="2" data-y="3" id="mazeCell_2_3">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="3" data-y="3" id="mazeCell_3_3">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="4" data-y="3" id="mazeCell_4_3">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="5" data-y="3" id="mazeCell_5_3">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="mazeCell" data-x="0" data-y="4" id="mazeCell_0_4">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="1" data-y="4" id="mazeCell_1_4">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="2" data-y="4" id="mazeCell_2_4">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="3" data-y="4" id="mazeCell_3_4">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="4" data-y="4" id="mazeCell_4_4">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="5" data-y="4" id="mazeCell_5_4">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="mazeCell" data-x="0" data-y="5" id="mazeCell_0_5">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="1" data-y="5" id="mazeCell_1_5">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="2" data-y="5" id="mazeCell_2_5">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="3" data-y="5" id="mazeCell_3_5">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="4" data-y="5" id="mazeCell_4_5">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+                  <td class="mazeCell" data-x="5" data-y="5" id="mazeCell_5_5">
+                     <div class="mazeCircle">O</div>
+                     <div class="mazeDot">&#183;</div>
+                  </td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id = 'modPasswords'>
+         <!-- Passwords -->
+         <h4>Passwords Module</h4>
+         Enter all letters from each block (e.g. asdvx)<br/>
+         <form id='passwordsForm'>
+            Block 1: <input id='passwordsBlock1' type='text' value=''/><br/>
+            Block 2: <input id='passwordsBlock2' type='text' value=''/><br/>
+            Block 3: <input id='passwordsBlock3' type='text' value=''/><br/>
+            Block 4: <input id='passwordsBlock4' type='text' value=''/><br/>
+            Block 5: <input id='passwordsBlock5' type='text' value=''/><br/>
+         </form>
+         <br/>
+         <input type='button' id='passwordsCompute' value='Solve'/>  <input id='passwordsReset' type='button' value='Reset'/><br/>
+         <p id='passwordsOutput'/>
+         <hr/>
+      </div>
+      <div id = 'modKnobs'>
+         <!-- Knobs -->
+         <h4>Knobs Module</h4>
+         Enter binary AND for all light pairs (e.g. 001010)<br/>
+         Binary AND = (off+off:0, off+on:0, on+off:0, on+on:1)<br/>
+         <form id='knobsForm'>
+            LED Config <input id='ledConfig' type='text' value=''/><br/>
+         </form>
+         <br/>
+         <input type='button' id='knobsCompute' value='Solve'/>  <input id='knobsReset' type='button' value='Reset'/><br/>
+         <p id='knobsOutput'/>
+         <hr/>
+      </div>
+      <!-- Misc Scripts -->
+      <script>
+         function hideAllModules(){
+                 
+                 $('#modButton').hide();
+                 $('#modComplex').hide();
+                 $('#modFirst').hide();
+                 $('#modKnobs').hide();
+                 $('#modMazes').hide();
+                 $('#modMemory').hide();
+                 $('#modMorse').hide();
+                 $('#modPasswords').hide();
+                 $('#modSimon').hide();
+                 $('#modSimple').hide();
+                 $('#modSymbols').hide();
+                 $('#modSeq').hide();
+         };
+         
+             $( document ).ready(function() {
+                 $( "#numBatteriesButtons" ).buttonset();
+                 $( "#serialSuffix" ).buttonset();
+                 $( "#serialVowel" ).buttonset();
+                 $( "#parallelPort" ).buttonset();
+                 $( "#indicatorCARLit" ).buttonset();
+                 $( "#indicatorFRKLit" ).buttonset();
+                 $( "#numStrikes" ).buttonset();
+                 $( "#selectedModuleButtons" ).buttonset();
+                 hideAllModules();
+                 
+             });
+         $('input[name=selectedModule]').change(function(){
+             hideAllModules();
+             // Get Selected Module.
+             var selectedModuleCode = $('input[name=selectedModule]:checked').val();
+             $("#"+selectedModuleCode).show();
+         });
+      </script>
+      
+      <!-- Module Scripts -->
+      <script src="js/wires_241.js"></script><!-- Wires -->
+      <script src="js/button_241.js"></script><!-- Button -->
+      <script src="js/symbols_241.js"></script><!-- Symbols -->
+      <script src="js/simon_241.js"></script><!-- Simon -->
+      <script src="js/first_241.js"></script><!-- Who's on First -->
+      <script src="js/memory_241.js"></script><!-- Memory -->
+      <script src="js/morse_241.js"></script><!-- Morse Code -->
+      <script src="js/complex_241.js"></script><!-- Complex Wires -->
+      <script src="js/wsequences_241.js"></script><!-- Wire Sequences -->
+      <script src="js/mazes_241.js"></script><!-- Mazes -->
+      <script src="js/passwords_241.js"></script><!-- Passwords -->
+      <script src="js/knobs_241.js"></script><!-- Knobs -->
+   </body>
 </html>

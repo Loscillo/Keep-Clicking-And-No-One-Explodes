@@ -1,3 +1,4 @@
+var wsequencesDB = {'red':0,'blue':0,'black':0};
 $("#showWSequences").click(function(){
     $("#wsequences").toggle();
 });

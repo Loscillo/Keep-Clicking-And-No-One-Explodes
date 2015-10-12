@@ -1,3 +1,4 @@
+var simonSequence = [];
 $("#showSimon").click(function(){
     $("#simon").toggle();
 });

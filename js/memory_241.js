@@ -1,3 +1,4 @@
+var memoryDB = [];
 $("#showMemory").click(function(){
     $("#memory").toggle();
 });

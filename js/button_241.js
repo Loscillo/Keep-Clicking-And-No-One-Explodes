@@ -1,6 +1,6 @@
 // Solution Handling
 function modButtonSolve(buttonColor,buttonText){
-    var answer = 'Answer: '+buttonColor+","+buttonText+":";
+    var answer = 'Answer: ';
     var numBatteries = $('input[name=numBatteries]:checked').val();
     var carLit = $('#indicatorCARYes').is(':checked');
     var frkLit = $('#indicatorFRKYes').is(':checked');
@@ -13,7 +13,7 @@ function modButtonSolve(buttonColor,buttonText){
     }
     
     if(numBatteries > 1 && buttonText === "detonate"){
-        answer+="Press and Immediately Release.";
+        answer+="Press and Immediately Release.<br/>&nbsp;<br/>&nbsp;";
         $("#modButtonOutput").html(answer);
         return;
     }
@@ -25,7 +25,7 @@ function modButtonSolve(buttonColor,buttonText){
     } 
     
     if(numBatteries > 2 && frkLit){
-        answer+="Press and Immediately Release.";        
+        answer+="Press and Immediately Release.<br/>&nbsp;<br/>&nbsp;";        
         $("#modButtonOutput").html(answer);
         return;
     }
@@ -37,7 +37,7 @@ function modButtonSolve(buttonColor,buttonText){
     }
     
     if(buttonColor === "red" && buttonText === "hold"){
-        answer+="Press and Immediately Release.";       
+        answer+="Press and Immediately Release.<br/>&nbsp;<br/>&nbsp;";       
         $("#modButtonOutput").html(answer);
         return;        
     }
