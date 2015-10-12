@@ -1,6 +1,8 @@
 <html>
 <head>
 <script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/d3.min.js"></script>
+<link rel="stylesheet" href="css/maze.css" />
 <title>Bomb Expert - 241</title>
 <script> // Init Actions
     $( document ).ready(function() {
@@ -630,6 +632,59 @@ Ask if each wire has red, blue, a star, and a lit LED.<br/>
 
 <div id = 'mazes'> <!-- Mazes -->
 <h4>Mazes Module</h4>
+
+    <div id="mazePane">
+        <table id="mazeTable">
+        <tr>
+            <td class="mazeCell" data-x="0" data-y="0" id="mazeCell_0_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="1" data-y="0" id="mazeCell_1_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="2" data-y="0" id="mazeCell_2_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="3" data-y="0" id="mazeCell_3_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="4" data-y="0" id="mazeCell_4_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="5" data-y="0" id="mazeCell_5_0"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+        </tr>
+        <tr>
+            <td class="mazeCell" data-x="0" data-y="1" id="mazeCell_0_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="1" data-y="1" id="mazeCell_1_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="2" data-y="1" id="mazeCell_2_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="3" data-y="1" id="mazeCell_3_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="4" data-y="1" id="mazeCell_4_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="5" data-y="1" id="mazeCell_5_1"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+        </tr>
+        <tr>
+            <td class="mazeCell" data-x="0" data-y="2" id="mazeCell_0_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="1" data-y="2" id="mazeCell_1_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="2" data-y="2" id="mazeCell_2_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="3" data-y="2" id="mazeCell_3_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="4" data-y="2" id="mazeCell_4_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="5" data-y="2" id="mazeCell_5_2"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+        </tr>
+        <tr>
+            <td class="mazeCell" data-x="0" data-y="3" id="mazeCell_0_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="1" data-y="3" id="mazeCell_1_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="2" data-y="3" id="mazeCell_2_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="3" data-y="3" id="mazeCell_3_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="4" data-y="3" id="mazeCell_4_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="5" data-y="3" id="mazeCell_5_3"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+        </tr>
+        <tr>
+            <td class="mazeCell" data-x="0" data-y="4" id="mazeCell_0_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="1" data-y="4" id="mazeCell_1_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="2" data-y="4" id="mazeCell_2_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="3" data-y="4" id="mazeCell_3_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="4" data-y="4" id="mazeCell_4_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="5" data-y="4" id="mazeCell_5_4"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+        </tr>
+        <tr>
+            <td class="mazeCell" data-x="0" data-y="5" id="mazeCell_0_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="1" data-y="5" id="mazeCell_1_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="2" data-y="5" id="mazeCell_2_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="3" data-y="5" id="mazeCell_3_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="4" data-y="5" id="mazeCell_4_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+            <td class="mazeCell" data-x="5" data-y="5" id="mazeCell_5_5"><div class="mazeCircle">O</div><div class="mazeDot">&#183;</div></td>
+        </tr>
+        </table>
+    </div>
 </div>
 
 <div id = 'passwords'> <!-- Passwords -->
