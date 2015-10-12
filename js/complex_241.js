@@ -1,20 +1,30 @@
+$( document ).ready(function() {
+   $('#modComplexSolve').button(); 
+   $('#modComplexReset').button();
+   for(var i=0;i<6;i++){
+       $('#modComplexW'+i+'Red').button();
+       $('#modComplexW'+i+'Blue').button();
+       $('#modComplexW'+i+'Star').button();
+       $('#modComplexW'+i+'Lit').button();
+   }
+});
 $("#showComplex").click(function(){
     $("#complex").toggle();
 });
 
-$("#complexReset").click(function(){
-    $("#complexForm")[0].reset();
-    $("#complexOutput").html("");
+$("#modComplexReset").click(function(){
+    $("#modComplexReset").removeClass("ui-state-focus ui-state-hover");
+    $("#modComplexForm")[0].reset();
+    $("#modComplexOutput").html("&nbsp;<br/>");
 });
 
-$("#complexCompute").click(function(){
+$("#modComplexSolve").click(function(){
     var answer = "Answer: Cut Wires ";
     // NOTE: There are 16 Possible Outcomes for each wire.
-    var evenSerial = $('input[name=serialSuffix]:checked').val() === "even";
-    var hasParallel = $('#hasParallel').is(':checked');
-    var numBatteries = 0;
-    numBatteries+= parseInt($('#aaCount option:selected').text());
-    numBatteries+= parseInt($('#dCount option:selected').text());
+    var evenSerial = $('#serialEven').is(':checked');
+    console.log("YOOO");
+    var hasParallel = $('#parallelPortYes').is(':checked');
+    var numBatteries = $('input[name=numBatteries]:checked').val();
     var wireArr = {
         0:{},
         1:{},
@@ -23,23 +33,23 @@ $("#complexCompute").click(function(){
         4:{},
         5:{}
     }
-    //$('input[name=memoryNum]:checked').val()
+    
     for(var i=0;i<6;i++){
-        var wireID = 'complex'+i;
-        var hasRed = $('input[id='+wireID+'HasRed'+']:checked').val();
-        var hasBlue = $('input[id='+wireID+'HasBlue'+']:checked').val();
-        var hasStar = $('input[id='+wireID+'HasStar'+']:checked').val();
-        var hasLit = $('input[id='+wireID+'HasLit'+']:checked').val();
+        var hasRed = $('#modComplexW'+i+"Red").is(':checked');
+        var hasBlue = $('#modComplexW'+i+"Blue").is(':checked');
+        var hasStar = $('#modComplexW'+i+"Star").is(':checked');
+        var hasLit = $('#modComplexW'+i+"Lit").is(':checked');
         wireArr[i] = {'red':hasRed,'blue':hasBlue,'star':hasStar,'lit':hasLit};
     }
+
     // The Wires to Cut.
     
     var cutWires = [];
     for(var i=0;i<6;i++){
-        var hasRed = wireArr[i]['red']!=undefined;
-        var hasBlue = wireArr[i]['blue']!=undefined;
-        var hasStar = wireArr[i]['star']!=undefined;
-        var hasLit = wireArr[i]['lit']!=undefined;
+        var hasRed = wireArr[i]['red'];
+        var hasBlue = wireArr[i]['blue'];
+        var hasStar = wireArr[i]['star'];
+        var hasLit = wireArr[i]['lit'];
         
         // C Handle 1: Nothing
         if(!hasRed && !hasBlue && !hasStar && !hasLit){
@@ -146,5 +156,5 @@ $("#complexCompute").click(function(){
         
     }
     answer +=cutWires;
-    $("#complexOutput").html(answer);
+    $("#modComplexOutput").html(answer);
 });

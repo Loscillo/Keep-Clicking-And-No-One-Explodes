@@ -530,57 +530,52 @@
       <div id = 'modComplex'>
          <!-- Complex Wires -->
          <h4>Complex Wires Module</h4>
-         Ask if each wire has red, blue, a star, and a lit LED.<br/>
-         <form id='complexForm'>
-            <table border=1>
-               <tr>
-                  <td>Wire 1</td>
-                  <td>Has Red<input type="checkbox" id="complex0HasRed"></td>
-                  <td>Has Blue<input type="checkbox" id="complex0HasBlue"></td>
-                  <td>Has Star<input type="checkbox" id="complex0HasStar"></td>
-                  <td>Has Lit LED<input type="checkbox" id="comp0ex1HasLit"></td>
-               </tr>
-               <tr>
-                  <td>Wire 2</td>
-                  <td>Has Red<input type="checkbox" id="complex1HasRed"></td>
-                  <td>Has Blue<input type="checkbox" id="complex1HasBlue"></td>
-                  <td>Has Star<input type="checkbox" id="complex1HasStar"></td>
-                  <td>Has Lit LED<input type="checkbox" id="complex1HasLit"></td>
-               </tr>
-               <tr>
-                  <td>Wire 3</td>
-                  <td>Has Red<input type="checkbox" id="complex2HasRed"></td>
-                  <td>Has Blue<input type="checkbox" id="complex2HasBlue"></td>
-                  <td>Has Star<input type="checkbox" id="complex2HasStar"></td>
-                  <td>Has Lit LED<input type="checkbox" id="complex2HasLit"></td>
-               </tr>
-               <tr>
-                  <td>Wire 4</td>
-                  <td>Has Red<input type="checkbox" id="complex3HasRed"></td>
-                  <td>Has Blue<input type="checkbox" id="complex3HasBlue"></td>
-                  <td>Has Star<input type="checkbox" id="complex3HasStar"></td>
-                  <td>Has Lit LED<input type="checkbox" id="complex3HasLit"></td>
-               </tr>
-               <tr>
-                  <td>Wire 5</td>
-                  <td>Has Red<input type="checkbox" id="complex4HasRed"></td>
-                  <td>Has Blue<input type="checkbox" id="complex4HasBlue"></td>
-                  <td>Has Star<input type="checkbox" id="complex4HasStar"></td>
-                  <td>Has Lit LED<input type="checkbox" id="complex4HasLit"></td>
-               </tr>
-               <tr>
-                  <td>Wire 6</td>
-                  <td>Has Red<input type="checkbox" id="complex5HasRed"></td>
-                  <td>Has Blue<input type="checkbox" id="complex5HasBlue"></td>
-                  <td>Has Star<input type="checkbox" id="complex5HasStar"></td>
-                  <td>Has Lit LED<input type="checkbox" id="complex5HasLit"></td>
-               </tr>
-            </table>
+        <p id='modComplexOutput'>&nbsp;<br/></p>
+        <button id='modComplexSolve' >Solve</button>
+        <button id='modComplexReset' >Reset</button>
+        
+        <form id='modComplexForm'>
+         <fieldset>
+         <legend>Wire 1</legend>
+            <input type="checkbox" id='modComplexW0Red' id='modComplexWires' ><label for='modComplexW0Red'>Red</label>
+            <input type="checkbox" id='modComplexW0Blue' id='modComplexWires' ><label for='modComplexW0Blue'>Blue</label>
+            <input type="checkbox" id='modComplexW0Star' id='modComplexWires' ><label for='modComplexW0Star'>Star</label>
+            <input type="checkbox" id='modComplexW0Lit'id='modComplexWires' ><label for='modComplexW0Lit'>Lit</label>
+         </fieldset><fieldset>
+         <legend>Wire 2</legend>
+            <input type="checkbox" id='modComplexW1Red' id='modComplexWires' ><label for='modComplexW1Red'>Red</label>
+            <input type="checkbox" id='modComplexW1Blue' id='modComplexWires' ><label for='modComplexW1Blue'>Blue</label>
+            <input type="checkbox" id='modComplexW1Star' id='modComplexWires' ><label for='modComplexW1Star'>Star</label>
+            <input type="checkbox" id='modComplexW1Lit'id='modComplexWires' ><label for='modComplexW1Lit'>Lit</label>
+         </fieldset><fieldset>
+         <legend>Wire 3</legend>
+            <input type="checkbox" id='modComplexW2Red' id='modComplexWires' ><label for='modComplexW2Red'>Red</label>
+            <input type="checkbox" id='modComplexW2Blue' id='modComplexWires' ><label for='modComplexW2Blue'>Blue</label>
+            <input type="checkbox" id='modComplexW2Star' id='modComplexWires' ><label for='modComplexW2Star'>Star</label>
+            <input type="checkbox" id='modComplexW2Lit'id='modComplexWires' ><label for='modComplexW2Lit'>Lit</label>
+         </fieldset><fieldset>
+         <legend>Wire 4</legend>
+            <input type="checkbox" id='modComplexW3Red' id='modComplexWires' ><label for='modComplexW3Red'>Red</label>
+            <input type="checkbox" id='modComplexW3Blue' id='modComplexWires' ><label for='modComplexW3Blue'>Blue</label>
+            <input type="checkbox" id='modComplexW3Star' id='modComplexWires' ><label for='modComplexW3Star'>Star</label>
+            <input type="checkbox" id='modComplexW3Lit'id='modComplexWires' ><label for='modComplexW3Lit'>Lit</label>
+         </fieldset><fieldset>
+         <legend>Wire 5</legend>
+            <input type="checkbox" id='modComplexW4Red' id='modComplexWires' ><label for='modComplexW4Red'>Red</label>
+            <input type="checkbox" id='modComplexW4Blue' id='modComplexWires' ><label for='modComplexW4Blue'>Blue</label>
+            <input type="checkbox" id='modComplexW4Star' id='modComplexWires' ><label for='modComplexW4Star'>Star</label>
+            <input type="checkbox" id='modComplexW4Lit'id='modComplexWires' ><label for='modComplexW4Lit'>Lit</label>
+         </fieldset><fieldset>
+         <legend>Wire 6</legend>
+            <input type="checkbox" id='modComplexW5Red' id='modComplexWires' ><label for='modComplexW5Red'>Red</label>
+            <input type="checkbox" id='modComplexW5Blue' id='modComplexWires' ><label for='modComplexW5Blue'>Blue</label>
+            <input type="checkbox" id='modComplexW5Star' id='modComplexWires' ><label for='modComplexW5Star'>Star</label>
+            <input type="checkbox" id='modComplexW5Lit'id='modComplexWires' ><label for='modComplexW5Lit'>Lit</label>
+         </fieldset>
          </form>
          <br/>
-         <input type='button' id='complexCompute' value='Solve'/>  <input id='complexReset' type='button' value='Reset'/><br/>
-         <p id='complexOutput'/>
-         <hr/>
+         
+         
       </div>
       <div id = 'modSeq'>
          <!-- Wire Sequences -->
