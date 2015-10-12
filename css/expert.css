@@ -1,0 +1,32 @@
+body { 
+width:75%; 
+margin:auto;
+background:black; 
+color:white;
+}
+
+.rounded-corners {
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+}
+
+.ui-button.redButton {
+    background-color: red;
+    width:100%;
+}
+.ui-button.blueButton {
+    background-color: blue;
+    width:100%;
+}
+
+.ui-button.yellowButton {
+    background-color: yellow;
+    color:black;
+    width:100%;
+}
+.ui-button.whiteButton {
+    background-color: white;
+    color:black;
+    width:100%;
+}

@@ -1,150 +1,202 @@
 <html>
 <head>
+<link rel="stylesheet" href="css/jquery-ui.css" />
 <script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <script src="js/d3.min.js"></script>
 <link rel="stylesheet" href="css/maze.css" />
-<title>Bomb Expert - 241</title>
+<link rel="stylesheet" href="css/expert.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Keep Clicking and No One Explodes - Version 241</title>
 <script> // Init Actions
+function hideAllModules(){
+        
+        $('#modButton').hide();
+        $('#modComplex').hide();
+        $('#modFirst').hide();
+        $('#modKnobs').hide();
+        $('#modMazes').hide();
+        $('#modMemory').hide();
+        $('#modMorse').hide();
+        $('#modPasswords').hide();
+        $('#modSimon').hide();
+        $('#modSimple').hide();
+        $('#modSymbols').hide();
+        $('#modSeq').hide();
+};
+
     $( document ).ready(function() {
-        $('#wires').hide();
-        $('#button').hide();
-        $('#symbols').hide();
-        $('#simon').hide();
-        $('#first').hide();
-        $('#memory').hide();
-        $('#morse').hide();
-        $('#complex').hide();
-        $('#wsequences').hide();
-        $('#mazes').hide();
-        $('#passwords').hide();
-        $('#knobs').hide();
+        $( "#numBatteriesButtons" ).buttonset();
+        $( "#serialSuffix" ).buttonset();
+        $( "#serialVowel" ).buttonset();
+        $( "#parallelPort" ).buttonset();
+        $( "#indicatorCARLit" ).buttonset();
+        $( "#indicatorFRKLit" ).buttonset();
+        $( "#numStrikes" ).buttonset();
+        $( "#selectedModuleButtons" ).buttonset();
+        hideAllModules();
+        
     });
 // Globals
 var simonSequence = [];
 var memoryDB = [];
 var wsequencesDB = {'red':0,'blue':0,'black':0};
+
+
+
+
+
 </script>
 
 </head>
 
 
 <body>
-<h1>Bomb Expert (241 Only)</h1>
-<i>"We're gonna have to science the shit out of this."</i><br/><br/>
-Reset Bomb Info <input id='bombReset' type='button' value='Reset'/><br/><br/>
+<fieldset>
+<legend>Bomb Info</legend>
+
+
+
 <form id='bombInfo'>
-<table border=1>
-<tr>
-<td>Serial Have a Vowel?</td>
-<td><input type="checkbox" id="serialHasVowel">
-</td></tr>
 
-<tr>
-<td>Serial Ends with Even or Odd: </td>
-<td>
-<input type="radio" name="serialSuffix" value="even" checked>Even
-<input type="radio" name="serialSuffix" value="odd">Odd
-</td>
-</tr>
+<fieldset>
+<legend>Serial Vowel?</legend>
+<div id='serialVowel'>
+    <input type='radio' id='serialVowelNo'  name='serialVowel' value=false checked/>
+    <label for='serialVowelNo'>NO</label>
+    <input type='radio' id='serialVowelYes'  name='serialVowel' value=true/>
+    <label for='serialVowelYes'>YES</label>  
+</div>
+</fieldset>
 
-<tr>
-<td>AA batteries?</td>
-<td><select id='aaCount'>
-    <option value=0>0</option>
-    <option value=1>1</option>
-    <option value=2>2</option>
-    <option value=3>3</option>
-    <option value=4>4</option>
-    <option value=5>5</option>
-    <option value=6>6</option>
-    <option value=7>7</option>
-    <option value=8>8</option>
-    <option value=9>9</option>
-    <option value=10>10</option>
-</select></td></tr>
+<fieldset>
+<legend>Serial Suffix?</legend>
+<div id='serialSuffix'>
+    <input type='radio' id='serialEven'  name='serialSuffix' value='even' checked/>
+    <label for='serialEven'>EVEN</label>
+    <input type='radio' id='serialOdd'  name='serialSuffix' value='odd'/>
+    <label for='serialOdd'>ODD</label>  
+</div>
+</fieldset>
 
-<tr>
-<td>D batteries?</td>
-<td><select id='dCount'>
-    <option value=0>0</option>
-    <option value=1>1</option>
-    <option value=2>2</option>
-    <option value=3>3</option>
-    <option value=4>4</option>
-    <option value=5>5</option>
-    <option value=6>6</option>
-    <option value=7>7</option>
-    <option value=8>8</option>
-    <option value=9>9</option>
-    <option value=10>10</option>
-</select></td></tr>
-<tr>
-<td>Lit Indicators</td><td>
-    BOB<input type="checkbox" id="bobLit">
-    CAR<input type="checkbox" id="carLit">
-    CLR<input type="checkbox" id="clrLit">
-    FRK<input type="checkbox" id="frkLit">
-    FRQ<input type="checkbox" id="frqLit">
-    IND<input type="checkbox" id="indLit">
-    MSA<input type="checkbox" id="msaLit">
-    NSA<input type="checkbox" id="nsaLit">
-    SIG<input type="checkbox" id="sigLit">
-    SND<input type="checkbox" id="sndLit">
-    TRN<input type="checkbox" id="trnLit">
-</td></tr>
 
-<tr>
-<td>Unlit Indicators</td><td>
-    BOB<input type="checkbox" id="bobUnlit">
-    CAR<input type="checkbox" id="carUnlit">
-    CLR<input type="checkbox" id="clrUnlit">
-    FRK<input type="checkbox" id="frkUnlit">
-    FRQ<input type="checkbox" id="frqUnlit">
-    IND<input type="checkbox" id="indUnlit">
-    MSA<input type="checkbox" id="msaUnlit">
-    NSA<input type="checkbox" id="nsaUnlit">
-    SIG<input type="checkbox" id="sigUnlit">
-    SND<input type="checkbox" id="sndUnlit">
-    TRN<input type="checkbox" id="trnUnlit">
-</td></tr>
-<tr>
+<fieldset>
+<legend>Batteries</legend>
+<div id='numBatteriesButtons'>
+    <input type='radio' name='numBatteries' id='batteries0'  id='numBatteries' value=0 checked='checked'/>
+    <label for='batteries0'>0</label>
+    <input type='radio' id='batteries1'  id='numBatteries'  value=1 name='numBatteries'/>
+    <label for='batteries1'>1</label>
+    <input type='radio' id='batteries2'  id='numBatteries' value=2 name='numBatteries'/>
+    <label for='batteries2'>2</label>
+    <input type='radio' id='batteries2_'  id='numBatteries' value=3 name='numBatteries'/>
+    <label for='batteries2_' name='numBatteries'>+</label>
+</div>
+</fieldset>
 
-<td>Ports</td><td>
-    DVI<input type="checkbox" id="hasDVI">
-    Parallel<input type="checkbox" id="hasParallel">
-    PS/2<input type="checkbox" id="hasPS2">
-    RCA<input type="checkbox" id="hasRCA">
-    RJ-45<input type="checkbox" id="hasRJ45">
-    Serial<input type="checkbox" id="hasSerial">
-</tr>
-<tr>
-<td>Number of Strikes?</td>
-<td><select id='strikeCount'>
-    <option value=0>0</option>
-    <option value=1>1</option>
-    <option value=2>2</option>
-    <option value=3>3</option>
-</select></td></tr>
+<fieldset>
+<legend>Parallel Port?</legend>
+<div id='parallelPort'>
+    <input type='radio' id='parallelPortNo'  name='parallelPort' value=false checked/>
+    <label for='parallelPortNo'>NO</label>
+    <input type='radio' id='parallelPortYes'  name='parallelPort' value=true/>
+    <label for='parallelPortYes'>YES</label>  
+</div>
+</fieldset>
 
-</table>
+<fieldset>
+<legend>CAR Indicator Lit?</legend>
+<div id='indicatorCARLit'>
+    <input type='radio' id='indicatorCARNo'  name='indicatorCARLit' value=false checked/>
+    <label for='indicatorCARNo'>NO</label>
+    <input type='radio' id='indicatorCARYes'  name='indicatorCARLit' value=true/>
+    <label for='indicatorCARYes'>YES</label>  
+</div>
+</fieldset>
+
+<fieldset>
+<legend>FRK Indicator Lit?</legend>
+<div id='indicatorFRKLit'>
+    <input type='radio' id='indicatorFRKNo'  name='indicatorFRKLit' value=false checked/>
+    <label for='indicatorFRKNo'>NO</label>
+    <input type='radio' id='indicatorFRKYes'  name='indicatorFRKLit' value=true/>
+    <label for='indicatorFRKYes'>YES</label>  
+</div>
+</fieldset>
+
+<fieldset>
+<legend>Number of Strikes</legend>
+<div id='numStrikes'>
+    <input type='radio' id='numStrikes0' name='numStrikes' value=0 checked/>
+    <label for='numStrikes0'>0</label>
+    <input type='radio' id='numStrikes1' name='numStrikes' value=1/>
+    <label for='numStrikes1'>1</label>
+    <input type='radio' id='numStrikes2' name='numStrikes' value=2/>
+    <label for='numStrikes2'>2</label>
+</div>
+</fieldset>
+
 </form>
-<!-- Module Buttons -->
-<input type="button" id="showButton" value="Button"/>
-<input type="button" id="showComplex" value="Complex Wires"/>
-<input type="button" id="showKnobs" value="Knobs"/>
-<input type="button" id="showMazes" value="Mazes"/>
-<input type="button" id="showMemory" value="Memory"/>
-<input type="button" id="showMorse" value="Morse Code"/>
-<input type="button" id="showPasswords" value="Passwords"/>
-<input type="button" id="showSimon" value="Simon Says"/>
-<input type="button" id="showWires" value="Simple Wires"/>
-<input type="button" id="showSymbols" value="Symbols"/>
-<input type="button" id="showWSequences" value="Wire Sequences"/>
-<input type="button" id="showFirst" value="Who's on First"/>
-<hr/>
-<!-- Module UI -->
 
-<div id='wires' > <!-- Wires -->
+
+</fieldset>
+<fieldset>
+<legend>Modules</legend>
+<form id='selectedModuleButtons'>
+    
+    <input type='radio' id='modButtonShow' id='selectedModule' name='selectedModule' value='modButton'/>
+    <label for='modButtonShow'>Button</label>
+    
+    <input type='radio' id='modComplexShow' id='selectedModule' name='selectedModule'  value='modComplex'/>
+    <label for='modComplexShow'>Complex</label>
+
+    <input type='radio' id='modFirstShow' id='selectedModule' name='selectedModule' value='modFirst'/>
+    <label for='modFirstShow'>First</label>
+    
+    <input type='radio' id='modKnobsShow' id='selectedModule' name='selectedModule' value='modKnobs'/>
+    <label for='modKnobsShow'>Knobs</label>
+
+    <input type='radio' id='modMazesShow' id='selectedModule' name='selectedModule' value='modMazes'/>
+    <label for='modMazesShow'>Mazes</label>
+    
+    <input type='radio' id='modMemoryShow' id='selectedModule' name='selectedModule' value='modMemory'/>
+    <label for='modMemoryShow'>Memory</label>  
+
+    <input type='radio' id='modMorseShow' id='selectedModule' name='selectedModule' value='modMorse'/>
+    <label for='modMorseShow'>Morse</label>
+
+    <input type='radio' id='modPasswordsShow' id='selectedModule' name='selectedModule' value='modPasswords'/>
+    <label for='modPasswordsShow'>Passwords</label>
+    
+    <input type='radio' id='modSimonShow' id='selectedModule' name='selectedModule' value='modSimon'/>
+    <label for='modSimonShow'>Simon</label>
+
+    <input type='radio' id='modSimpleShow' id='selectedModule' name='selectedModule' value='modSimple'/>
+    <label for='modSimpleShow'>Simple</label>
+
+    <input type='radio' id='modSymbolsShow' id='selectedModule' name='selectedModule' value='modSymbols'/>
+    <label for='modSymbolsShow'>Symbols</label>
+ 
+    <input type='radio' id='modSeqShow' id='selectedModule' name='selectedModule' value='modSeq'/>
+    <label for='modSeqShow'>Sequences</label>
+
+
+
+</form>
+</fieldset>
+<hr/>
+<!-- Module Panels -->
+<script>
+$('input[name=selectedModule]').change(function(){
+    hideAllModules();
+    // Get Selected Module.
+    var selectedModuleCode = $('input[name=selectedModule]:checked').val();
+    $("#"+selectedModuleCode).show();
+});
+</script>
+
+<div id='modSimple' > <!-- Wires -->
 <h4>Simple Wires Module</h4>
 
 Instructions: What are the wire colors in order from top to bottom?<br/>
@@ -224,34 +276,46 @@ Instructions: What are the wire colors in order from top to bottom?<br/>
 <hr/>
 </div>
 
-<div id='button'> <!-- Button -->
+<div id='modButton'> <!-- Button -->
 <h4>Button Module</h4>
-<form id='buttonForm'>
-<table border=1>
+
+<p id='modButtonOutput'/></p>
+<table border=1 cellspacing="10">
 <tr>
-    <td>Button Color</td><td>
-    <input type="radio" name="buttonColor" value="blue" checked>Blue
-    <input type="radio" name="buttonColor" value="red" >Red
-    <input type="radio" name="buttonColor" value="white" >White
-    <input type="radio" name="buttonColor" value="yellow" >Yellow
-    <input type="radio" name="buttonColor" value="other" >Other
-</td></tr>
-<tr>
-    <td>Button Text</td><td>
-    <input type="radio" name="buttonText" value="abort" checked>Abort
-    <input type="radio" name="buttonText" value="detonate">Detonate
-    <input type="radio" name="buttonText" value="hold">Hold
-    <input type="radio" name="buttonText" value="other">Other
-</td></tr>
+<td><button class = 'redButton' width='100%' id='modButtonRedAbort' >Abort</button></td>
+<td><button class = 'blueButton' id='modButtonBlueAbort' >Abort</button></td>
+</tr><tr>
+<td><button class = 'yellowButton' id='modButtonYellowAbort' >Abort</button></td>
+<td><button class = 'whiteButton' id='modButtonWhiteAbort' >Abort</button></td>
+</tr><tr>
+<td><button class = 'redButton' id='modButtonRedHold' >Hold</button></td>
+<td><button class = 'blueButton' id='modButtonBlueHold' >Hold</button></td>
+</tr><tr>
+<td><button class = 'yellowButton' id='modButtonYellowHold' >Hold</button></td>
+<td><button class = 'whiteButton' id='modButtonWhiteHold' >Hold</button></td>
+</tr><tr>
+<td><button class = 'redButton' id='modButtonRedDetonate' >Detonate</button></td>
+<td><button class = 'blueButton' id='modButtonBlueDetonate' >Detonate</button></td>
+</tr><tr>
+<td><button class = 'yellowButton' id='modButtonYellowDetonate' >Detonate</button></td>
+<td><button class = 'whiteButton' id='modButtonWhiteDetonate' >Detonate</button></td>
+</tr><tr>
+<td><button class = 'redButton' id='modButtonRedPress' >Press</button></td>
+<td><button class = 'blueButton' id='modButtonBluePress' >Press</button></td>
+</tr><tr>
+<td><button class = 'yellowButton' id='modButtonYellowPress' >Press</button></td>
+<td><button class = 'whiteButton' id='modButtonWhitePress' >Press</button></td>
+</tr><tr>
+<td><button class = 'redButton' id='modButtonRedOther' >Other</button></td>
+<td><button class = 'blueButton' id='modButtonBlueOther' >Other</button></td>
+</tr><tr>
+<td><button class = 'yellowButton' id='modButtonYellowOther' >Other</button></td>
+<td><button class = 'whiteButton' id='modButtonWhiteOther' >Other</button></td>
+</tr>
 </table>
-</form>
-<br/>
-<input type='button' id='buttonCompute' value='Solve'/>  <input id='buttonReset' type='button' value='Reset'/><br/>
-<p id='buttonOutput'/>
-<hr/>
 </div>
 
-<div id='symbols'> <!-- Symbols -->
+<div id='modSymbols'> <!-- Symbols -->
 <h4>Symbols Module</h4>
 <!-- fun fact: Look these up at http://unicodelookup.com/ for the real names. -->
 <form id='symbolsForm'>
@@ -353,7 +417,7 @@ Instructions: What are the wire colors in order from top to bottom?<br/>
 <hr/>
 </div>
 
-<div id='simon'> <!-- Simon Says -->
+<div id='modSimon'> <!-- Simon Says -->
 <h4>Simon Says Module</h4>
 <form id='simonForm'>
 <table border=1>
@@ -375,7 +439,7 @@ Instructions: What are the wire colors in order from top to bottom?<br/>
 <hr/>
 </div>
 
-<div id='first'> <!-- Who's on First -->
+<div id='modFirst'> <!-- Who's on First -->
 <h4>Who's on First Module</h4>
 What's The Word on the Display?<br/>
 <form id='firstForm'>
@@ -459,7 +523,7 @@ What word is in that position?<br/>
 <hr/>
 </div>
 
-<div id='memory'> <!-- Memory -->
+<div id='modMemory'> <!-- Memory -->
 <h4>Memory Module</h4>
 <p id='memoryStage'>Stage 1</p><br/>
 <form id='memoryForm'>
@@ -485,7 +549,7 @@ What word is in that position?<br/>
 <hr/>
 </div>
 
-<div id='morse'> <!-- Morse Code -->
+<div id='modMorse'> <!-- Morse Code -->
 <h4>Morse Code Module</h4>
 Enter the morse code ('.-') you hear in each of the boxes: leave any blank to get current possible results. <br/>
 <form id='morseForm'>
@@ -511,7 +575,7 @@ Enter the morse code ('.-') you hear in each of the boxes: leave any blank to ge
 <hr/>
 </div>
 
-<div id = 'complex'> <!-- Complex Wires -->
+<div id = 'modComplex'> <!-- Complex Wires -->
 <h4>Complex Wires Module</h4>
 Ask if each wire has red, blue, a star, and a lit LED.<br/>
 <form id='complexForm'>
@@ -571,7 +635,7 @@ Ask if each wire has red, blue, a star, and a lit LED.<br/>
 <hr/>
 </div>
 
-<div id = 'wsequences'> <!-- Wire Sequences -->
+<div id = 'modSeq'> <!-- Wire Sequences -->
 <h4>Wire Sequences Module</h4>
 <form id='wsequencesForm'>
 <table border='1'>
@@ -630,7 +694,7 @@ Ask if each wire has red, blue, a star, and a lit LED.<br/>
 <hr/>
 </div>
 
-<div id = 'mazes'> <!-- Mazes -->
+<div id = 'modMazes'> <!-- Mazes -->
 <h4>Mazes Module</h4>
 
     <div id="mazePane">
@@ -687,7 +751,7 @@ Ask if each wire has red, blue, a star, and a lit LED.<br/>
     </div>
 </div>
 
-<div id = 'passwords'> <!-- Passwords -->
+<div id = 'modPasswords'> <!-- Passwords -->
 <h4>Passwords Module</h4>
 Enter all letters from each block (e.g. asdvx)<br/>
 <form id='passwordsForm'>
@@ -703,7 +767,7 @@ Block 5: <input id='passwordsBlock5' type='text' value=''/><br/>
 <hr/>
 </div>
 
-<div id = 'knobs'> <!-- Knobs -->
+<div id = 'modKnobs'> <!-- Knobs -->
 <h4>Knobs Module</h4>
 Enter binary AND for all light pairs (e.g. 001010)<br/>
 Binary AND = (off+off:0, off+on:0, on+off:0, on+on:1)<br/>
@@ -717,13 +781,6 @@ LED Config <input id='ledConfig' type='text' value=''/><br/>
 </div>
 
 <!-- Module Scripts -->
-
-<script> // Bomb Info
-$("#bombReset").click(function(){
-    $("#bombInfo")[0].reset();
-});
-
-</script>
 
 <!-- Wires -->
 <script src="js/wires_241.js"></script>
