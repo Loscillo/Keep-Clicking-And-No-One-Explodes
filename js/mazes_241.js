@@ -201,16 +201,16 @@ function build_walls(maze_number) {
         elem.dataset['mask'] = wall_mask;
         console.debug('x: ' + x + ', y: ' + y + ', mask: ' + wall_mask);
         if (wall_mask & 8) { // top
-            $(elem).css("border-top", "1px solid #000");
+            $(elem).css("border-top", "1px solid #fff");
         }
         if (wall_mask & 4) { // left
-            $(elem).css("border-left", "1px solid #000");
+            $(elem).css("border-left", "1px solid #fff");
         }
         if (wall_mask & 2) { // bottom
-            $(elem).css("border-bottom", "1px solid #000");
+            $(elem).css("border-bottom", "1px solid #fff");
         }
         if (wall_mask & 1) { // right
-            $(elem).css("border-right", "1px solid #000");
+            $(elem).css("border-right", "1px solid #fff");
         }
     });
 }
@@ -244,12 +244,7 @@ function place_circle() {
     
 }
 
-$("#showMazes").click(function() {
-    $("#mazes").toggle();
-    if (!maze_populated) {
-        populate_maze_db();
-        hook_cells();
-        reset_pane();
-        maze_populated = true;
-    }
-});
+populate_maze_db();
+hook_cells();
+reset_pane();
+maze_populated = true;

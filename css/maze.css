@@ -1,5 +1,5 @@
 #mazeTable {
-    border: 1px solid #000;
+    border: 1px solid #fff;
 }
 
 #mazeTable td {
@@ -33,6 +33,6 @@
 }
 
 .mazeCell.placed .mazeCircle {
-    color: #black;
+    color: #fff;
     display: block;
 }
