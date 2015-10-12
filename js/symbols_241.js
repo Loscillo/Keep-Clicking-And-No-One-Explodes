@@ -1,13 +1,19 @@
-$("#showSymbols").click(function(){
-    $("#symbols").toggle();
+$(document).ready(function(){
+    for(var i=1;i<28;i++){
+        $('#symbols'+i).button();
+    }
+    $('#modSymbolsReset').button();
+    $('#modSymbolsSolve').button();
+    
 });
 
-$("#symbolsReset").click(function(){
-    $("#symbolsForm")[0].reset();
-    $("#symbolsOutput").html("");
+$("#modSymbolsReset").click(function(){
+    $("#modSymbolsForm")[0].reset();
+    $("#modSymbolsOutput").html("&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>");
 });
 
-$("#symbolsCompute").click(function(){
+$("#modSymbolsSolve").click(function(){
+
   var answer = "Answer: ";
   var symHTMLMap = {
     "01":"<font size=20>&#984;</font>",
@@ -57,13 +63,13 @@ $("#symbolsCompute").click(function(){
   
   if(checkedVals.length != 4){
       answer = "ERR - Must only select 4 symbols at a time.";
-      $("#symbolsOutput").html(answer);
+      $("#modSymbolsOutput").html(answer);
       return;
   }
   var solutionArr = getSolutionArr(symDB,checkedVals);
   if(solutionArr === undefined){
       answer = "ERR - Symbol Combo not in any solution.";
-      $("#symbolsOutput").html(answer);
+      $("#modSymbolsOutput").html(answer);
       return;      
   }
   var solutionHtml = "";
@@ -73,7 +79,7 @@ $("#symbolsCompute").click(function(){
       }
   }
    answer+=solutionHtml;
-   $("#symbolsOutput").html(answer);
+   $("#modSymbolsOutput").html(answer);
    return; 
    
   
