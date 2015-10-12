@@ -829,15 +829,26 @@
       <div id = 'modKnobs'>
          <!-- Knobs -->
          <h4>Knobs Module</h4>
-         Enter binary AND for all light pairs (e.g. 001010)<br/>
-         Binary AND = (off+off:0, off+on:0, on+off:0, on+on:1)<br/>
-         <form id='knobsForm'>
-            LED Config <input id='ledConfig' type='text' value=''/><br/>
+         <p id='modKnobsOutput'>&nbsp;</p>
+        <button id='modKnobsSolve' >Solve</button>
+        <button id='modKnobsReset' >Reset</button>
+
+         <form id='modKnobsForm'>
+         <fieldset>
+         <legend>Both LEDs Lit</legend>
+            <input type='checkbox' id='modKnobs0' ><label for='modKnobs0'>1</label>
+            <input type='checkbox' id='modKnobs1' ><label for='modKnobs1'>2</label>
+            <input type='checkbox' id='modKnobs2' ><label for='modKnobs2'>3</label>
+            <input type='checkbox' id='modKnobs3' ><label for='modKnobs3'>4</label>
+            <input type='checkbox' id='modKnobs4' ><label for='modKnobs4'>5</label>
+            <input type='checkbox' id='modKnobs5' ><label for='modKnobs5'>6</label>
+         </fieldset>
          </form>
+         
          <br/>
-         <input type='button' id='knobsCompute' value='Solve'/>  <input id='knobsReset' type='button' value='Reset'/><br/>
-         <p id='knobsOutput'/>
-         <hr/>
+         
+         
+         
       </div>
       <!-- Misc Scripts -->
       <script>
