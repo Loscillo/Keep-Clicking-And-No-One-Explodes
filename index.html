@@ -496,7 +496,7 @@
       <div id='modMorse'>
          <!-- Morse Code -->
          <h4>Morse Code Module</h4>
-         Enter the morse code ('.-') you hear in each of the boxes: leave any blank to get current possible results. <br/>
+         Enter any morse code ('.-') heard in any order - even incomplete, it will return matches.<br/>
          <input type='button' id='modMorseSolve' value='Solve'/>  
          <input id='modMorseReset' type='button' value='Reset'/><br/>
          <form id='modMorseForm'>
@@ -798,17 +798,16 @@
          <!-- Passwords -->
          <h4>Passwords Module</h4>
          Enter all letters from each block (e.g. asdvx)<br/>
-         <form id='passwordsForm'>
+         <p id='modPasswordsOutput'>&nbsp;</p>
+         <input type='button' id='modPasswordsSolve' value='Solve'/>  
+         <input id='modPasswordsReset' type='button' value='Reset'/><br/><br/>
+         <form id='modPasswordsForm'>
             Block 1: <input id='passwordsBlock1' type='text' value=''/><br/>
             Block 2: <input id='passwordsBlock2' type='text' value=''/><br/>
             Block 3: <input id='passwordsBlock3' type='text' value=''/><br/>
             Block 4: <input id='passwordsBlock4' type='text' value=''/><br/>
             Block 5: <input id='passwordsBlock5' type='text' value=''/><br/>
          </form>
-         <br/>
-         <input type='button' id='passwordsCompute' value='Solve'/>  <input id='passwordsReset' type='button' value='Reset'/><br/>
-         <p id='passwordsOutput'/>
-         <hr/>
       </div>
       <div id = 'modKnobs'>
          <!-- Knobs -->

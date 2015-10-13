@@ -1,12 +1,15 @@
-$("#showPasswords").click(function(){
-    $("#passwords").toggle();
+$(document).ready(function(){
+   $('#modPasswordsSolve').button();
+   $('#modPasswordsReset').button();
+   
 });
 
-$("#passwordsReset").click(function(){
-    $("#passwordsForm")[0].reset();
+$("#modPasswordsReset").click(function(){
+    $("#modPasswordsForm")[0].reset();
+    $("#modPasswordsOutput").html("&nbsp;")
 });
 
-$("#passwordsCompute").click(function(){
+$("#modPasswordsSolve").click(function(){
   
    var answer = "Answer: ";
    var wordsDB = [
@@ -34,7 +37,7 @@ $("#passwordsCompute").click(function(){
    wordBank = getBank(block5Text,wordBank,4);
    
    answer += wordBank;
-   $("#passwordsOutput").html(answer);
+   $("#modPasswordsOutput").html(answer);
    return;   
    
    function getBank(blockLetters,wordBank,indx){
