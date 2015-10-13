@@ -1,15 +1,24 @@
 var simonSequence = [];
-$("#showSimon").click(function(){
-    $("#simon").toggle();
+$(document).ready(function(){
+    $('#simonReset').button(); 
+    $('#simonRed').button();
+    $('#simonBlue').button();
+    $('#simonGreen').button();
+    $('#simonYellow').button();
 });
 
 $("#simonReset").click(function(){
-    $("#simonForm")[0].reset();
+
     simonSequence = [];
-    $("#simonOutput").html("");
+    $("#simonOutput").html("&nbsp;<br/>");
 });
 
-$("#simonCompute").click(function(){
+$('#simonRed').click(function(){getNextColor('red');});
+$('#simonBlue').click(function(){getNextColor('blue');});
+$('#simonGreen').click(function(){getNextColor('green');});
+$('#simonYellow').click(function(){getNextColor('yellow');});
+
+function getNextColor(inputColor){
     var ssDB = {
         red:{
             0:{true:"Blue",false:"Blue"},
@@ -32,11 +41,12 @@ $("#simonCompute").click(function(){
             2:{true:"Blue",false:"Red"}             
         }
     };
-    var inputColor = $('input[name=simonColor]:checked').val()
-    console.log(inputColor);
-    var serialVowel = $('#serialHasVowel').is(':checked');
-    var numStrikes = parseInt($('#strikeCount option:selected').text());
+
+
+    var serialVowel = $('#serialVowelYes').is(':checked');
+    var numStrikes = parseInt($('input[name=numStrikes]:checked').val());
+
     var resultColor = ssDB[inputColor][numStrikes][serialVowel];
     simonSequence.push(" "+resultColor);
     $("#simonOutput").html(simonSequence);
-});
+};

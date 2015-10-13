@@ -346,23 +346,18 @@
       <div id='modSimon'>
          <!-- Simon Says -->
          <h4>Simon Says Module</h4>
-         <form id='simonForm'>
-            <table border=1>
-               <tr>
-                  <td>Current Color</td>
-                  <td>
-                     <input type="radio" name="simonColor" value="none" checked>None
-                     <input type="radio" name="simonColor" value="red">Red
-                     <input type="radio" name="simonColor" value="blue">Blue
-                     <input type="radio" name="simonColor" value="green">Green
-                     <input type="radio" name="simonColor" value="yellow">Yellow
-                  </td>
-               </tr>
-            </table>
-         </form>
-         <br/>
-         <input type='button' id='simonCompute' value='Solve'/>  <input id='simonReset' type='button' value='Reset'/><br/>
-         <p id='simonOutput'/>
+         <p id='simonOutput'>&nbsp;<br/></p>
+         <input id='simonReset' type='button' value='Reset'/><br/>
+         <fieldset>
+         <legend>Next Color in Sequence</legend>
+         <table><tr>
+         <td><button class = 'redButton' id='simonRed'>R</button></td>
+         <td><button class = 'blueButton' id='simonBlue'>B</button></td>
+         <td><button class = 'greenButton' id='simonGreen'>G</button></td>
+         <td><button class = 'yellowButton' id='simonYellow'>Y</button></td>
+         </tr>
+         </table>
+         </fieldset>
          <hr/>
       </div>
       <div id='modFirst'>
