@@ -1,16 +1,18 @@
-$("#showFirst").click(function(){
-    $("#first").toggle();
+$(document).ready(function(){
+   $('#firstSet').buttonset();
+   $('#firstReset').button();
+   $('#firstCompute').button();
 });
 
 $("#firstReset").click(function(){
     $("#firstForm")[0].reset();
     memoryDB = [];
-    $("#firstOutput").html("");
-    $("#firstStage1Output").html("");
+    $("#firstOutput").html("&nbsp;");
+    $("#firstStage1Output").html("&nbsp;");
 });
 
 
-$("#firstStage1").click(function(){
+$("#firstForm").change(function(){
    var answer = "";
     var firstStage1DB = {
         "YES":"Middle Left",
@@ -43,11 +45,14 @@ $("#firstStage1").click(function(){
         "CEE":"Lower Right"
     }
     var displayWord = $('input[name=firstStep1]:checked').val()
-    answer = firstStage1DB[displayWord];
+    if(displayWord === undefined){
+    return;    
+    }    
+    answer = "Position: "+firstStage1DB[displayWord];
    $("#firstStage1Output").html(answer);
 });
 
-$("#firstCompute").click(function(){
+$("#firstForm").change(function(){
     var answer = "Answer: ";
     var firstDB = {
         "READY": "YES, OKAY, WHAT, MIDDLE, LEFT, PRESS, RIGHT, BLANK, READY, NO, FIRST, UHHH, NOTHING, WAIT",
@@ -81,6 +86,11 @@ $("#firstCompute").click(function(){
     }
     
     var firstWord = $('input[name=firstWord]:checked').val()
+    console.log(firstWord);
+    if(firstWord === undefined){
+    return;    
+    }
+    
     answer += firstDB[firstWord];
    $("#firstOutput").html(answer);   
     

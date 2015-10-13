@@ -368,132 +368,148 @@
       <div id='modFirst'>
          <!-- Who's on First -->
          <h4>Who's on First Module</h4>
-         What's The Word on the Display?<br/>
-         <form id='firstForm'>
-            <table border=1>
-               <!-- Step 1 -->
-               <tr>
-                  <!-- Row 1 -->
-                  <td><input type="radio" name="firstStep1" value="    "></td>
-                  <td><input type="radio" name="firstStep1" value="BLANK">BLANK</td>
-                  <td><input type="radio" name="firstStep1" value="C">C</td>
-                  <td><input type="radio" name="firstStep1" value="CEE">CEE</td>
-                  <td><input type="radio" name="firstStep1" value="DISPLAY">DISPLAY</td>
-                  <td><input type="radio" name="firstStep1" value="FIRST">FIRST</td>
-                  <td><input type="radio" name="firstStep1" value="HOLD ON">HOLD ON</td>
-                  <td><input type="radio" name="firstStep1" value="LEAD">LEAD</td>
-                  <td><input type="radio" name="firstStep1" value="LED">LED</td>
-               </tr>
-               <tr>
-                  <!-- Row 2 -->
-                  <td><input type="radio" name="firstStep1" value="LEED">LEED</td>
-                  <td><input type="radio" name="firstStep1" value="NO">NO</td>
-                  <td><input type="radio" name="firstStep1" value="NOTHING">NOTHING</td>
-                  <td><input type="radio" name="firstStep1" value="OKAY">OKAY</td>
-                  <td><input type="radio" name="firstStep1" value="READ">READ</td>
-                  <td><input type="radio" name="firstStep1" value="RED">RED</td>
-                  <td><input type="radio" name="firstStep1" value="REED">REED</td>
-                  <td><input type="radio" name="firstStep1" value="SAYS">SAYS</td>
-                  <td><input type="radio" name="firstStep1" value="SEE">SEE</td>
-               </tr>
-               <tr>
-                  <!-- Row 3 -->
-                  <td><input type="radio" name="firstStep1" value="THEIR">THEIR</td>
-                  <td><input type="radio" name="firstStep1" value="THERE">THERE</td>
-                  <td><input type="radio" name="firstStep1" value="THEY ARE">THEY ARE</td>
-                  <td><input type="radio" name="firstStep1" value="THEY'RE">THEY'RE</td>
-                  <td><input type="radio" name="firstStep1" value="UR">UR</td>
-                  <td><input type="radio" name="firstStep1" value="YES">YES</td>
-                  <td><input type="radio" name="firstStep1" value="YOU ARE">YOU ARE</td>
-                  <td><input type="radio" name="firstStep1" value="YOU">YOU</td>
-                  <td><input type="radio" name="firstStep1" value="YOU'RE">YOU'RE</td>
-                  <td><input type="radio" name="firstStep1" value="YOUR">YOUR</td>
-               </tr>
-            </table>
-            <br/>
-            <input type='button' id='firstStage1' value='Get Position'/><br/>
-            <p id='firstStage1Output'></p>
-            <br/>
-            What word is in that position?<br/>
-            <table border='1'>
-               <!-- Step 2 -->
-               <tr>
-                  <!-- Row 1 -->
-                  <td><input type="radio" name="firstWord" value="BLANK"> BLANK</td>
-                  <td><input type="radio" name="firstWord" value="DONE"> DONE</td>
-                  <td><input type="radio" name="firstWord" value="FIRST"> FIRST</td>
-                  <td><input type="radio" name="firstWord" value="HOLD"> HOLD</td>
-                  <td><input type="radio" name="firstWord" value="LEFT"> LEFT</td>
-                  <td><input type="radio" name="firstWord" value="LIKE"> LIKE</td>
-                  <td><input type="radio" name="firstWord" value="MIDDLE"> MIDDLE</td>
-                  <td><input type="radio" name="firstWord" value="NEXT"> NEXT</td>
-                  <td><input type="radio" name="firstWord" value="NO"> NO</td>
-               </tr>
-               <tr>
-                  <!-- Row 2 -->
-                  <td><input type="radio" name="firstWord" value="NOTHING"> NOTHING</td>
-                  <td><input type="radio" name="firstWord" value="OKAY"> OKAY</td>
-                  <td><input type="radio" name="firstWord" value="PRESS"> PRESS</td>
-                  <td><input type="radio" name="firstWord" value="READY"> READY</td>
-                  <td><input type="radio" name="firstWord" value="RIGHT"> RIGHT</td>
-                  <td><input type="radio" name="firstWord" value="SURE"> SURE</td>
-                  <td><input type="radio" name="firstWord" value="U"> U</td>
-                  <td><input type="radio" name="firstWord" value="UH HUH"> UH HUH</td>
-                  <td><input type="radio" name="firstWord" value="UH UH"> UH UH</td>
-               </tr>
-               <tr>
-                  <!-- Row 3 -->
-                  <td><input type="radio" name="firstWord" value="UHHH"> UHHH</td>
-                  <td><input type="radio" name="firstWord" value="UR"> UR</td>
-                  <td><input type="radio" name="firstWord" value="WAIT"> WAIT</td>
-                  <td><input type="radio" name="firstWord" value="WHAT"> WHAT</td>
-                  <td><input type="radio" name="firstWord" value="WHAT?"> WHAT?</td>
-                  <td><input type="radio" name="firstWord" value="YES"> YES</td>
-                  <td><input type="radio" name="firstWord" value="YOU ARE"> YOU ARE</td>
-                  <td><input type="radio" name="firstWord" value="YOU"> YOU</td>
-                  <td><input type="radio" name="firstWord" value="YOU'RE"> YOU'RE</td>
-                  <td><input type="radio" name="firstWord" value="YOUR"> YOUR</td>
-               </tr>
-            </table>
-         </form>
+         <p id='firstStage1Output'>&nbsp;</p>
+         <p id='firstOutput'>&nbsp;</p>
+         
+         <input id='firstReset' type='button' value='Reset'>
          <br/>
-         <input type='button' id='firstCompute' value='Solve'/>  <input id='firstReset' type='button' value='Reset'/><br/>
-         <p id='firstOutput'/>
-         <hr/>
+         <form id='firstForm'>
+         <div id='firstSet'>
+         
+         <fieldset>
+         <legend>Word on Display</legend>
+         
+                  <input type="radio" name="firstStep1" id='fs1____' value="    "><label for='fs1____'>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                  <input type="radio" name="firstStep1" id='fs1blank' value="BLANK"><label for='fs1blank'>BLANK</label>
+                  <input type="radio" name="firstStep1" id='fs1c' value="C"><label for='fs1c'>C</label>
+                  <input type="radio" name="firstStep1" id='fs1cee' value="CEE"><label for='fs1cee'>CEE</label>
+                  <input type="radio" name="firstStep1" id='fs1display' value="DISPLAY"><label for='fs1display'>DISPLAY</label>
+                  <input type="radio" name="firstStep1" id='fs1first' value="FIRST"><label for='fs1first'>FIRST</label>
+                  <input type="radio" name="firstStep1" id='fs1holdon' value="HOLD ON"><label for='fs1holdon'>HOLD ON</label>
+                  <input type="radio" name="firstStep1" id='fs1lead' value="LEAD"><label for='fs1lead'>LEAD</label>
+                  <input type="radio" name="firstStep1" id='firstLED' value="LED"><label for='firstLED'>LED</label>
+                  <input type="radio" name="firstStep1" id='fs1leed' value="LEED"><label for='fs1leed'>LEED</label>
+                  <input type="radio" name="firstStep1" id='fs1no' value="NO"><label for='fs1no'>NO</label>
+                  <input type="radio" name="firstStep1" id='fs1nothing' value="NOTHING"><label for='fs1nothing'>NOTHING</label>
+                  <input type="radio" name="firstStep1" id='fs1okay' value="OKAY"><label for='fs1okay'>OKAY</label>
+                  <input type="radio" name="firstStep1" id='fs1read' value="READ"><label for='fs1read'>READ</label>
+                  <input type="radio" name="firstStep1" id='fs1red' value="RED"><label for='fs1red'>RED</label>
+                  <input type="radio" name="firstStep1" id='fs1reed' value="REED"><label for='fs1reed'>REED</label>
+                  <input type="radio" name="firstStep1" id='fs1says' value="SAYS"><label for='fs1says'>SAYS</label>
+                  <input type="radio" name="firstStep1" id='fs1see' value="SEE"><label for='fs1see'>SEE</label>
+                  <input type="radio" name="firstStep1" id='fs1their' value="THEIR"><label for='fs1their'>THEIR</label>
+                  <input type="radio" name="firstStep1" id='fs1there' value="THERE"><label for='fs1there'>THERE</label>
+                  <input type="radio" name="firstStep1" id='fs1theyare' value="THEY ARE"><label for='fs1theyare'>THEY ARE</label>
+                  <input type="radio" name="firstStep1" id='fs1theyre' value="THEY'RE"><label for='fs1theyre'>THEY'RE</label>
+                  <input type="radio" name="firstStep1" id='fs1ur' value="UR"><label for='fs1ur'>UR</label>
+                  <input type="radio" name="firstStep1" id='fs1yes' value="YES"><label for='fs1yes'>YES</label>
+                  <input type="radio" name="firstStep1" id='fs1youare' value="YOU ARE"><label for='fs1youare'>YOU ARE</label>
+                  <input type="radio" name="firstStep1" id='fs1you' value="YOU"><label for='fs1you'>YOU</label>
+                  <input type="radio" name="firstStep1" id='fs1youre' value="YOU'RE"><label for='fs1youre'>YOU'RE</label>
+                  <input type="radio" name="firstStep1" id='fs1your' value="YOUR"><label for='fs1your'>YOUR</label>
+
+            </fieldset>
+            
+            <br/>
+            
+            
+            <br/>
+            
+            <fieldset>
+            <legend>Word From Button</legend>
+                  <input type="radio" name="firstWord" id='fs2blank' value="BLANK"><label for='fs2blank'>BLANK</label>
+                  <input type="radio" name="firstWord" id='fs2done' value="DONE"><label for='fs2done'>DONE</label>
+                  <input type="radio" name="firstWord" id='fs2first' value="FIRST"><label for='fs2first'>FIRST</label>
+                  <input type="radio" name="firstWord" id='fs2hold' value="HOLD"><label for='fs2hold'>HOLD</label>
+                  <input type="radio" name="firstWord" id='fs2left' value="LEFT"><label for='fs2left'>LEFT</label>
+                  <input type="radio" name="firstWord" id='fs2like' value="LIKE"><label for='fs2like'>LIKE</label>
+                  <input type="radio" name="firstWord" id='fs2middle' value="MIDDLE"><label for='fs2middle'>MIDDLE</label>
+                  <input type="radio" name="firstWord" id='fs2next' value="NEXT"><label for='fs2next'>NEXT</label>
+                  <input type="radio" name="firstWord" id='fs2no' value="NO"><label for='fs2no'>NO</label>
+                  <input type="radio" name="firstWord" id='fs2nothing' value="NOTHING"><label for='fs2nothing'>NOTHING</label>
+                  <input type="radio" name="firstWord" id='fs2okay' value="OKAY"><label for='fs2okay'>OKAY</label>
+                  <input type="radio" name="firstWord" id='fs2press' value="PRESS"><label for='fs2press'>PRESS</label>
+                  <input type="radio" name="firstWord" id='fs2ready' value="READY"><label for='fs2ready'>READY</label>
+                  <input type="radio" name="firstWord" id='fs2right' value="RIGHT"><label for='fs2right'>RIGHT</label>
+                  <input type="radio" name="firstWord" id='fs2sure' value="SURE"><label for='fs2sure'>SURE</label>
+                  <input type="radio" name="firstWord" id='fs2u' value="U"><label for='fs2u'>U</label>
+                  <input type="radio" name="firstWord" id='fs2uhhuh' value="UH HUH"><label for='fs2uhhuh'>UH HUH</label>
+                  <input type="radio" name="firstWord" id='fs2uhuh' value="UH UH"><label for='fs2uhuh'>UH UH</label>
+                  <input type="radio" name="firstWord" id='fs2uhhh' value="UHHH"><label for='fs2uhhh'>UHHH</label>
+                  <input type="radio" name="firstWord" id='fs2ur' value="UR"><label for='fs2ur'>UR</label>
+                  <input type="radio" name="firstWord" id='fs2wait' value="WAIT"><label for='fs2wait'>WAIT</label>
+                  <input type="radio" name="firstWord" id='fs2what' value="WHAT"><label for='fs2what'>WHAT</label>
+                  <input type="radio" name="firstWord" id='fs2what_' value="WHAT?"><label for='fs2what_'>WHAT?</label>
+                  <input type="radio" name="firstWord" id='fs2yes' value="YES"><label for='fs2yes'>YES</label>
+                  <input type="radio" name="firstWord" id='fs2youare' value="YOU ARE"><label for='fs2youare'>YOU ARE</label>
+                  <input type="radio" name="firstWord" id='fs2you' value="YOU"><label for='fs2you'>YOU</label>
+                  <input type="radio" name="firstWord" id='fs2youre' value="YOU'RE"><label for='fs2youre'>YOU'RE</label>
+                  <input type="radio" name="firstWord" id='fs2your' value="YOUR"><label for='fs2your'>YOUR</label>
+            </fieldset>
+            </div>
+         </form>
+         
       </div>
       <div id='modMemory'>
          <!-- Memory -->
          <h4>Memory Module</h4>
-         <p id='memoryStage'>Stage 1</p>
+         <p id='modMemoryOutput'>&nbsp;</p>
+         <input type='button' id='modMemorySolve' value='Solve'/>  
+         <input id='modMemoryReset' type='button' value='Reset'/><br/>
+         
+         <p id='modMemoryStage'>Stage 1</p>
          <br/>
-         <form id='memoryForm'>
-            <table border='1'>
-               <tr>
-                  <td>Number on Screen</td>
-                  <td>
-                     <input type="radio" name="memoryNum" value="1">1
-                     <input type="radio" name="memoryNum" value="2">2
-                     <input type="radio" name="memoryNum" value="3">3
-                     <input type="radio" name="memoryNum" value="4">4
-                  </td>
-               </tr>
-               <tr>
-                  <td>Button Number Sequence</td>
-                  <td>
-                     <input type="number" size=1 min=1 max=4 name="memorySeq0" value=1/>
-                     <input type="number" size=1 min=1 max=4 name="memorySeq1" value=2/>
-                     <input type="number" size=1 min=1 max=4 name="memorySeq2" value=3/>
-                     <input type="number" size=1 min=1 max=4 name="memorySeq3" value=4/>
-                  </td>
-               </tr>
-            </table>
+         <form id='modMemoryForm'>
+
+               <fieldset>
+                  <legend>Screen</legend>
+                    <div id='memoryNum'>
+                     <input type="radio" name="memoryNum" id="memoryNum1" value=1><label for='memoryNum1'>1</label>
+                     <input type="radio" name="memoryNum" id="memoryNum2" value=2><label for='memoryNum2'>2</label>
+                     <input type="radio" name="memoryNum" id="memoryNum3" value=3><label for='memoryNum3'>3</label>
+                     <input type="radio" name="memoryNum" id="memoryNum4" value=4><label for='memoryNum4'>4</label>
+                     </div>
+                  </fieldset>
+               <br/><br/>
+               <fieldset>
+                  <legend>First</legend>
+                    <div id='memory0'>
+                     <input type="radio" name="memory0" id="memory01" value=1><label for='memory01'>1</label>
+                     <input type="radio" name="memory0" id="memory02" value=2><label for='memory02'>2</label>
+                     <input type="radio" name="memory0" id="memory03" value=3><label for='memory03'>3</label>
+                     <input type="radio" name="memory0" id="memory04" value=4><label for='memory04'>4</label>
+                     </div>
+                </fieldset>
+               <fieldset>
+                  <legend>Second</legend>
+                    <div id='memory1'>
+                     <input type="radio" name="memory1" id="memory11" value=1><label for='memory11'>1</label>
+                     <input type="radio" name="memory1" id="memory12" value=2><label for='memory12'>2</label>
+                     <input type="radio" name="memory1" id="memory13" value=3><label for='memory13'>3</label>
+                     <input type="radio" name="memory1" id="memory14" value=4><label for='memory14'>4</label>
+                     </div>
+                </fieldset>
+               <fieldset>
+                  <legend>Third</legend>
+                    <div id='memory2'>
+                     <input type="radio" name="memory2" id="memory21" value=1><label for='memory21'>1</label>
+                     <input type="radio" name="memory2" id="memory22" value=2><label for='memory22'>2</label>
+                     <input type="radio" name="memory2" id="memory23" value=3><label for='memory23'>3</label>
+                     <input type="radio" name="memory2" id="memory24" value=4><label for='memory24'>4</label>
+                     </div>
+                </fieldset>
+               <fieldset>
+                  <legend>Fourth</legend>
+                    <div id='memory3'>
+                     <input type="radio" name="memory3" id="memory31" value=1><label for='memory31'>1</label>
+                     <input type="radio" name="memory3" id="memory32" value=2><label for='memory32'>2</label>
+                     <input type="radio" name="memory3" id="memory33" value=3><label for='memory33'>3</label>
+                     <input type="radio" name="memory3" id="memory34" value=4><label for='memory34'>4</label>
+                     </div>
+                </fieldset>
          </form>
-         <br/>
-         <input type='button' id='memoryCompute' value='Solve'/>  <input id='memoryReset' type='button' value='Reset'/><br/>
-         <p id='memoryOutput'/>
-         <hr/>
       </div>
-      <div id='modMorse'>
+      <div id ='modMorse'>
          <!-- Morse Code -->
          <h4>Morse Code Module</h4>
          Enter any morse code ('.-') heard in any order - even incomplete, it will return matches.<br/>

@@ -1,22 +1,29 @@
 var memoryDB = [];
-$("#showMemory").click(function(){
-    $("#memory").toggle();
+$(document).ready(function(){
+   $('#memoryNum').buttonset();
+   $('#memory0').buttonset();   
+   $('#memory1').buttonset();   
+   $('#memory2').buttonset();   
+   $('#memory3').buttonset();   
+   $('#modMemorySolve').button();   
+   $('#modMemoryReset').button();   
 });
-
-$("#memoryReset").click(function(){
-    $("#memoryForm")[0].reset();
+$("#modMemoryReset").click(function(){
+    $("#modMemoryForm")[0].reset();
     memoryDB = [];
-    $("#memoryOutput").html("");
-    $("#memoryStage").html("Stage 1");
+    $("#modMemoryOutput").html("&nbsp;");
+    $("#modMemoryStage").html("Stage 1");
 });
 
-$("#memoryCompute").click(function(){
+$("#modMemorySolve").click(function(){
     var answer = "Answer: ";
     var memSequence = []
-    var screenVal = parseInt($('input[name=memoryNum]:checked').val())
+    var screenVal = $('input[name=memoryNum]:checked').val()
+    
     var roundNum = memoryDB.length;
     for(var i=0;i<4;i++){
-        memSequence.push(parseInt($('input[name=memorySeq'+i+']').val()));
+        memSequence.push(parseInt($('input[name=memory'+i+']:checked').val()));
+
     }
 
     
@@ -26,7 +33,7 @@ $("#memoryCompute").click(function(){
 
     if(hasDuplicates(memSequence)){
        answer = "ERR - cannot have duplicates in sequence."
-       $("#memoryOutput").html(answer);
+       $("#modMemoryOutput").html(answer);
        return;       
     }
     
@@ -35,39 +42,39 @@ $("#memoryCompute").click(function(){
         var result = roundOne(memoryDB,screenVal,memSequence);
         memoryDB[roundNum] = result;
         answer+= "Press "+result['label'];
-        $("#memoryOutput").html(answer);
-        $("#memoryStage").html("Stage 2");
+        $("#modMemoryOutput").html(answer);
+        $("#modMemoryStage").html("Stage 2");
         return;
     case 1:
         var result = roundTwo(memoryDB,screenVal,memSequence);
         memoryDB[roundNum] = result;
         answer+= "Press "+result['label'];
-        $("#memoryOutput").html(answer);
-        $("#memoryStage").html("Stage 3");
+        $("#modMemoryOutput").html(answer);
+        $("#modMemoryStage").html("Stage 3");
         return;
     case 2:
         var result = roundThree(memoryDB,screenVal,memSequence);
         memoryDB[roundNum] = result;
         answer+= "Press "+result['label'];
-        $("#memoryOutput").html(answer);
-        $("#memoryStage").html("Stage 4");
+        $("#modMemoryOutput").html(answer);
+        $("#modMemoryStage").html("Stage 4");
         return;
     case 3:
         var result = roundFour(memoryDB,screenVal,memSequence);
         memoryDB[roundNum] = result;
         answer+= "Press "+result['label'];
-        $("#memoryOutput").html(answer);
-        $("#memoryStage").html("Stage 5");
+        $("#modMemoryOutput").html(answer);
+        $("#modMemoryStage").html("Stage 5");
         return;
     case 4:
         var result = roundFive(memoryDB,screenVal,memSequence);
         memoryDB[roundNum] = result;
         answer+= "Press "+result['label'];
-        $("#memoryOutput").html(answer);
+        $("#modMemoryOutput").html(answer);
         return;
     default:
         answer = "ERR - not a valid round - forgot to reset?"
-        $("#memoryOutput").html(answer);
+        $("#modMemoryOutput").html(answer);
         return;           
     }
 
