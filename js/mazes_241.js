@@ -122,7 +122,8 @@ function populate_maze_db() {
 }
 
 var placed = {};
-var lastPlacement = "";
+var lastPlacement = "-1";
+var cur_maze = -1;
 
 function _object_count(obj) {
 	var count = 0;
@@ -155,96 +156,93 @@ function __circle_placement_callback(e) {
     var cell = e.currentTarget;
     var x = parseInt(cell.dataset.x), y = parseInt(cell.dataset.y);
     var placementString = "" + x + "_" + y;
-    if (placed[placementString] !== undefined) {
-        // already placed it here, so just toggle it
-        delete placed[placementString];
+    if (_object_count(placed) > 0 && lastPlacement != "-1" && placed[lastPlacement] !== undefined) {
+        console.debug("Deleting last circle placement...");
+        delete placed[lastPlacement];
+        $("#mazeCell_" + lastPlacement).removeClass("placed");
         lastPlacement = "-1";
-        $(cell).removeClass("placed");
-    } else if (_object_count(placed) > 1) {
-        console.log("placementString: " + placementString + " -- objcount: " + _object_count(placed));
-        // repositioning second placement
-        if (lastPlacement != "-1" && placed[lastPlacement] !== undefined) {
-            delete placed[lastPlacement];
-            $("#mazeCell_" + lastPlacement).removeClass("placed");
-            lastPlacement = "-1";
-        }
-        placed[placementString] = 1;
-        lastPlacement = placementString;
-        $(cell).addClass("placed");
-    } else { // just add it
-        placed[placementString] = 1;
-        lastPlacement = placementString;
-        $(cell).addClass("placed");
+        reset_maze_walls();
     }
+    placed[placementString] = 1;
+    lastPlacement = placementString;
+    $(cell).addClass("placed");
 
-    if (_object_count(placed) == 2) {
+    if (_object_count(placed) > 0) {
         attempt_render_maze();
     }
 }
 
-function hook_cells() {
-    $("td.mazeCell").click(__circle_placement_callback);
+function __start_placement_callback(e) {
+}
+
+function __stop_placement_callback(e) {
 }
 
 function reset_maze_walls() {
-    $('td.mazeCell').css("border-top", "");
-    $('td.mazeCell').css("border-left", "");
-    $('td.mazeCell').css("border-bottom", "");
-    $('td.mazeCell').css("border-right", "");
+    console.debug('resetting walls...');
+    $('td.mazeCell').css("border-top", "none")
+                    .css("border-left", "none")
+                    .css("border-bottom", "none")
+                    .css("border-right", "none")
+                    .data('mask', null);
 }
 
 function build_walls(maze_number) {
-    reset_maze_walls();
+    console.debug('building walls for #' + maze_number);
     $('td.mazeCell').each(function(idx, elem) {
         var x = parseInt(elem.dataset.x), y = parseInt(elem.dataset.y);
         var wall_mask = wall_db[maze_number].walls[y*6 + x];
         elem.dataset['mask'] = wall_mask;
-        console.debug('x: ' + x + ', y: ' + y + ', mask: ' + wall_mask);
-        if (wall_mask & 8) { // top
+        if (wall_mask & 8) {
             $(elem).css("border-top", "1px solid #fff");
         }
-        if (wall_mask & 4) { // left
+        if (wall_mask & 4) {
             $(elem).css("border-left", "1px solid #fff");
         }
-        if (wall_mask & 2) { // bottom
+        if (wall_mask & 2) {
             $(elem).css("border-bottom", "1px solid #fff");
         }
-        if (wall_mask & 1) { // right
+        if (wall_mask & 1) {
             $(elem).css("border-right", "1px solid #fff");
         }
     });
 }
 
+function start_stop_transition() {
+    $('td.mazeCell').addClass('start-stop');
+}
 
 function attempt_render_maze() {
-	var maze_scaffolds = [-1, -1];
+	var maze_scaffold = -1;
 	var placements = placements_made();
-	if (placements.length != 2) {
+	if (placements.length != 1) {
 		return;
 	}
 	placements.forEach(function(c, i, arr) {
 		var pcoords = _parse_placement(c);
 		if (maze_db1[pcoords.x][pcoords.y] !== undefined) {
-			maze_scaffolds[i] = maze_db1[pcoords.x][pcoords.y];
+			maze_scaffold = maze_db1[pcoords.x][pcoords.y];
 		} else if (maze_db2[pcoords.x][pcoords.y] !== undefined) {
-			maze_scaffolds[i] = maze_db2[pcoords.x][pcoords.y];
+			maze_scaffold = maze_db2[pcoords.x][pcoords.y];
 		}
 	});
-	if (maze_scaffolds[0] != -1 && maze_scaffolds[0] == maze_scaffolds[1]) {
+	if (maze_scaffold != -1) {
 		// we have a match, render it
-        build_walls(parseInt(maze_scaffolds[0]));
+        currentTarget = maze_scaffold;
+        build_walls(parseInt(maze_scaffold));
+        start_stop_transition();
 	}
 }
 
 function reset_pane() {
-    
-}
-
-function place_circle() {
-    
+    reset_maze_walls();
+    placed = {};
+    lastPlacement = "-1";
+    cur_maze = -1;
+    $('td.mazeCell').removeClass('start-stop')
+                    .click(__circle_placement_callback);
 }
 
 populate_maze_db();
-hook_cells();
 reset_pane();
-maze_populated = true;
+$("td.mazeCell").click(__circle_placement_callback);
