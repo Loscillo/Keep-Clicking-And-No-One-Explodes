@@ -119,7 +119,7 @@ $("#modSimpleSolve").click(function(){
         if(countYellow > 1){
             return "Cut the Second Wire.";
         }
-        
+        return "Cut the Second Wire.";
     }
     // Calculate answer given 5 wires.
     function wiresCalc5(wires,serialSuffix){
