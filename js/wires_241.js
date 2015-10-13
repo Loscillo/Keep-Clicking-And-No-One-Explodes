@@ -1,26 +1,63 @@
-$("#showWires").click(function(){
-    $("#wires").toggle();
+$(document).ready(function(){
+    for(var i=0;i<7;i++){
+        $('#modSimpleW'+i+'Red').button();
+        $('#modSimpleW'+i+'Blue').button();
+        $('#modSimpleW'+i+'Yellow').button();
+        $('#modSimpleW'+i+'White').button();
+        $('#modSimpleW'+i+'Black').button();
+    }
+    $('#modSimpleSolve').button();
+    $('#modSimpleReset').button();
 });
 
-$("#wiresReset").click(function(){
-    $("#wiresForm")[0].reset();
+$("#modSimpleReset").click(function(){
+    $("#modSimpleForm")[0].reset();
+    $("#modSimpleOutput").html("&nbsp;");
+    
 });
 
-$("#wiresCompute").click(function(){
+$("#modSimpleSolve").click(function(){
     var answer = "Answer: ";
     // Get the serial suffix (odd or even).
-    var wireSerialSuffix = $('input[name=serialSuffix]:checked').val()
+    var wireSerialSuffix = "";
+    if($('#serialEven').is(':checked')){
+        wireSerialSuffix = "even";
+    }else{
+        wireSerialSuffix = "odd";
+    }
+    var wiresArr = [];
+    
+    function checkWire(wiresArr,curWire){
+        if($("#"+curWire+'Red').is(':checked')){
+            wiresArr.push("red");
+            return wiresArr;
+        }
+        if($("#"+curWire+'Blue').is(':checked')){
+            wiresArr.push("blue");
+            return wiresArr;
+        }
+        if($("#"+curWire+'Yellow').is(':checked')){
+            wiresArr.push("yellow");
+            return wiresArr;
+        }
+        if($("#"+curWire+'White').is(':checked')){
+            wiresArr.push("white");
+            return wiresArr;
+        }
+        if($("#"+curWire+'Black').is(':checked')){
+            wiresArr.push("black");
+            return wiresArr;
+        }       
+        return wiresArr;
+    };
     // Get the total number of wires.
     
-    var wiresArr = [];
-    for(var i =1;i < 7; i++){
-        var wireName = "wiresWire"+i;
-        var currWire = $('input[name='+wireName+']:checked').val();
-        if(currWire != "none"){
-            wiresArr.push(currWire);
-        }
-    }
     
+    for(var i =0;i < 7; i++){
+        var wireName = "modSimpleW"+i;
+        wiresArr = checkWire(wiresArr,wireName);
+    }
+
     switch(wiresArr.length) {
         case 3:
             answer += wiresCalc3(wiresArr,wireSerialSuffix);
@@ -46,7 +83,7 @@ $("#wiresCompute").click(function(){
             return "Cut the Second Wire.";
         }
         
-        if(wires[-1]==="white"){
+        if(wires[wires.length-1]==="white"){
             return "Cut the Last Wire.";
         }
         // Count occurence of blue wires.
@@ -71,7 +108,7 @@ $("#wiresCompute").click(function(){
             return "Cut the Last Red Wire.";
         }
         
-        if(wires[-1]==="yellow" && wires.indexOf('red') === -1){
+        if(wires[wires.length-1]==="yellow" && wires.indexOf('red') === -1){
             return "Cut the First Wire.";
         }
         
@@ -88,8 +125,8 @@ $("#wiresCompute").click(function(){
     function wiresCalc5(wires,serialSuffix){
         var countRed = wires.reduce(function(n, val) {return n + (val === "red");}, 0);
         var countYellow = wires.reduce(function(n, val) {return n + (val === "yellow");}, 0);
-        
-        if(wires[-1] === "black" && serialSuffix === "odd"){
+
+        if(wires[wires.length-1] == "black" && serialSuffix == "odd"){
             return "Cut the Fourth Wire.";
         }
         
@@ -127,5 +164,5 @@ $("#wiresCompute").click(function(){
     
     
     
-    $("#wiresOutput").html(answer);
+    $("#modSimpleOutput").html(answer);
 });

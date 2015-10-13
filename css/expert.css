@@ -20,6 +20,11 @@ color:white;
     width:100%;
 }
 
+.ui-button.blackButton {
+    background-color: black;
+    width:100%;
+}
+
 .ui-button.yellowButton {
     background-color: yellow;
     color:black;
@@ -30,6 +35,11 @@ color:white;
     color:black;
     width:100%;
 }
+
+.small-button {
+   font-size: .8em !important;
+}
+
 .ui-button.gen {
     width:100%;
 }

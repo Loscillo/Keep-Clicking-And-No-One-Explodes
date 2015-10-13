@@ -120,81 +120,66 @@
       <div id='modSimple' >
          <!-- Wires -->
          <h4>Simple Wires Module</h4>
-         Instructions: What are the wire colors in order from top to bottom?<br/>
-         <form id='wiresForm'>
-            <table border='1'>
-               <tr>
-                  <td>Wire 1</td>
-                  <td>
-                     <input type="radio" name="wiresWire1" value="none" checked>None
-                     <input type="radio" name="wiresWire1" value="black">Black
-                     <input type="radio" name="wiresWire1" value="blue">Blue
-                     <input type="radio" name="wiresWire1" value="red">Red
-                     <input type="radio" name="wiresWire1" value="white">White
-                     <input type="radio" name="wiresWire1" value="yellow">Yellow
-                  </td>
-               </tr>
-               <tr>
-                  <td>Wire 2</td>
-                  <td>
-                     <input type="radio" name="wiresWire2" value="none" checked>None
-                     <input type="radio" name="wiresWire2" value="black">Black
-                     <input type="radio" name="wiresWire2" value="blue">Blue
-                     <input type="radio" name="wiresWire2" value="red">Red
-                     <input type="radio" name="wiresWire2" value="white">White
-                     <input type="radio" name="wiresWire2" value="yellow">Yellow
-                  </td>
-               </tr>
-               <tr>
-                  <td>Wire 3</td>
-                  <td>
-                     <input type="radio" name="wiresWire3" value="none" checked>None
-                     <input type="radio" name="wiresWire3" value="black">Black
-                     <input type="radio" name="wiresWire3" value="blue">Blue
-                     <input type="radio" name="wiresWire3" value="red">Red
-                     <input type="radio" name="wiresWire3" value="white">White
-                     <input type="radio" name="wiresWire3" value="yellow">Yellow
-                  </td>
-               </tr>
-               <tr>
-                  <td>Wire 4</td>
-                  <td>
-                     <input type="radio" name="wiresWire4" value="none" checked>None
-                     <input type="radio" name="wiresWire4" value="black">Black
-                     <input type="radio" name="wiresWire4" value="blue">Blue
-                     <input type="radio" name="wiresWire4" value="red">Red
-                     <input type="radio" name="wiresWire4" value="white">White
-                     <input type="radio" name="wiresWire4" value="yellow">Yellow
-                  </td>
-               </tr>
-               <tr>
-                  <td>Wire 5</td>
-                  <td>
-                     <input type="radio" name="wiresWire5" value="none" checked>None
-                     <input type="radio" name="wiresWire5" value="black">Black
-                     <input type="radio" name="wiresWire5" value="blue">Blue
-                     <input type="radio" name="wiresWire5" value="red">Red
-                     <input type="radio" name="wiresWire5" value="white">White
-                     <input type="radio" name="wiresWire5" value="yellow">Yellow
-                  </td>
-               </tr>
-               <tr>
-                  <td>Wire 6</td>
-                  <td>
-                     <input type="radio" name="wiresWire6" value="none" checked>None
-                     <input type="radio" name="wiresWire6" value="black">Black
-                     <input type="radio" name="wiresWire6" value="blue">Blue
-                     <input type="radio" name="wiresWire6" value="red">Red
-                     <input type="radio" name="wiresWire6" value="white">White
-                     <input type="radio" name="wiresWire6" value="yellow">Yellow
-                  </td>
-               </tr>
-            </table>
+         <p id='modSimpleOutput'>&nbsp;</p>
+        
+         <button id='modSimpleSolve' >Solve</button>
+         <button id='modSimpleReset' >Reset</button>
+         <form id='modSimpleForm'>
+         <fieldset>
+         <legend>Wire 1</legend>
+         <input type='radio' id='modSimpleW0Red' name='modSimpleW0' ><label style='background-color:red;' for='modSimpleW0Red'>&nbsp;</label>
+         <input type='radio' id='modSimpleW0Blue' name='modSimpleW0' ><label style='background-color:blue;' for='modSimpleW0Blue'>&nbsp;</label>
+         <input type='radio' id='modSimpleW0Yellow' name='modSimpleW0'><label style='background-color:yellow;' for='modSimpleW0Yellow'>&nbsp;</label>
+         <input type='radio' id='modSimpleW0White' name='modSimpleW0' ><label style='background-color:white;color:black;'for='modSimpleW0White'>&nbsp;</label>
+         <input type='radio' id='modSimpleW0Black' name='modSimpleW0' ><label style='background-color:black;' for='modSimpleW0Black'>&nbsp;</label>
+         </fieldset>
+
+         <fieldset>
+         <legend>Wire 2</legend>
+         <input type='radio' id='modSimpleW1Red' name='modSimpleW1' ><label style='background-color:red;' for='modSimpleW1Red'>&nbsp;</label>
+         <input type='radio' id='modSimpleW1Blue' name='modSimpleW1' ><label style='background-color:blue;' for='modSimpleW1Blue'>&nbsp;</label>
+         <input type='radio' id='modSimpleW1Yellow' name='modSimpleW1'><label style='background-color:yellow;' for='modSimpleW1Yellow'>&nbsp;</label>
+         <input type='radio' id='modSimpleW1White' name='modSimpleW1' ><label style='background-color:white;color:black;'for='modSimpleW1White'>&nbsp;</label>
+         <input type='radio' id='modSimpleW1Black' name='modSimpleW1' ><label style='background-color:black;' for='modSimpleW1Black'>&nbsp;</label>
+         </fieldset>
+
+         <fieldset>
+         <legend>Wire 3</legend>
+         <input type='radio' id='modSimpleW2Red' name='modSimpleW2' ><label style='background-color:red;' for='modSimpleW2Red'>&nbsp;</label>
+         <input type='radio' id='modSimpleW2Blue' name='modSimpleW2' ><label style='background-color:blue;' for='modSimpleW2Blue'>&nbsp;</label>
+         <input type='radio' id='modSimpleW2Yellow' name='modSimpleW2'><label style='background-color:yellow;' for='modSimpleW2Yellow'>&nbsp;</label>
+         <input type='radio' id='modSimpleW2White' name='modSimpleW2' ><label style='background-color:white;color:black;'for='modSimpleW2White'>&nbsp;</label>
+         <input type='radio' id='modSimpleW2Black' name='modSimpleW2' ><label style='background-color:black;' for='modSimpleW2Black'>&nbsp;</label>
+         </fieldset>
+
+         <fieldset>
+         <legend>Wire 4</legend>
+         <input type='radio' id='modSimpleW3Red' name='modSimpleW3' ><label style='background-color:red;' for='modSimpleW3Red'>&nbsp;</label>
+         <input type='radio' id='modSimpleW3Blue' name='modSimpleW3' ><label style='background-color:blue;' for='modSimpleW3Blue'>&nbsp;</label>
+         <input type='radio' id='modSimpleW3Yellow' name='modSimpleW3'><label style='background-color:yellow;' for='modSimpleW3Yellow'>&nbsp;</label>
+         <input type='radio' id='modSimpleW3White' name='modSimpleW3' ><label style='background-color:white;color:black;'for='modSimpleW3White'>&nbsp;</label>
+         <input type='radio' id='modSimpleW3Black' name='modSimpleW3' ><label style='background-color:black;' for='modSimpleW3Black'>&nbsp;</label>
+         </fieldset>
+
+         <fieldset>
+         <legend>Wire 5</legend>
+         <input type='radio' id='modSimpleW4Red' name='modSimpleW4' ><label style='background-color:red;' for='modSimpleW4Red'>&nbsp;</label>
+         <input type='radio' id='modSimpleW4Blue' name='modSimpleW4' ><label style='background-color:blue;' for='modSimpleW4Blue'>&nbsp;</label>
+         <input type='radio' id='modSimpleW4Yellow' name='modSimpleW4'><label style='background-color:yellow;' for='modSimpleW4Yellow'>&nbsp;</label>
+         <input type='radio' id='modSimpleW4White' name='modSimpleW4' ><label style='background-color:white;color:black;'for='modSimpleW4White'>&nbsp;</label>
+         <input type='radio' id='modSimpleW4Black' name='modSimpleW4' ><label style='background-color:black;' for='modSimpleW4Black'>&nbsp;</label>
+         </fieldset>
+
+         <fieldset>
+         <legend>Wire 6</legend>
+         <input type='radio' id='modSimpleW5Red' name='modSimpleW5' ><label style='background-color:red;' for='modSimpleW5Red'>&nbsp;</label>
+         <input type='radio' id='modSimpleW5Blue' name='modSimpleW5' ><label style='background-color:blue;' for='modSimpleW5Blue'>&nbsp;</label>
+         <input type='radio' id='modSimpleW5Yellow' name='modSimpleW5'><label style='background-color:yellow;' for='modSimpleW5Yellow'>&nbsp;</label>
+         <input type='radio' id='modSimpleW5White' name='modSimpleW5' ><label style='background-color:white;color:black;'for='modSimpleW5White'>&nbsp;</label>
+         <input type='radio' id='modSimpleW5Black' name='modSimpleW5' ><label style='background-color:black;' for='modSimpleW5Black'>&nbsp;</label>
+         </fieldset>         
          </form>
-         <br/>
-         <input type='button' id='wiresCompute' value='Solve'/>  <input id='wiresReset' type='button' value='Reset'/><br/>
-         <p id='wiresOutput'>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/></p>
-         <hr/>
+
       </div>
       <div id='modButton'>
          <!-- Button -->
