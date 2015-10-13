@@ -497,7 +497,9 @@
          <!-- Morse Code -->
          <h4>Morse Code Module</h4>
          Enter the morse code ('.-') you hear in each of the boxes: leave any blank to get current possible results. <br/>
-         <form id='morseForm'>
+         <input type='button' id='modMorseSolve' value='Solve'/>  
+         <input id='modMorseReset' type='button' value='Reset'/><br/>
+         <form id='modMorseForm'>
             <table border=1>
                <tr>
                   <td>1:<input type='text' id='morseChar0' value=''/></td>
@@ -519,10 +521,7 @@
                </tr>
             </table>
          </form>
-         <br/>
-         <input type='button' id='morseCompute' value='Solve'/>  <input id='morseReset' type='button' value='Reset'/><br/>
-         <p id='morseOutput'/>
-         <hr/>
+         <p id='modMorseOutput'>&nbsp;<br/></p>
       </div>
       <div id = 'modComplex'>
          <!-- Complex Wires -->

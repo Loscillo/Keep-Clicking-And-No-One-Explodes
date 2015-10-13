@@ -1,10 +1,11 @@
-$("#showMorse").click(function(){
-    $("#morse").toggle();
+$(document).ready(function(){
+   $("#modMorseSolve").button(); 
+   $("#modMorseReset").button(); 
 });
 
-$("#morseReset").click(function(){
-    $("#morseForm")[0].reset();
-    $("#morseOutput").html("");
+$("#modMorseReset").click(function(){
+    $("#modMorseForm")[0].reset();
+    $("#modMorseOutput").html("");
 
 
 });
@@ -40,7 +41,7 @@ var morseTable = {
     '--..--': ',', '..--..': '?', '-..-.': '/', '.--.-.': '@'
 };
 
-$("#morseCompute").click(function(){
+$("#modMorseSolve").click(function(){
     var answer = "";
     var morseKeys = Object.keys(morseTable);
     var morseWords = Object.keys(morseWordsDB);
@@ -75,29 +76,35 @@ $("#morseCompute").click(function(){
     function getPossibleWords(testChar,possibleWords){
         var newWords = [];
         for(var i=0;i<possibleWords.length;i++){
+            var entryOutput = possibleWords[i];
             // Check the map for repeating.
             if(morseMap[testChar] == 1){
             if(possibleWords[i].indexOf(testChar) > -1){
-                newWords.push(possibleWords[i]);
+                newWords.push(entryOutput);
+                continue;
             }    
             }else{
               var numOccurences = $.grep(possibleWords[i], function (elem) {
                 return elem === testChar;
                 }).length;
               if(numOccurences >= morseMap[testChar]){
-                  newWords.push(possibleWords[i]);
+                  newWords.push(entryOutput);
+                  continue;
               }
             }
             
         }
         return newWords;
     }
-    
+    console.log(possibleWords);
     // Remove Duplicates.
     possibleWords = jQuery.unique(possibleWords);
     
-    answer+="Chars:"+morseCharArr+"<br/>Possible Words: "+possibleWords;
-    $("#morseOutput").html(answer);
+    answer+="Chars:"+morseCharArr+"<br/>Possible Words: <br/>";
+    for(var i=0;i<possibleWords.length;i++){
+        answer+=possibleWords[i]+":"+morseWordsDB[possibleWords[i]]+"<br/>";
+    }
+    $("#modMorseOutput").html(answer);
 });
 
 

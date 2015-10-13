@@ -62,13 +62,13 @@ $("#modSymbolsSolve").click(function(){
   }
   
   if(checkedVals.length != 4){
-      answer = "ERR - Must only select 4 symbols at a time.";
+      answer = "ERR - Must only select 4 symbols at a time.<br/>&nbsp;<br/>&nbsp;<br/>";
       $("#modSymbolsOutput").html(answer);
       return;
   }
   var solutionArr = getSolutionArr(symDB,checkedVals);
   if(solutionArr === undefined){
-      answer = "ERR - Symbol Combo not in any solution.";
+      answer = "ERR - Symbol Combo not in any solution.<br/>&nbsp;<br/>&nbsp;<br/>";
       $("#modSymbolsOutput").html(answer);
       return;      
   }
