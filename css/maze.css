@@ -27,6 +27,14 @@
     left: 3px;
 }
 
+.mazeCell.start-stop:hover {
+    background-color: green;
+}
+
+.mazeCell.start-stop.place-stop:hover {
+    background-color: red;
+}
+
 .mazeCell:hover .mazeCircle {
     display: block;
     color: #2211aa;
