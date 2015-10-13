@@ -1,17 +1,19 @@
 var wsequencesDB = {'red':0,'blue':0,'black':0};
-$("#showWSequences").click(function(){
-    $("#wsequences").toggle();
+$(document).ready(function(){
+   $('#wsequencesReset').button(); 
+   $('#wsequencesSolve').button(); 
+   $('#ws').buttonset(); 
 });
 
 $("#wsequencesReset").click(function(){
     $("#wsequencesForm")[0].reset();
     wsequencesDB = {'red':0,'blue':0,'black':0};
-    $("#wsequencesOutput").html("");
+    $("#wsequencesOutput").html("&nbsp;");
 
 
 });
 
-$("#wsequencesCompute").click(function(){
+$("#wsequencesSolve").click(function(){
     var answer = "Answer: ";
 
     var wsequencesCutDB = {
@@ -49,16 +51,16 @@ $("#wsequencesCompute").click(function(){
             9:['a']      
         }
     }
-    var wire1Color = $('#wsequencesWire1Color option:selected').text();
-    var wire1Connected = $('input[name=wsequencesWire1Connect]:checked').val();
-    var wire2Color = $('#wsequencesWire2Color option:selected').text();
-    var wire2Connected = $('input[name=wsequencesWire2Connect]:checked').val();
-    var wire3Color = $('#wsequencesWire3Color option:selected').text();
-    var wire3Connected = $('input[name=wsequencesWire3Connect]:checked').val();
+    var wire1Color = $('input[name=ws1Color]:checked').val();
+    var wire1Connected = $('input[name=ws1End]:checked').val();
+    var wire2Color = $('input[name=ws2Color]:checked').val();
+    var wire2Connected = $('input[name=ws2End]:checked').val();
+    var wire3Color = $('input[name=ws3Color]:checked').val();
+    var wire3Connected = $('input[name=ws3End]:checked').val();
     console.log("1:"+wire1Color+" : "+wire1Connected);
     console.log("2:"+wire2Color+" : "+wire2Connected);
     console.log("3:"+wire3Color+" : "+wire3Connected);
-    
+    console.log(wsequencesDB);
     var cutList = [];
     
     wsequencesDB[wire1Color]++;

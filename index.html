@@ -587,59 +587,64 @@
       <div id = 'modSeq'>
          <!-- Wire Sequences -->
          <h4>Wire Sequences Module</h4>
-         <form id='wsequencesForm'>
-            <table border='1'>
-               <tr>
-                  <td>1</td>
-                  <td>
-                     <select id='wsequencesWire1Color'>
-                        <option value='red'>red</option>
-                        <option value='blue'>blue</option>
-                        <option value='black'>black</option>
-                     </select>
-                  </td>
-                  <td>
-                     <input type="radio" name="wsequencesWire1Connect" value="a">A
-                     <input type="radio" name="wsequencesWire1Connect" value="b">B
-                     <input type="radio" name="wsequencesWire1Connect" value="c">C   
-                  </td>
-               </tr>
-               <tr>
-                  <td>2</td>
-                  <td>
-                     <select id='wsequencesWire2Color'>
-                        <option value='red'>red</option>
-                        <option value='blue'>blue</option>
-                        <option value='black'>black</option>
-                     </select>
-                  </td>
-                  <td>
-                     <input type="radio" name="wsequencesWire2Connect" value="a">A
-                     <input type="radio" name="wsequencesWire2Connect" value="b">B
-                     <input type="radio" name="wsequencesWire2Connect" value="c">C   
-                  </td>
-               </tr>
-               <tr>
-                  <td>3</td>
-                  <td>
-                     <select id='wsequencesWire3Color'>
-                        <option value='red'>red</option>
-                        <option value='blue'>blue</option>
-                        <option value='black'>black</option>
-                     </select>
-                  </td>
-                  <td>
-                     <input type="radio" name="wsequencesWire3Connect" value="a">A
-                     <input type="radio" name="wsequencesWire3Connect" value="b">B
-                     <input type="radio" name="wsequencesWire3Connect" value="c">C   
-                  </td>
-               </tr>
-            </table>
-         </form>
+         <p id='wsequencesOutput'>&nbsp;</p><br/>
+         <input type='button' id='wsequencesSolve' value='Solve'/>  
+         <input id='wsequencesReset' type='button' value='Reset'/>
          <br/>
-         <input type='button' id='wsequencesCompute' value='Solve'/>  <input id='wsequencesReset' type='button' value='Reset'/><br/>
-         <p id='wsequencesOutput'/>
-         <hr/>
+         <form id='wsequencesForm'>
+         <div id='ws'>
+            <fieldset>
+            <legend>First Wire</legend>
+            <table>
+            <tr>
+            <td>
+            <input type='radio' id='ws1ColorRed' value='red' name='ws1Color'><label style='background-color:red;' for='ws1ColorRed'>R</label>
+            <input type='radio' id='ws1ColorBlue' value='blue' name='ws1Color'><label style='background-color:blue;' for='ws1ColorBlue'>B</label>
+            <input type='radio' id='ws1ColorBlack' value='black' name='ws1Color'><label style='background-color:black;color:white;' for='ws1ColorBlack'>K</label>
+            </td><td>
+            <input type='radio' id='ws1EndA' name='ws1End' value="a"><label for='ws1EndA'>A</label>
+            <input type='radio' id='ws1EndB' name='ws1End' value="b"><label for='ws1EndB'>B</label>
+            <input type='radio' id='ws1EndC' name='ws1End' value="c"><label for='ws1EndC'>C</label>          
+            </td>
+            </tr>
+            </table>
+            </fieldset>
+            
+            <fieldset>
+            <legend>Second Wire</legend>
+            <table>
+            <tr>
+            <td>
+            <input type='radio' id='ws2ColorRed' value='red' name='ws2Color'><label style='background-color:red;' for='ws2ColorRed'>R</label>
+            <input type='radio' id='ws2ColorBlue' value='blue' name='ws2Color'><label style='background-color:blue;' for='ws2ColorBlue'>B</label>
+            <input type='radio' id='ws2ColorBlack' value='black' name='ws2Color'><label style='background-color:black;color:white;' for='ws2ColorBlack'>K</label>
+            </td><td>
+            <input type='radio' id='ws2EndA' name='ws2End' value="a"><label for='ws2EndA'>A</label>
+            <input type='radio' id='ws2EndB' name='ws2End' value="b"><label for='ws2EndB'>B</label>
+            <input type='radio' id='ws2EndC' name='ws2End' value="c"><label for='ws2EndC'>C</label>          
+            </td>
+            </tr>
+            </table>
+            </fieldset>
+            
+            <fieldset>
+            <legend>Third Wire</legend>
+            <table>
+            <tr>
+            <td>
+            <input type='radio' id='ws3ColorRed' value='red' name='ws3Color'><label style='background-color:red;' for='ws3ColorRed'>R</label>
+            <input type='radio' id='ws3ColorBlue' value='blue' name='ws3Color'><label style='background-color:blue;' for='ws3ColorBlue'>B</label>
+            <input type='radio' id='ws3ColorBlack' value='black' name='ws3Color'><label style='background-color:black;color:white;' for='ws3ColorBlack'>K</label>
+            </td><td>
+            <input type='radio' id='ws3EndA' name='ws3End' value="a"><label for='ws3EndA'>A</label>
+            <input type='radio' id='ws3EndB' name='ws3End' value="b"><label for='ws3EndB'>B</label>
+            <input type='radio' id='ws3EndC' name='ws3End' value="c"><label for='ws3EndC'>C</label>          
+            </td>
+            </tr>
+            </table>
+            </fieldset>            
+         </div>
+         </form>
       </div>
       <div id = 'modMazes'>
          <!-- Mazes -->
