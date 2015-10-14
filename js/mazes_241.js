@@ -199,7 +199,7 @@ function within_bounds(where, dirmask) {
     }
 }
 
-function _dimension(dirmask) {
+function _advance(dirmask) {
     return [
             ((dirmask & 5) > 0 ? 0 : 1),
             ((dirmask & 3) > 0 ? 1 : -1)
@@ -223,7 +223,8 @@ function _can_move_forward(where, dirmask, maze_num) {
     }
 
 function _build_path_segment(path_stack, dirmask, stop_marker, maze_num, level) {
-    if (level > 72) {
+    if (level > 36) {
+        // we're doing something wrong if we go beyond 6x6 traversals
         console.log('recursion bugs ahoy');
         return null;
     }
@@ -233,21 +234,22 @@ function _build_path_segment(path_stack, dirmask, stop_marker, maze_num, level) 
         return path_stack;
     }
 
+    $('#mazeCell_'+head[0]+'_'+head[1]).data('visited', 1);
+
     var substack = clone(path_stack), target_node = null;
     head = substack[substack.length-1];
     if (_can_move_right(head, dirmask, maze_num)) {
         console.debug('\t wanna move right, dirmask: ' + dirmask);
-        var d = _dimension(ror(dirmask));
-        target_node = head;
+        var d = _advance(ror(dirmask));
+        target_node = head.slice(0, 2);
         target_node[d[0]] += d[1];
         if (!_visited(target_node)) {
             console.debug('\t moving right to ' + target_node);
             console.debug('\t new dirmask: ' + ror(dirmask));
-            $('#mazeCell_'+target_node[0]+'_'+target_node[1]).data('visited', 1);
             substack.push(target_node);
-            substack = _build_path_segment(substack, ror(dirmask), stop_marker, maze_num);
+            substack = _build_path_segment(substack, ror(dirmask), stop_marker, maze_num, level+1);
             if (!substack) {
-                substack = clone(path_stack);
+                substack = path_stack;
             } else {
                 return substack;
             }
@@ -257,18 +259,17 @@ function _build_path_segment(path_stack, dirmask, stop_marker, maze_num, level) 
     }
     if (_can_move_left(head, dirmask, maze_num)) {
         console.debug('\t wanna move left, dirmask: '+ dirmask);
-        var d = _dimension(rol(dirmask));
+        var d = _advance(rol(dirmask));
         console.debug('\t dimension: ' + d);
-        target_node = head;
+        target_node = head.slice(0, 2);
         target_node[d[0]] += d[1];
         if (!_visited(target_node)) {
             console.debug('\t moving left to ' + target_node);
             console.debug('\t new dirmask: ' + rol(dirmask));
-            $('#mazeCell_'+target_node[0]+'_'+target_node[1]).data('visited', 1);
             substack.push(target_node);
-            substack = _build_path_segment(substack, rol(dirmask), stop_marker, maze_num);
+            substack = _build_path_segment(substack, rol(dirmask), stop_marker, maze_num, level+1);
             if (!substack) {
-                substack = clone(path_stack);
+                substack = path_stack;
             } else {
                 return substack;
             }
@@ -278,16 +279,15 @@ function _build_path_segment(path_stack, dirmask, stop_marker, maze_num, level) 
     }
     if (_can_move_forward(head, dirmask, maze_num)) {
         console.debug('\t wanna move forward');
-        var d = _dimension(dirmask);
-        target_node = head;
+        var d = _advance(dirmask);
+        target_node = head.slice(0, 2);
         target_node[d[0]] += d[1];
         if (!_visited(target_node)) {
             console.debug('\t moving forward to ' + target_node);
-            $('#mazeCell_'+target_node[0]+'_'+target_node[1]).data('visited', 1);
             substack.push(target_node);
-            substack = _build_path_segment(substack, dirmask, stop_marker, maze_num);
+            substack = _build_path_segment(substack, dirmask, stop_marker, maze_num, level+1);
             if (!substack) {
-                substack = clone(path_stack);
+                substack = path_stack;
             } else {
                 return substack;
             }
@@ -296,22 +296,23 @@ function _build_path_segment(path_stack, dirmask, stop_marker, maze_num, level) 
     var dirmask_180 = rol(rol(dirmask));
     if (_can_move_forward(head, dirmask_180, maze_num)) {
         console.debug('\t wanna move backward: dirmask = ' + dirmask_180);
-        var d = _dimension(dirmask_180);
-        target_node = clone(head);
+        console.debug('\t current stack: ' + substack);
+        var d = _advance(dirmask_180);
+        target_node = head.slice(0, 2);
         target_node[d[0]] += d[1];
         if (!_visited(target_node)) {
             console.debug('\t moving backwards to ' + target_node);
-            console.debug('\t new dirmask: ' + rol(rol(dirmask)));
-            $('#mazeCell_'+target_node[0]+'_'+target_node[1]).data('visited', 1);
+            console.debug('\t new dirmask: ' + dirmask_180);
             substack.push(target_node);
-            substack = _build_path_segment(substack, dirmask_180, stop_marker, maze_num);
+            substack = _build_path_segment(substack, dirmask_180, stop_marker, maze_num, level+1);
             if (!substack) {
-                substack = clone(path_stack);
+                substack = path_stack;
             } else {
                 return substack;
             }
         }
     }
+
     return null;
 }
 
@@ -327,14 +328,33 @@ function build_and_show_path() {
     console.debug("This is the part where I build out a maze at " +
         "(" + start_marker.x + ", " + start_marker.y + ") and " +
         "(" + stop_marker.x + ", " + stop_marker.y + ")");
-    var path_stack = Array();
+    var path_stack = Array(), spoken_directions = Array();
+    var previous_node = null;
     path_stack.push([start_marker.x, start_marker.y]);
     path_stack = _build_path_segment(path_stack, 1, stop_marker, cur_maze, 0);
     console.debug(path_stack);
     if (path_stack) {
         path_stack.forEach(function(val, idx) {
             $('#mazeCell_'+val[0]+'_'+val[1]).addClass('path-segment');
+            if (previous_node) {
+                switch([val[0]-previous_node[0], val[1]-previous_node[1]].toString()) {
+                    case "-1,0":
+                        spoken_directions.push("left");
+                        break;
+                    case "0,-1":
+                        spoken_directions.push("up");
+                        break;
+                    case "1,0":
+                        spoken_directions.push("right");
+                        break;
+                    case "0,1":
+                        spoken_directions.push("down");
+                        break;
+                }
+            }
+            previous_node = val;
         });
+        $('#mazeDirections').text(spoken_directions.join(', '));
     } else {
         console.log('we fail');
     }
