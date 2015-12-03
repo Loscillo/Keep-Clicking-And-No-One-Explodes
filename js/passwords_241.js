@@ -6,10 +6,18 @@ $(document).ready(function(){
 
 $("#modPasswordsReset").click(function(){
     $("#modPasswordsForm")[0].reset();
-    $("#modPasswordsOutput").html("&nbsp;")
+    $("#modPasswordsOutput").html("&nbsp;");
 });
 
-$("#modPasswordsSolve").click(function(){
+$("#modPasswordsSolve").click(solvePassword);
+
+$('#passwordsBlock1').keyup(solvePassword);
+$('#passwordsBlock2').keyup(solvePassword);
+$('#passwordsBlock3').keyup(solvePassword);
+$('#passwordsBlock4').keyup(solvePassword);
+$('#passwordsBlock5').keyup(solvePassword);
+
+function solvePassword(){
   
    var answer = "Answer: ";
    var wordsDB = [
@@ -20,7 +28,7 @@ $("#modPasswordsSolve").click(function(){
     'spell','still','study','their','there',
     'these','thing','think','three','water',
     'where','which','world','would','write'
-   ]
+   ];
     
    var wordBank = wordsDB;
    
@@ -41,7 +49,9 @@ $("#modPasswordsSolve").click(function(){
    return;   
    
    function getBank(blockLetters,wordBank,indx){
-       
+       if(blockLetters.length === 0){
+        return wordBank;
+       }
        var newBank = [];
        for(var i=0;i<wordBank.length;i++){
            var tstChar = wordBank[i][indx];
@@ -59,4 +69,4 @@ $("#modPasswordsSolve").click(function(){
        // Check letters of current bank to ensure they match.
        return newBank;
    }
-});
+}
