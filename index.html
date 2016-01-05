@@ -1,8 +1,8 @@
 <html>
 <head>
-    <link rel="stylesheet" href="css/jquery-ui.css"/>
+    <!--<link rel="stylesheet" href="css/jquery-ui.css"/>-->
     <link rel="stylesheet" href="css/maze.css"/>
-    <link rel="stylesheet" href="css/expert.css"/>
+    <!--<link rel="stylesheet" href="css/expert.css"/>-->
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/edit.css"/>
     <style>
@@ -31,12 +31,13 @@
         }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
     <title>KCNE241</title>
 </head>
 
-<body class="container">
+<body class="container-fluid">
 <div class="row">
-    <div class="col-md-3" id="leftCol">
+    <div class="col-md-2" id="leftCol">
         <ul class="nav nav-stacked" id="sidebar">
             <li><a href="#modSimple">Simple Wires Module</a></li>
             <li><a href="#modButton">Button Module</a></li>
@@ -52,7 +53,7 @@
             <li><a href="#modKnobs">Knobs Module</a></li>
         </ul>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-10">
         <!-- Bomb Info Section -->
         <fieldset>
             <legend>Bomb Info</legend>
@@ -192,92 +193,63 @@
             </form>
 
         </div>
-        <div id='modButton'>
+        <hr>
+        <div id='modButton' class="well">
             <!-- Button -->
-            <h4>Button Module</h4>
+            <h2 class="text-center">Button Module</h2>
             <p id='modButtonOutput'/></p>
-            <table border=1 cellspacing="10">
-                <tr>
-                    <td>
-                        <button class='redButton' width='100%' id='modButtonRedAbort'>Abort</button>
-                    </td>
-                    <td>
-                        <button class='blueButton' id='modButtonBlueAbort'>Abort</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class='yellowButton' id='modButtonYellowAbort'>Abort</button>
-                    </td>
-                    <td>
-                        <button class='whiteButton' id='modButtonWhiteAbort'>Abort</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class='redButton' id='modButtonRedHold'>Hold</button>
-                    </td>
-                    <td>
-                        <button class='blueButton' id='modButtonBlueHold'>Hold</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class='yellowButton' id='modButtonYellowHold'>Hold</button>
-                    </td>
-                    <td>
-                        <button class='whiteButton' id='modButtonWhiteHold'>Hold</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class='redButton' id='modButtonRedDetonate'>Detonate</button>
-                    </td>
-                    <td>
-                        <button class='blueButton' id='modButtonBlueDetonate'>Detonate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class='yellowButton' id='modButtonYellowDetonate'>Detonate</button>
-                    </td>
-                    <td>
-                        <button class='whiteButton' id='modButtonWhiteDetonate'>Detonate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class='redButton' id='modButtonRedPress'>Press</button>
-                    </td>
-                    <td>
-                        <button class='blueButton' id='modButtonBluePress'>Press</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class='yellowButton' id='modButtonYellowPress'>Press</button>
-                    </td>
-                    <td>
-                        <button class='whiteButton' id='modButtonWhitePress'>Press</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class='redButton' id='modButtonRedOther'>Other</button>
-                    </td>
-                    <td>
-                        <button class='blueButton' id='modButtonBlueOther'>Other</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class='yellowButton' id='modButtonYellowOther'>Other</button>
-                    </td>
-                    <td>
-                        <button class='whiteButton' id='modButtonWhiteOther'>Other</button>
-                    </td>
-                </tr>
-            </table>
+            <div class="alert alert-info" id="modButtonClick" style="display: none;">
+                <p>Press and immediately release.</p>
+            </div>
+            <div class="alert alert-info" id="modButtonHold" style="display: none;">
+                <p>Release on number <span id="modButtonRelease"></span>.</p>
+            </div>
+            <div class="alert alert-danger" id="modButtonChoice" style="display: none;">
+                <p>You must select a color and a word.</p>
+            </div>
+
+            <div class="btn-group btn-block" role="group">
+                <button id="modButtonSolve" class="btn btn-success col-lg-6">Solve</button>
+                <button id="modButtonReset" class="btn btn-danger col-lg-6">Reset</button>
+            </div>
+            <br/><br/>
+
+            <form>
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    <label class="btn btn-warning">
+                        <input type="radio" name="modButtonColor" value="yellow" autocomplete="off"/> Yellow
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" name="modButtonColor" value="blue" autocomplete="off"/> Blue
+                    </label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="modButtonColor" value="red" autocomplete="off"/> Red
+                    </label>
+                    <label class="btn btn-blank">
+                        <input type="radio" name="modButtonColor" value="white" autocomplete="off"/> White
+                    </label>
+                </div>
+            </form>
+
+            <form>
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    <label class="btn btn-default">
+                        <input type="radio" name="modButtonText" value="abort" autocomplete="off"/> Abort
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="modButtonText" value="hold" autocomplete="off"/> Hold
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="modButtonText" value="detonate" autocomplete="off"/> Detonate
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="modButtonText" value="press" autocomplete="off"/> Press
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="modButtonText" value="other" autocomplete="off"/> Other
+                    </label>
+                </div>
+            </form>
         </div>
         <hr>
         <div id='modSymbols' class="well">
@@ -294,8 +266,8 @@
                 <p id="modSymbolsAnswer"></p>
             </div>
             <div class="btn-group btn-block" role="group">
-                <button id="modSymbolsSolve" class="btn btn-primary col-lg-6">Solve</button>
-                <button id="modSymbolsReset" class="btn btn-warning col-lg-6">Reset</button>
+                <button id="modSymbolsSolve" class="btn btn-success col-lg-6">Solve</button>
+                <button id="modSymbolsReset" class="btn btn-danger col-lg-6">Reset</button>
             </div>
 
             <form id='modSymbolsForm'>
@@ -1010,6 +982,123 @@
 
         </div>
     </div>
+
+    <button id="test" class="btn btn-block btn-primary">test</button>
+
+    <!-- Modals -->
+    <div class="modal" id="modalSerialVowel" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Vowel in serial number ?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalBatteries" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Number of batteries ?</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <form>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default">
+                                <input type="radio" name="batteries" value="0" autocomplete="off"/> 0
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="batteries" value="1" autocomplete="off"/> 1
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="batteries" value="2" autocomplete="off"/> 2
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="batteries" value="4" autocomplete="off"/> +
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalCAR" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">CAR indicator with LED lit? ?</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <form>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-success">
+                                <input type="radio" name="car" value="0" autocomplete="off"/> Yes
+                            </label>
+                            <label class="btn btn-danger">
+                                <input type="radio" name="car" value="1" autocomplete="off"/> No
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalFRK" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">FRK indicator with LED lit? ?</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <form>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-success">
+                                <input type="radio" name="frk" value="0" autocomplete="off"/> Yes
+                            </label>
+                            <label class="btn btn-danger">
+                                <input type="radio" name="frk" value="1" autocomplete="off"/> No
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalButtonStrip" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Hold button. Color of strip ?</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <form>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary">
+                                <input type="radio" name="buttonStrip" value="4" autocomplete="off"/> Blue
+                            </label>
+                            <label class="btn btn-warning">
+                                <input type="radio" name="buttonStrip" value="5" autocomplete="off"/> Yellow
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="buttonStrip" value="1" autocomplete="off"/> Other
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <!-- Misc Scripts -->
 <script src="js/jquery-1.11.3.min.js"></script>
@@ -1039,6 +1128,7 @@
 
 <!-- Module Scripts -->
 <script src="js/checkboxButtons.js"></script>
+<script src="js/bomb.js"></script><!-- Bomb definition -->
 <script src="js/wires_241.js"></script><!-- Wires -->
 <script src="js/button_241.js"></script><!-- Button -->
 <script src="js/symbols_241.js"></script><!-- Symbols -->

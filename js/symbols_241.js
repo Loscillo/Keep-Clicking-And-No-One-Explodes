@@ -1,4 +1,5 @@
 $("#modSymbolsReset").click(function () {
+    $(this).blur();
     for (var i = 1; i < 28; i++) {
         if ($('input[id=symbols' + i + ']:checked').val()) {
             $('button[id=symbolsButton' + i + ']').trigger("click");
@@ -10,6 +11,7 @@ $("#modSymbolsReset").click(function () {
 });
 
 $("#modSymbolsSolve").click(function () {
+    $(this).blur();
     $("#modSymbolsErrorNumber").hide();
     $("#modSymbolsErrorCombo").hide();
     $("#modSymbolsSuccess").hide();

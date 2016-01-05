@@ -1,98 +1,107 @@
 // Solution Handling
-function modButtonSolve(buttonColor,buttonText){
-    var answer = 'Answer: ';
-    var numBatteries = $('input[name=numBatteries]:checked').val();
-    var carLit = $('#indicatorCARYes').is(':checked');
-    var frkLit = $('#indicatorFRKYes').is(':checked');
+function modButtonSolve(buttonColor, buttonText) {
+    modButtonHideAnswers();
 
     // Solution Cases
-    if(buttonColor === "blue" && buttonText === "abort"){
-        answer+="Hold button.<br/>Release on number for strip:<br/>(blue:4 , yellow:5, other:1)";
-        $("#modButtonOutput").html(answer);
-        return;
-    }
-    
-    if(numBatteries > 1 && buttonText === "detonate"){
-        answer+="Press and Immediately Release.<br/>&nbsp;<br/>&nbsp;";
-        $("#modButtonOutput").html(answer);
-        return;
-    }
- 
-    if(buttonColor === "white" && carLit){
-        answer+="Hold button.<br/>Release on number for strip:<br/>(blue:4 , yellow:5, other:1)";
-        $("#modButtonOutput").html(answer);
-        return;
-    } 
-    
-    if(numBatteries > 2 && frkLit){
-        answer+="Press and Immediately Release.<br/>&nbsp;<br/>&nbsp;";        
-        $("#modButtonOutput").html(answer);
+    if (buttonColor === "blue" && buttonText === "abort") {
+        modButtonShowAnswer("hold");
         return;
     }
 
-    if(buttonColor === "yellow"){
-        answer+="Hold button.<br/>Release on number for strip:<br/>(blue:4 , yellow:5, other:1)";
-        $("#modButtonOutput").html(answer);
+    if (bomb.batteries === undefined) {
+        bomb.batteriesModal(modButtonSolve, [buttonColor, buttonText]);
         return;
     }
-    
-    if(buttonColor === "red" && buttonText === "hold"){
-        answer+="Press and Immediately Release.<br/>&nbsp;<br/>&nbsp;";       
-        $("#modButtonOutput").html(answer);
-        return;        
+
+    if (bomb.batteries > 1 && buttonText === "detonate") {
+        modButtonShowAnswer("click");
+        return;
     }
-    
-    answer+="Hold button.<br/>Release on number for strip:<br/>(blue:4 , yellow:5, other:1)";
-    $("#modButtonOutput").html(answer);
-    
+
+    if (bomb.indicatorCARLit === undefined) {
+        bomb.CARModal(modButtonSolve, [buttonColor, buttonText]);
+        return;
+    }
+
+    if (buttonColor === "white" && bomb.indicatorCARLit) {
+        modButtonShowAnswer("hold");
+        return;
+    }
+
+    if (bomb.indicatorFRKLit === undefined) {
+        bomb.FRKModal(modButtonSolve, [buttonColor, buttonText]);
+        return;
+    }
+
+    if (bomb.batteries > 2 && bomb.indicatorFRKLit) {
+        modButtonShowAnswer("click");
+        return;
+    }
+
+    if (buttonColor === "yellow") {
+        modButtonShowAnswer("hold");
+        return;
+    }
+
+    if (buttonColor === "red" && buttonText === "hold") {
+        modButtonShowAnswer("click");
+        return;
+    }
+
+    modButtonShowAnswer("hold");
 }
 
-// Init All the Buttons.
-$( document ).ready(function() {
-$( "#modButtonRedAbort" ).button();
-$( "#modButtonBlueAbort" ).button();
-$( "#modButtonYellowAbort" ).button();
-$( "#modButtonWhiteAbort" ).button();
-$( "#modButtonRedDetonate" ).button();
-$( "#modButtonBlueDetonate" ).button();
-$( "#modButtonYellowDetonate" ).button();
-$( "#modButtonWhiteDetonate" ).button();
-$( "#modButtonRedHold" ).button();
-$( "#modButtonBlueHold" ).button();
-$( "#modButtonYellowHold" ).button();
-$( "#modButtonWhiteHold" ).button();
-$( "#modButtonRedPress" ).button();
-$( "#modButtonBluePress" ).button();
-$( "#modButtonYellowPress" ).button();
-$( "#modButtonWhitePress" ).button();
-$( "#modButtonRedOther" ).button();
-$( "#modButtonBlueOther" ).button();
-$( "#modButtonYellowOther" ).button();
-$( "#modButtonWhiteOther" ).button();
+function modButtonHideAnswers() {
+    $("#modButtonHold").hide();
+    $("#modButtonClick").hide();
+    $("#modButtonChoice").hide();
+}
+function modButtonShowAnswer(answer) {
+    if(answer === "hold") {
+        $("input[name='buttonStrip']:checked").each(function(){
+            $(this).prop("checked", false);
+        });
+        $("#modalButtonStrip").modal("toggle");
+    }
+    else if(answer === "click") {
+        $("#modButtonClick").show();
+    }
+    else if(answer === "choice") {
+        $("#modButtonChoice").show();
+    }
+    else {
+        $("#modButtonRelease").html(answer);
+        $("#modButtonHold").show();
+    }
+}
+
+$("#modButtonSolve").click(function () {
+    var color = $("input[name='modButtonColor']:checked").val();
+    var text = $("input[name='modButtonText']:checked").val();
+
+    if(color === undefined || text === undefined) {
+        modButtonShowAnswer("choice");
+    }
+    else {
+        modButtonSolve(color, text);
+    }
+    $(this).blur();
 });
 
-// Click Handlers
-$( "#modButtonRedAbort" ).click(function(){modButtonSolve('red','abort');});
-$( "#modButtonBlueAbort" ).click(function(){modButtonSolve('blue','abort');});
-$( "#modButtonYellowAbort" ).click(function(){modButtonSolve('yellow','abort');});
-$( "#modButtonWhiteAbort" ).click(function(){modButtonSolve('white','abort');});
-$( "#modButtonRedDetonate" ).click(function(){modButtonSolve('red','detonate');});
-$( "#modButtonBlueDetonate" ).click(function(){modButtonSolve('blue','detonate');});
-$( "#modButtonYellowDetonate" ).click(function(){modButtonSolve('yellow','detonate');});
-$( "#modButtonWhiteDetonate" ).click(function(){modButtonSolve('white','detonate');});
-$( "#modButtonRedHold" ).click(function(){modButtonSolve('red','hold');});
-$( "#modButtonBlueHold" ).click(function(){modButtonSolve('blue','hold');});
-$( "#modButtonYellowHold" ).click(function(){modButtonSolve('yellow','hold');});
-$( "#modButtonWhiteHold" ).click(function(){modButtonSolve('white','hold');});
-$( "#modButtonRedPress" ).click(function(){modButtonSolve('red','press');});
-$( "#modButtonBluePress" ).click(function(){modButtonSolve('blue','press');});
-$( "#modButtonYellowPress" ).click(function(){modButtonSolve('yellow','press');});
-$( "#modButtonWhitePress" ).click(function(){modButtonSolve('white','press');});
-$( "#modButtonRedOther" ).click(function(){modButtonSolve('red','other');});
-$( "#modButtonBlueOther" ).click(function(){modButtonSolve('blue','other');});
-$( "#modButtonYellowOther" ).click(function(){modButtonSolve('yellow','other');});
-$( "#modButtonWhiteOther" ).click(function(){modButtonSolve('white','other');});
+$("#modButtonReset").click(function () {
+    modButtonHideAnswers();
+    $("input[name='modButtonColor']:checked").each(function(){
+        $(this).prop("checked", false);
+        $(this).closest("label").removeClass("active");
+    });
+    $("input[name='modButtonText']:checked").each(function(){
+        $(this).prop("checked", false);
+        $(this).closest("label").removeClass("active");
+    });
+    $(this).blur();
+});
 
-
-
-
+$("input[name='buttonStrip']").change(function () {
+    $("#modalButtonStrip").modal("toggle");
+    modButtonShowAnswer($(this).val());
+});
