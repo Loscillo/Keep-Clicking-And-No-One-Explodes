@@ -1,8 +1,7 @@
 .btn-blank {
     color: #333;
     background-color: #fff;
-    border-color: #ccc;
-    text-color: black;
+    border-color: #fff;
 }
 
 .btn-blank:focus,
@@ -15,47 +14,27 @@
 .btn-blank:hover {
     color: #333;
     background-color: #e6e6e6;
-    border-color: #adadad;
+    border-color: #e6e6e6;
 }
+
 .btn-blank:active,
-.btn-blank.active,
-.open > .dropdown-toggle.btn-blank {
+.btn-blank.active {
     color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad;
+    border-color: #e6e6e6;
+    background: #e6e6e6 none;
 }
 
 .btn-blank:active:hover,
 .btn-blank.active:hover,
-.open > .dropdown-toggle.btn-blank:hover,
 .btn-blank:active:focus,
 .btn-blank.active:focus,
-.open > .dropdown-toggle.btn-blank:focus,
 .btn-blank:active.focus,
-.btn-blank.active.focus,
-.open > .dropdown-toggle.btn-blank.focus {
+.btn-blank.active.focus {
     color: #333;
     background-color: #d4d4d4;
     border-color: #8c8c8c;
 }
-.btn-blank:active,
-.btn-blank.active,
-.open > .dropdown-toggle.btn-blank {
-    background-image: none;
-}
-.btn-blank.disabled:hover,
-.btn-blank[disabled]:hover,
-fieldset[disabled] .btn-blank:hover,
-.btn-blank.disabled:focus,
-.btn-blank[disabled]:focus,
-fieldset[disabled] .btn-blank:focus,
-.btn-blank.disabled.focus,
-.btn-blank[disabled].focus,
-fieldset[disabled] .btn-blank.focus {
-    background-color: #fff;
-    border-color: #ccc;
-}
-.btn-blank .badge {
-    color: #fff;
-    background-color: #333;
+
+body {
+    padding-top: 70px;
 }

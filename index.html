@@ -5,55 +5,46 @@
     <!--<link rel="stylesheet" href="css/expert.css"/>-->
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/edit.css"/>
-    <style>
-
-        .affix-top, .affix {
-            position: static;
-        }
-
-        @media (min-width: 979px) {
-            #sidebar.affix-top {
-                position: static;
-                margin-top: 30px;
-                width: 228px;
-            }
-
-            #sidebar.affix {
-                position: fixed;
-                top: 70px;
-                width: 228px;
-            }
-        }
-
-        #sidebar li.active {
-            border: 0 #eee solid;
-            border-right-width: 4px;
-        }
-    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>KCNE241</title>
 </head>
 
 <body class="container-fluid">
-<div class="row">
-    <div class="col-md-2" id="leftCol">
-        <ul class="nav nav-stacked" id="sidebar">
-            <li><a href="#modSimple">Simple Wires Module</a></li>
-            <li><a href="#modButton">Button Module</a></li>
-            <li><a href="#modSymbols">Symbols Module</a></li>
-            <li><a href="#modSimon">Simon Says Module</a></li>
-            <li><a href="#modFirst">Who's on First Module</a></li>
-            <li><a href="#modMemory">Memory Module</a></li>
-            <li><a href="#modMorse">Morse Code Module</a></li>
-            <li><a href="#modComplex">Complex Wires Module</a></li>
-            <li><a href="#modSeq">Wires Sequence Module</a></li>
-            <li><a href="#modMazes">Mazes Module</a></li>
-            <li><a href="#modPasswords">Passwords Module</a></li>
-            <li><a href="#modKnobs">Knobs Module</a></li>
-        </ul>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--<a class="navbar-brand" href="#">Brand</a>-->
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#modSimple">Simple Wires</a></li>
+                <li><a href="#modButton">Button</a></li>
+                <li><a href="#modSymbols">Symbols</a></li>
+                <li><a href="#modSimon">Simon Says</a></li>
+                <li><a href="#modFirst">Who's on First</a></li>
+                <li><a href="#modMemory">Memory</a></li>
+                <li><a href="#modMorse">Morse Code</a></li>
+                <li><a href="#modComplex">Complex Wires</a></li>
+                <li><a href="#modSeq">Wires Sequence</a></li>
+                <li><a href="#modMazes">Mazes</a></li>
+                <li><a href="#modPasswords">Passwords</a></li>
+                <li><a href="#modKnobs">Knobs</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="col-md-10">
+</nav>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
         <!-- Bomb Info Section -->
         <fieldset>
             <legend>Bomb Info</legend>
@@ -259,9 +250,10 @@
 
             <div class="btn-group btn-group-justified" role="group">
                 <div class="btn-group" role="group">
-                <button id="modButtonSolve" class="btn btn-success">Solve</button>
-                    </div><div class="btn-group" role="group">
-                <button id="modButtonReset" class="btn btn-danger">Reset</button>
+                    <button id="modButtonSolve" class="btn btn-success">Solve</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button id="modButtonReset" class="btn btn-danger">Reset</button>
                 </div>
             </div>
             <br/>
@@ -321,9 +313,10 @@
             <div class="btn-group btn-group-justified" role="group">
                 <div class="btn-group" role="group">
                     <button id="modSymbolsSolve" class="btn btn-success">Solve</button>
-                </div><div class="btn-group" role="group">
-                <button id="modSymbolsReset" class="btn btn-danger">Reset</button>
-            </div>
+                </div>
+                <div class="btn-group" role="group">
+                    <button id="modSymbolsReset" class="btn btn-danger">Reset</button>
+                </div>
             </div>
 
             <form id='modSymbolsForm'>
@@ -1306,12 +1299,6 @@
         $("#indicatorCARLit").buttonset();
         $("#indicatorFRKLit").buttonset();
         $("#numStrikes").buttonset();
-    });
-
-    $('#sidebar').affix({
-        offset: {
-            top: 245
-        }
     });
 
     var $body = $(document.body);
