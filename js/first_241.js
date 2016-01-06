@@ -1,19 +1,4 @@
-$(document).ready(function(){
-   $('#firstSet').buttonset();
-   $('#firstReset').button();
-   $('#firstCompute').button();
-});
-
-$("#firstReset").click(function(){
-    $("#firstForm")[0].reset();
-    memoryDB = [];
-    $("#firstOutput").html("&nbsp;");
-    $("#firstStage1Output").html("&nbsp;");
-});
-
-
-$("#firstForm").change(function(){
-   var answer = "";
+$("input[name='firstStep1']").change(function(){
     var firstStage1DB = {
         "YES":"Middle Left",
         "FIRST":"Upper Right",
@@ -48,11 +33,11 @@ $("#firstForm").change(function(){
     if(displayWord === undefined){
     return;    
     }    
-    answer = "Position: "+firstStage1DB[displayWord];
+    var answer = "Position: "+firstStage1DB[displayWord];
    $("#firstStage1Output").html(answer);
 });
 
-$("#firstForm").change(function(){
+$("input[name='firstWord']").change(function(){
     var answer = "Answer: ";
     var firstDB = {
         "READY": "YES, OKAY, WHAT, MIDDLE, LEFT, PRESS, RIGHT, BLANK, READY, NO, FIRST, UHHH, NOTHING, WAIT",
@@ -92,6 +77,6 @@ $("#firstForm").change(function(){
     }
     
     answer += firstDB[firstWord];
-   $("#firstOutput").html(answer);   
+   $("#firstStage2Output").html(answer);
     
 });

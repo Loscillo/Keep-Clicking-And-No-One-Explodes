@@ -558,74 +558,216 @@
                     </tr>
                 </table>
             </fieldset>
-            <hr/>
         </div>
-        <div id='modFirst'>
+        <hr>
+        <div id='modFirst' class="well">
             <!-- Who's on First -->
-            <h4>Who's on First Module</h4>
-            <p id='firstStage1Output'>&nbsp;</p>
-            <p id='firstOutput'>&nbsp;</p>
-
-            <input id='firstReset' type='button' value='Reset'>
-            <br/>
-            <form id='firstForm'>
+            <h2 class="text-center">Who's on First Module</h2>
+            <form id="firstForm">
+                <fieldset>
+                    <legend>Word on Display</legend>
+                    <div class="alert alert-info">
+                        <p id="firstStage1Output">Click on the word displayed on the screen to get the corresponding position.</p>
+                    </div>
+                    <div data-toggle="buttons">
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="    " autocomplete="off"/>&nbsp;
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="C" autocomplete="off"/>C
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="CEE" autocomplete="off"/>CEE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="SEE" autocomplete="off"/>SEE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="LED" autocomplete="off"/>LED
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="LEED" autocomplete="off"/>LEED
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="LEAD" autocomplete="off"/>LEAD
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="BLANK" autocomplete="off"/>BLANK
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="YES" autocomplete="off"/>YES
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="NO" autocomplete="off"/>NO
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="OKAY" autocomplete="off"/>OKAY
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="RED" autocomplete="off"/>RED
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="REED" autocomplete="off"/>REED
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="READ" autocomplete="off"/>READ
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="DISPLAY" autocomplete="off"/>DISPLAY
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="FIRST" autocomplete="off"/>FIRST
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="HOLD ON" autocomplete="off"/>HOLD ON
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="THEIR" autocomplete="off"/>THEIR
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="THERE" autocomplete="off"/>THERE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="THEY'RE" autocomplete="off"/>THEY'RE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="THEY ARE" autocomplete="off"/>THEY ARE
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="NOTHING" autocomplete="off"/>NOTHING
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="SAYS" autocomplete="off"/>SAYS
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="YOU" autocomplete="off"/>YOU
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="YOU ARE" autocomplete="off"/>YOU ARE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="FirstWord" value="UR" autocomplete="off"/>UR
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="YOU'RE" autocomplete="off"/>YOU'RE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstStep1" value="YOUR" autocomplete="off"/>YOUR
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
+                <fieldset>
+                    <legend>Word from Button</legend>
+                    <div class="alert alert-info">
+                        <p id="firstStage2Output">Click on the word displayed by the button.</p>
+                    </div>
+                    <div data-toggle="buttons">
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="READY" autocomplete="off"/>READY
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="FIRST" autocomplete="off"/>FIRST
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="BLANK" autocomplete="off"/>BLANK
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="NOTHING" autocomplete="off"/>NOTHING
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="PRESS" autocomplete="off"/>PRESS
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="DONE" autocomplete="off"/>DONE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="NEXT" autocomplete="off"/>NEXT
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="LEFT" autocomplete="off"/>LEFT
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="MIDDLE" autocomplete="off"/>MIDDLE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="RIGHT" autocomplete="off"/>RIGHT
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="HOLD" autocomplete="off"/>HOLD
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="WHAT" autocomplete="off"/>WHAT
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="WHAT?" autocomplete="off"/>WHAT ?
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="WAIT" autocomplete="off"/>WAIT
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="YES" autocomplete="off"/>YES
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="NO" autocomplete="off"/>NO
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="OKAY" autocomplete="off"/>OKAY
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="SURE" autocomplete="off"/>SURE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="UHHH" autocomplete="off"/>UHHH
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="UH UH" autocomplete="off"/>UH UH
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="UH HUH" autocomplete="off"/>UH HUH
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="LIKE" autocomplete="off"/>LIKE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="U" autocomplete="off"/>U
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="YOU" autocomplete="off"/>YOU
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="YOU ARE" autocomplete="off"/>YOU ARE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="UR" autocomplete="off"/>UR
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="YOU'RE" autocomplete="off"/>YOU'RE
+                            </label>
+                            <label class="btn btn-default btn-block">
+                                <input type="radio" name="firstWord" value="YOUR" autocomplete="off"/>YOUR
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!--<form id='firstForm'>
                 <div id='firstSet'>
-
-                    <fieldset>
-                        <legend>Word on Display</legend>
-
-                        <input type="radio" name="firstStep1" id='fs1____' value="    "><label for='fs1____'>&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                        <input type="radio" name="firstStep1" id='fs1blank' value="BLANK"><label
-                            for='fs1blank'>BLANK</label>
-                        <input type="radio" name="firstStep1" id='fs1c' value="C"><label for='fs1c'>C</label>
-                        <input type="radio" name="firstStep1" id='fs1cee' value="CEE"><label for='fs1cee'>CEE</label>
-                        <input type="radio" name="firstStep1" id='fs1display' value="DISPLAY"><label for='fs1display'>DISPLAY</label>
-                        <input type="radio" name="firstStep1" id='fs1first' value="FIRST"><label
-                            for='fs1first'>FIRST</label>
-                        <input type="radio" name="firstStep1" id='fs1holdon' value="HOLD ON"><label for='fs1holdon'>HOLD
-                        ON</label>
-                        <input type="radio" name="firstStep1" id='fs1lead' value="LEAD"><label
-                            for='fs1lead'>LEAD</label>
-                        <input type="radio" name="firstStep1" id='firstLED' value="LED"><label
-                            for='firstLED'>LED</label>
-                        <input type="radio" name="firstStep1" id='fs1leed' value="LEED"><label
-                            for='fs1leed'>LEED</label>
-                        <input type="radio" name="firstStep1" id='fs1no' value="NO"><label for='fs1no'>NO</label>
-                        <input type="radio" name="firstStep1" id='fs1nothing' value="NOTHING"><label for='fs1nothing'>NOTHING</label>
-                        <input type="radio" name="firstStep1" id='fs1okay' value="OKAY"><label
-                            for='fs1okay'>OKAY</label>
-                        <input type="radio" name="firstStep1" id='fs1read' value="READ"><label
-                            for='fs1read'>READ</label>
-                        <input type="radio" name="firstStep1" id='fs1red' value="RED"><label for='fs1red'>RED</label>
-                        <input type="radio" name="firstStep1" id='fs1reed' value="REED"><label
-                            for='fs1reed'>REED</label>
-                        <input type="radio" name="firstStep1" id='fs1says' value="SAYS"><label
-                            for='fs1says'>SAYS</label>
-                        <input type="radio" name="firstStep1" id='fs1see' value="SEE"><label for='fs1see'>SEE</label>
-                        <input type="radio" name="firstStep1" id='fs1their' value="THEIR"><label
-                            for='fs1their'>THEIR</label>
-                        <input type="radio" name="firstStep1" id='fs1there' value="THERE"><label
-                            for='fs1there'>THERE</label>
-                        <input type="radio" name="firstStep1" id='fs1theyare' value="THEY ARE"><label for='fs1theyare'>THEY
-                        ARE</label>
-                        <input type="radio" name="firstStep1" id='fs1theyre' value="THEY'RE"><label for='fs1theyre'>THEY'RE</label>
-                        <input type="radio" name="firstStep1" id='fs1ur' value="UR"><label for='fs1ur'>UR</label>
-                        <input type="radio" name="firstStep1" id='fs1yes' value="YES"><label for='fs1yes'>YES</label>
-                        <input type="radio" name="firstStep1" id='fs1youare' value="YOU ARE"><label for='fs1youare'>YOU
-                        ARE</label>
-                        <input type="radio" name="firstStep1" id='fs1you' value="YOU"><label for='fs1you'>YOU</label>
-                        <input type="radio" name="firstStep1" id='fs1youre' value="YOU'RE"><label
-                            for='fs1youre'>YOU'RE</label>
-                        <input type="radio" name="firstStep1" id='fs1your' value="YOUR"><label
-                            for='fs1your'>YOUR</label>
-
-                    </fieldset>
-
-                    <br/>
-
-
-                    <br/>
-
                     <fieldset>
                         <legend>Word From Button</legend>
                         <input type="radio" name="firstWord" id='fs2blank' value="BLANK"><label
@@ -669,7 +811,7 @@
                         <input type="radio" name="firstWord" id='fs2your' value="YOUR"><label for='fs2your'>YOUR</label>
                     </fieldset>
                 </div>
-            </form>
+            </form>-->
 
         </div>
         <div id='modMemory'>
