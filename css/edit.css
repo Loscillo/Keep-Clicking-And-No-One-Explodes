@@ -38,3 +38,9 @@
 body {
     padding-top: 70px;
 }
+
+.symbol {
+    font-size: 30px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
