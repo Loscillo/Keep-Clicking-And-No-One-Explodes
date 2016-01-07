@@ -1,12 +1,3 @@
-$( document ).ready(function() {
-   for(var i=0;i<6;i++){
-       $('#modComplexW'+i+'Red').button();
-       $('#modComplexW'+i+'Blue').button();
-       $('#modComplexW'+i+'Star').button();
-       $('#modComplexW'+i+'Lit').button();
-   }
-});
-
 $("#modComplexReset").click(function(){
     $(this).blur();
     $("#modComplexWRedButton").trigger("click");

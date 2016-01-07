@@ -235,7 +235,7 @@
         <div id='modButton' class="well">
             <!-- Button -->
             <h2 class="text-center">Button Module</h2>
-            <p id='modButtonOutput'/></p>
+
             <div class="alert alert-info" id="modButtonClick" style="display: none;">
                 <p>Press and immediately release.</p>
             </div>
@@ -998,86 +998,51 @@
 
 
         </div>
-        <div id='modSeq'>
+        <hr>
+        <div id='modSeq' class="well">
             <!-- Wire Sequences -->
-            <h4>Wire Sequences Module</h4>
-            <p id='wsequencesOutput'>&nbsp;</p><br/>
-            <input type='button' id='wsequencesSolve' value='Solve'/>
-            <input id='wsequencesReset' type='button' value='Reset'/>
+            <h2 class="text-center">Wire Sequences Module</h2>
+            <h4 class="text-center">Wire <span id="modWireSNumber">1</span></h4>
+
+            <div class="alert alert-success" id="modWireSCut" style="display: none;">
+                <p>Cut</p>
+            </div>
+            <div class="alert alert-danger" id="modWireSDoNotCut" style="display: none;">
+                <p>Do not cut</p>
+            </div>
+
+            <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" role="group">
+                    <button id="modWireSSolve" class="btn btn-success">Solve</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button id="modWireSReset" class="btn btn-danger">Reset</button>
+                </div>
+            </div>
             <br/>
             <form id='wsequencesForm'>
-                <div id='ws'>
-                    <fieldset>
-                        <legend>First Wire</legend>
-                        <table>
-                            <tr>
-                                <td>
-                                    <input type='radio' id='ws1ColorRed' value='red' name='ws1Color'><label
-                                        style='background-color:red;' for='ws1ColorRed'>R</label>
-                                    <input type='radio' id='ws1ColorBlue' value='blue' name='ws1Color'><label
-                                        style='background-color:blue;' for='ws1ColorBlue'>B</label>
-                                    <input type='radio' id='ws1ColorBlack' value='black' name='ws1Color'><label
-                                        style='background-color:black;color:white;' for='ws1ColorBlack'>K</label>
-                                </td>
-                                <td>
-                                    <input type='radio' id='ws1EndA' name='ws1End' value="a"><label
-                                        for='ws1EndA'>A</label>
-                                    <input type='radio' id='ws1EndB' name='ws1End' value="b"><label
-                                        for='ws1EndB'>B</label>
-                                    <input type='radio' id='ws1EndC' name='ws1End' value="c"><label
-                                        for='ws1EndC'>C</label>
-                                </td>
-                            </tr>
-                        </table>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Second Wire</legend>
-                        <table>
-                            <tr>
-                                <td>
-                                    <input type='radio' id='ws2ColorRed' value='red' name='ws2Color'><label
-                                        style='background-color:red;' for='ws2ColorRed'>R</label>
-                                    <input type='radio' id='ws2ColorBlue' value='blue' name='ws2Color'><label
-                                        style='background-color:blue;' for='ws2ColorBlue'>B</label>
-                                    <input type='radio' id='ws2ColorBlack' value='black' name='ws2Color'><label
-                                        style='background-color:black;color:white;' for='ws2ColorBlack'>K</label>
-                                </td>
-                                <td>
-                                    <input type='radio' id='ws2EndA' name='ws2End' value="a"><label
-                                        for='ws2EndA'>A</label>
-                                    <input type='radio' id='ws2EndB' name='ws2End' value="b"><label
-                                        for='ws2EndB'>B</label>
-                                    <input type='radio' id='ws2EndC' name='ws2End' value="c"><label
-                                        for='ws2EndC'>C</label>
-                                </td>
-                            </tr>
-                        </table>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Third Wire</legend>
-                        <table>
-                            <tr>
-                                <td>
-                                    <input type='radio' id='ws3ColorRed' value='red' name='ws3Color'><label
-                                        style='background-color:red;' for='ws3ColorRed'>R</label>
-                                    <input type='radio' id='ws3ColorBlue' value='blue' name='ws3Color'><label
-                                        style='background-color:blue;' for='ws3ColorBlue'>B</label>
-                                    <input type='radio' id='ws3ColorBlack' value='black' name='ws3Color'><label
-                                        style='background-color:black;color:white;' for='ws3ColorBlack'>K</label>
-                                </td>
-                                <td>
-                                    <input type='radio' id='ws3EndA' name='ws3End' value="a"><label
-                                        for='ws3EndA'>A</label>
-                                    <input type='radio' id='ws3EndB' name='ws3End' value="b"><label
-                                        for='ws3EndB'>B</label>
-                                    <input type='radio' id='ws3EndC' name='ws3End' value="c"><label
-                                        for='ws3EndC'>C</label>
-                                </td>
-                            </tr>
-                        </table>
-                    </fieldset>
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    <label class="btn btn-danger">
+                        <input type="radio" name="modWireSColor" value="red" autocomplete="off"/> Red
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" name="modWireSColor" value="blue" autocomplete="off"/> Blue
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="modWireSColor" value="black" autocomplete="off"/> Black
+                    </label>
+                </div>
+                <br/>
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    <label class="btn btn-default">
+                        <input type="radio" name="modWireSEnd" value="a" autocomplete="off"/> A
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="modWireSEnd" value="b" autocomplete="off"/> B
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="modWireSEnd" value="c" autocomplete="off"/> C
+                    </label>
                 </div>
             </form>
         </div>
