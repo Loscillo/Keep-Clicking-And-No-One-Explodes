@@ -930,79 +930,68 @@
             </form>
             <p id='modMorseOutput'></p>
         </div>
-        <div id='modComplex'>
+        <hr>
+        <div id='modComplex' class="well">
             <!-- Complex Wires -->
-            <h4>Complex Wires Module</h4>
+            <h2 class="text-center">Complex Wires Module</h2>
             <p id='modComplexOutput'>&nbsp;<br/></p>
-            <button id='modComplexSolve'>Solve</button>
-            <button id='modComplexReset'>Reset</button>
 
+            <div class="alert alert-success" id="modComplexCut" style="display: none;">
+                <p>Cut</p>
+            </div>
+
+            <div class="alert alert-danger" id="modComplexDoNotCut" style="display: none;">
+                <p>Do not cut</p>
+            </div>
+
+            <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" role="group">
+                    <button id="modComplexSolve" class="btn btn-success">Solve</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button id="modComplexReset" class="btn btn-danger">Reset</button>
+                </div>
+            </div>
+            <br>
             <form id='modComplexForm'>
                 <fieldset>
-                    <legend>Wire 1</legend>
-                    <input type="checkbox" id='modComplexW0Red' id='modComplexWires'><label
-                        for='modComplexW0Red'>Red</label>
-                    <input type="checkbox" id='modComplexW0Blue' id='modComplexWires'><label
-                        for='modComplexW0Blue'>Blue</label>
-                    <input type="checkbox" id='modComplexW0Star' id='modComplexWires'><label
-                        for='modComplexW0Star'>Star</label>
-                    <input type="checkbox" id='modComplexW0Lit' id='modComplexWires'><label
-                        for='modComplexW0Lit'>Lit</label>
-                </fieldset>
-                <fieldset>
-                    <legend>Wire 2</legend>
-                    <input type="checkbox" id='modComplexW1Red' id='modComplexWires'><label
-                        for='modComplexW1Red'>Red</label>
-                    <input type="checkbox" id='modComplexW1Blue' id='modComplexWires'><label
-                        for='modComplexW1Blue'>Blue</label>
-                    <input type="checkbox" id='modComplexW1Star' id='modComplexWires'><label
-                        for='modComplexW1Star'>Star</label>
-                    <input type="checkbox" id='modComplexW1Lit' id='modComplexWires'><label
-                        for='modComplexW1Lit'>Lit</label>
-                </fieldset>
-                <fieldset>
-                    <legend>Wire 3</legend>
-                    <input type="checkbox" id='modComplexW2Red' id='modComplexWires'><label
-                        for='modComplexW2Red'>Red</label>
-                    <input type="checkbox" id='modComplexW2Blue' id='modComplexWires'><label
-                        for='modComplexW2Blue'>Blue</label>
-                    <input type="checkbox" id='modComplexW2Star' id='modComplexWires'><label
-                        for='modComplexW2Star'>Star</label>
-                    <input type="checkbox" id='modComplexW2Lit' id='modComplexWires'><label
-                        for='modComplexW2Lit'>Lit</label>
-                </fieldset>
-                <fieldset>
-                    <legend>Wire 4</legend>
-                    <input type="checkbox" id='modComplexW3Red' id='modComplexWires'><label
-                        for='modComplexW3Red'>Red</label>
-                    <input type="checkbox" id='modComplexW3Blue' id='modComplexWires'><label
-                        for='modComplexW3Blue'>Blue</label>
-                    <input type="checkbox" id='modComplexW3Star' id='modComplexWires'><label
-                        for='modComplexW3Star'>Star</label>
-                    <input type="checkbox" id='modComplexW3Lit' id='modComplexWires'><label
-                        for='modComplexW3Lit'>Lit</label>
-                </fieldset>
-                <fieldset>
-                    <legend>Wire 5</legend>
-                    <input type="checkbox" id='modComplexW4Red' id='modComplexWires'><label
-                        for='modComplexW4Red'>Red</label>
-                    <input type="checkbox" id='modComplexW4Blue' id='modComplexWires'><label
-                        for='modComplexW4Blue'>Blue</label>
-                    <input type="checkbox" id='modComplexW4Star' id='modComplexWires'><label
-                        for='modComplexW4Star'>Star</label>
-                    <input type="checkbox" id='modComplexW4Lit' id='modComplexWires'><label
-                        for='modComplexW4Lit'>Lit</label>
-                </fieldset>
-                <fieldset>
-                    <legend>Wire 6</legend>
-                    <input type="checkbox" id='modComplexW5Red' id='modComplexWires'><label
-                        for='modComplexW5Red'>Red</label>
-                    <input type="checkbox" id='modComplexW5Blue' id='modComplexWires'><label
-                        for='modComplexW5Blue'>Blue</label>
-                    <input type="checkbox" id='modComplexW5Star' id='modComplexWires'><label
-                        for='modComplexW5Star'>Star</label>
-                    <input type="checkbox" id='modComplexW5Lit' id='modComplexWires'><label
-                        for='modComplexW5Lit'>Lit</label>
+                    <legend>Wire</legend>
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>
+                                <div class="button-checkbox">
+                                    <button type="button" class="btn btn-lg btn-block" id="modComplexWRedButton"
+                                            data-color="success">Red
+                                    </button>
+                                    <input type="checkbox" id="modComplexWRed" class="hidden" autocomplete="off"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-checkbox">
+                                    <button type="button" class="btn btn-lg btn-block" id="modComplexWBlueButton"
+                                            data-color="success">Blue
+                                    </button>
+                                    <input type="checkbox" id="modComplexWBlue" class="hidden" autocomplete="off"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-checkbox">
+                                    <button type="button" class="btn btn-lg btn-block" id="modComplexWStarButton"
+                                            data-color="success">Star
+                                    </button>
+                                    <input type="checkbox" id="modComplexWStar" class="hidden" autocomplete="off"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-checkbox">
+                                    <button type="button" class="btn btn-lg btn-block" id="modComplexWLitButton"
+                                            data-color="success">Lit
+                                    </button>
+                                    <input type="checkbox" id="modComplexWLit" class="hidden" autocomplete="off"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </fieldset>
             </form>
             <br/>
@@ -1446,16 +1435,60 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">CAR indicator with LED lit? ?</h4>
+                    <h4 class="modal-title">CAR indicator with LED lit ?</h4>
                 </div>
                 <div class="modal-body text-center">
                     <form>
                         <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-success">
-                                <input type="radio" name="car" value="0" autocomplete="off"/> Yes
+                                <input type="radio" name="car" value="true" autocomplete="off"/> Yes
                             </label>
                             <label class="btn btn-danger">
-                                <input type="radio" name="car" value="1" autocomplete="off"/> No
+                                <input type="radio" name="car" value="false" autocomplete="off"/> No
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalSerialSuffix" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Last digit of the serial number ?</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <form>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default">
+                                <input type="radio" name="suffix" value="true" autocomplete="off"/> Even
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="suffix" value="false" autocomplete="off"/> Odd
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalParallel" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Presence of a parallel port ?</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <form>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-success">
+                                <input type="radio" name="parallel" value="true" autocomplete="off"/> Yes
+                            </label>
+                            <label class="btn btn-danger">
+                                <input type="radio" name="parallel" value="false" autocomplete="off"/> No
                             </label>
                         </div>
                     </form>
@@ -1474,10 +1507,10 @@
                     <form>
                         <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-success">
-                                <input type="radio" name="frk" value="0" autocomplete="off"/> Yes
+                                <input type="radio" name="frk" value="true" autocomplete="off"/> Yes
                             </label>
                             <label class="btn btn-danger">
-                                <input type="radio" name="frk" value="1" autocomplete="off"/> No
+                                <input type="radio" name="frk" value="false" autocomplete="off"/> No
                             </label>
                         </div>
                     </form>

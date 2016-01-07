@@ -1,6 +1,6 @@
 var bomb = {
     serialVowel: undefined,
-    serialSuffix: undefined,
+    serialSuffixEven: undefined,
     batteries: undefined,
     parallelPort: undefined,
     CAR: undefined,
@@ -14,7 +14,9 @@ var bomb = {
     },
 
     serialSuffixModal: function (callback, parameters) {
-
+        $("#modalSerialSuffix").modal("toggle");
+        this.callback = callback;
+        this.parameters = parameters;
     },
 
     batteriesModal: function (callback, parameters) {
@@ -24,7 +26,9 @@ var bomb = {
     },
 
     parallelPortModal: function (callback, parameters) {
-
+        $("#modalParallel").modal("toggle");
+        this.callback = callback;
+        this.parameters = parameters;
     },
 
     CARModal: function (callback, parameters) {
@@ -41,7 +45,7 @@ var bomb = {
 };
 
 $("#test").click(function () {
-    bomb.FRKModal(undefined, undefined);
+    bomb.CARModal(undefined, undefined);
 });
 
 $("input[name='batteries']").change(function () {
@@ -53,7 +57,7 @@ $("input[name='batteries']").change(function () {
 });
 
 $("input[name='car']").change(function () {
-    bomb.indicatorCARLit = Boolean($(this).val());
+    bomb.indicatorCARLit = ($(this).val() == "true");
     if (bomb.callback != undefined) {
         bomb.callback.apply(this, bomb.parameters);
     }
@@ -61,11 +65,28 @@ $("input[name='car']").change(function () {
 });
 
 $("input[name='frk']").change(function () {
-    bomb.indicatorFRKLit = Boolean($(this).val());
+    bomb.indicatorFRKLit = ($(this).val() == "true");
     if (bomb.callback != undefined) {
         bomb.callback.apply(this, bomb.parameters);
     }
     $("#modalFRK").modal("toggle");
+});
+
+$("input[name='suffix']").change(function () {
+    bomb.serialSuffixEven = ($(this).val() == "true");
+    console.log(bomb.serialSuffixEven);
+    if (bomb.callback != undefined) {
+        bomb.callback.apply(this, bomb.parameters);
+    }
+    $("#modalSerialSuffix").modal("toggle");
+});
+
+$("input[name='parallel']").change(function () {
+    bomb.parallelPort = ($(this).val() == "true");
+    if (bomb.callback != undefined) {
+        bomb.callback.apply(this, bomb.parameters);
+    }
+    $("#modalParallel").modal("toggle");
 });
 
 function removeChecked(element) {
