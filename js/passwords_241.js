@@ -51,12 +51,14 @@ function solvePassword() {
         $("#modPasswordsAnswerOutput").html(wordBank[0]);
         $("#modPasswordsAnswer").show();
     }
-    else if(wordBank.length > 5) {
-        $("#modPasswordsTooMany").show();
-    }
-    else {
-        $("#modPasswordsPossibilitiesOutput").html("" + wordBank);
-        $("#modPasswordsPossibilities").show();
+    else if(wordBank.length != wordsDB.length) {
+        if(wordBank.length > 5) {
+            $("#modPasswordsTooMany").show();
+        }
+        else {
+            $("#modPasswordsPossibilitiesOutput").html("" + wordBank);
+            $("#modPasswordsPossibilities").show();
+        }
     }
 }
 
