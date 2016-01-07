@@ -1293,22 +1293,80 @@
                 </div>
             </form>
         </div>
-        <div id='modKnobs'>
+        <div id='modKnobs' class="well">
             <!-- Knobs -->
-            <h4>Knobs Module</h4>
-            <p id='modKnobsOutput'>&nbsp;</p>
-            <button id='modKnobsSolve'>Solve</button>
-            <button id='modKnobsReset'>Reset</button>
+            <h2 class="text-center">Knobs Module</h2>
+            <div class="alert alert-success" id="modKnobsSuccess" style="display: none;">
+                <p id="modKnobsAnswer"></p>
+            </div>
+            <div class="alert alert-danger" id="modKnobsError" style="display: none;">
+                <p>Input not in DB.</p>
+            </div>
 
-            <form id='modKnobsForm'>
+            <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" role="group">
+                    <button id="modKnobsSolve" class="btn btn-success">Solve</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button id="modKnobsReset" class="btn btn-danger">Reset</button>
+                </div>
+            </div>
+            <br/>
+            <form>
                 <fieldset>
                     <legend>Both LEDs Lit</legend>
-                    <input type='checkbox' id='modKnobs0'><label for='modKnobs0'>1</label>
-                    <input type='checkbox' id='modKnobs1'><label for='modKnobs1'>2</label>
-                    <input type='checkbox' id='modKnobs2'><label for='modKnobs2'>3</label>
-                    <input type='checkbox' id='modKnobs3'><label for='modKnobs3'>4</label>
-                    <input type='checkbox' id='modKnobs4'><label for='modKnobs4'>5</label>
-                    <input type='checkbox' id='modKnobs5'><label for='modKnobs5'>6</label>
+                    <table class="table table-responsive">
+                        <tr>
+                            <td>
+                                <div class="button-checkbox">
+                                    <button type="button" class="btn btn-lg btn-block" id="modKnobsButton0"
+                                            data-color="success">1
+                                    </button>
+                                    <input type="checkbox" id="modKnobs0" class="hidden"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-checkbox">
+                                    <button type="button" class="btn btn-lg btn-block" id="modKnobsButton1"
+                                            data-color="success">2
+                                    </button>
+                                    <input type="checkbox" id="modKnobs1" class="hidden"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-checkbox">
+                                    <button type="button" class="btn btn-lg btn-block" id="modKnobsButton2"
+                                            data-color="success">3
+                                    </button>
+                                    <input type="checkbox" id="modKnobs2" class="hidden"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-checkbox">
+                                    <button type="button" class="btn btn-lg btn-block" id="modKnobsButton3"
+                                            data-color="success">4
+                                    </button>
+                                    <input type="checkbox" id="modKnobs3" class="hidden"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-checkbox">
+                                    <button type="button" class="btn btn-lg btn-block" id="modKnobsButton4"
+                                            data-color="success">5
+                                    </button>
+                                    <input type="checkbox" id="modKnobs4" class="hidden"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-checkbox">
+                                    <button type="button" class="btn btn-lg btn-block" id="modKnobsButton5"
+                                            data-color="success">6
+                                    </button>
+                                    <input type="checkbox" id="modKnobs5" class="hidden"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </fieldset>
             </form>
 
