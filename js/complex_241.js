@@ -1,9 +1,17 @@
 $("#modComplexReset").click(function(){
     $(this).blur();
-    $("#modComplexWRedButton").trigger("click");
-    $("#modComplexWBlueButton").trigger("click");
-    $("#modComplexWStarButton").trigger("click");
-    $("#modComplexWLitButton").trigger("click");
+    if($('input[id=modComplexWRed]:checked').val()) {
+        $("#modComplexWRedButton").trigger("click");
+    }
+    if($('input[id=modComplexWBlue]:checked').val()) {
+        $("#modComplexWBlueButton").trigger("click");
+    }
+    if($('input[id=modComplexWStar]:checked').val()) {
+        $("#modComplexWStarButton").trigger("click");
+    }
+    if($('input[id=modComplexWLit]:checked').val()) {
+        $("#modComplexWLitButton").trigger("click");
+    }
     modComplexHideAnswers();
 });
 
