@@ -881,35 +881,54 @@
                 </fieldset>
             </form>
         </div>
-        <div id='modMorse'>
+        <hr>
+        <div id='modMorse' class="well">
             <!-- Morse Code -->
-            <h4>Morse Code Module</h4>
-            Enter any morse code ('.-') heard in any order - even incomplete, it will return matches.<br/>
-            <input type='button' id='modMorseSolve' value='Solve'/>
-            <input id='modMorseReset' type='button' value='Reset'/><br/>
-            <form id='modMorseForm'>
-                <table border=1>
-                    <tr>
-                        <td>1:<input type='text' id='morseChar0' value=''/></td>
-                    </tr>
-                    <tr>
-                        <td>2:<input type='text' id='morseChar1' value=''/></td>
-                    </tr>
-                    <tr>
-                        <td>3:<input type='text' id='morseChar2' value=''/></td>
-                    </tr>
-                    <tr>
-                        <td>4:<input type='text' id='morseChar3' value=''/></td>
-                    </tr>
-                    <tr>
-                        <td>5:<input type='text' id='morseChar4' value=''/></td>
-                    </tr>
-                    <tr>
-                        <td>6:<input type='text' id='morseChar5' value=''/></td>
-                    </tr>
-                </table>
+            <h2 class="text-center">Morse Code Module</h2>
+            <h4 class="text-center">Enter any morse code ('.-') heard in any order - even incomplete, it will return matches.</h4>
+
+            <button id="modMorseReset" class="btn btn-danger btn-block">Reset</button>
+            <br/>
+
+            <form class="form-horizontal" id="modMorseForm">
+                <div class="form-group">
+                    <label for="morseChar0" class="col-sm-1 control-label">Char 1</label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" id="morseChar0" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="morseChar1" class="col-sm-1 control-label">Char 2</label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" id="morseChar1" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="morseChar2" class="col-sm-1 control-label">Char 3</label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" id="morseChar2" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="morseChar3" class="col-sm-1 control-label">Char 4</label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" id="morseChar3" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="morseChar4" class="col-sm-1 control-label">Char 5</label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" id="morseChar4" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="morseChar5" class="col-sm-1 control-label">Char 6</label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" id="morseChar5" autocomplete="off">
+                    </div>
+                </div>
             </form>
-            <p id='modMorseOutput'>&nbsp;<br/></p>
+            <p id='modMorseOutput'></p>
         </div>
         <div id='modComplex'>
             <!-- Complex Wires -->

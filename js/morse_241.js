@@ -1,14 +1,15 @@
-$(document).ready(function(){
-   $("#modMorseSolve").button(); 
-   $("#modMorseReset").button(); 
-});
-
 $("#modMorseReset").click(function(){
     $("#modMorseForm")[0].reset();
     $("#modMorseOutput").html("");
-
-
+    $(this).blur();
 });
+
+$('#morseChar0').blur(solveMorse);
+$('#morseChar1').blur(solveMorse);
+$('#morseChar2').blur(solveMorse);
+$('#morseChar3').blur(solveMorse);
+$('#morseChar4').blur(solveMorse);
+$('#morseChar5').blur(solveMorse);
 
 var morseWordsDB = {
     'shell':'3.505MHz',
@@ -41,7 +42,7 @@ var morseTable = {
     '--..--': ',', '..--..': '?', '-..-.': '/', '.--.-.': '@'
 };
 
-$("#modMorseSolve").click(function(){
+function solveMorse() {
     var answer = "";
     var morseKeys = Object.keys(morseTable);
     var morseWords = Object.keys(morseWordsDB);
@@ -105,7 +106,7 @@ $("#modMorseSolve").click(function(){
         answer+=possibleWords[i]+":"+morseWordsDB[possibleWords[i]]+"<br/>";
     }
     $("#modMorseOutput").html(answer);
-});
+}
 
 
 
