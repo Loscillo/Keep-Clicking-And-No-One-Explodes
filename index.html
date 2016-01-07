@@ -13,7 +13,6 @@
 <body class="container-fluid">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -21,7 +20,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <!--<a class="navbar-brand" href="#">Brand</a>-->
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -814,61 +812,71 @@
             </form>-->
 
         </div>
-        <div id='modMemory'>
+        <hr>
+        <div id='modMemory' class="well">
             <!-- Memory -->
-            <h4>Memory Module</h4>
+            <h2 class="text-center">Memory Module</h2>
+            <h4 class="text-center">Stage <span id="modMemoryStage">1</span></h4>
             <p id='modMemoryOutput'>&nbsp;</p>
-            <input type='button' id='modMemorySolve' value='Solve'/>
-            <input id='modMemoryReset' type='button' value='Reset'/><br/>
 
-            <p id='modMemoryStage'>Stage 1</p>
+            <button class="btn btn-danger btn-block" id="modMemoryReset">Reset</button>
             <br/>
             <form id='modMemoryForm'>
-
-                <fieldset>
+                <fieldset id="modMemoryScreenForm">
                     <legend>Screen</legend>
-                    <div id='memoryNum'>
-                        <input type="radio" name="memoryNum" id="memoryNum1" value=1><label for='memoryNum1'>1</label>
-                        <input type="radio" name="memoryNum" id="memoryNum2" value=2><label for='memoryNum2'>2</label>
-                        <input type="radio" name="memoryNum" id="memoryNum3" value=3><label for='memoryNum3'>3</label>
-                        <input type="radio" name="memoryNum" id="memoryNum4" value=4><label for='memoryNum4'>4</label>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryScreen" value="1" autocomplete="off"/> 1
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryScreen" value="2" autocomplete="off"/> 2
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryScreen" value="3" autocomplete="off"/> 3
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryScreen" value="4" autocomplete="off"/> 4
+                        </label>
                     </div>
                 </fieldset>
-                <br/><br/>
-                <fieldset>
-                    <legend>First</legend>
-                    <div id='memory0'>
-                        <input type="radio" name="memory0" id="memory01" value=1><label for='memory01'>1</label>
-                        <input type="radio" name="memory0" id="memory02" value=2><label for='memory02'>2</label>
-                        <input type="radio" name="memory0" id="memory03" value=3><label for='memory03'>3</label>
-                        <input type="radio" name="memory0" id="memory04" value=4><label for='memory04'>4</label>
+                <fieldset id="modMemoryPositionForm" style="display: none;">
+                    <legend>Position</legend>
+                    <div class="alert alert-info">
+                        <p>Click on number <span id="modMemoryNumberOutput"></span>.</p>
+                    </div>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryPosition" value="1" autocomplete="off"/> 1
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryPosition" value="2" autocomplete="off"/> 2
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryPosition" value="3" autocomplete="off"/> 3
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryPosition" value="4" autocomplete="off"/> 4
+                        </label>
                     </div>
                 </fieldset>
-                <fieldset>
-                    <legend>Second</legend>
-                    <div id='memory1'>
-                        <input type="radio" name="memory1" id="memory11" value=1><label for='memory11'>1</label>
-                        <input type="radio" name="memory1" id="memory12" value=2><label for='memory12'>2</label>
-                        <input type="radio" name="memory1" id="memory13" value=3><label for='memory13'>3</label>
-                        <input type="radio" name="memory1" id="memory14" value=4><label for='memory14'>4</label>
+                <fieldset id="modMemoryNumberForm" style="display: none;">
+                    <div class="alert alert-info">
+                        <p>Click on position <span id="modMemoryPositionOutput"></span>.</p>
                     </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Third</legend>
-                    <div id='memory2'>
-                        <input type="radio" name="memory2" id="memory21" value=1><label for='memory21'>1</label>
-                        <input type="radio" name="memory2" id="memory22" value=2><label for='memory22'>2</label>
-                        <input type="radio" name="memory2" id="memory23" value=3><label for='memory23'>3</label>
-                        <input type="radio" name="memory2" id="memory24" value=4><label for='memory24'>4</label>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Fourth</legend>
-                    <div id='memory3'>
-                        <input type="radio" name="memory3" id="memory31" value=1><label for='memory31'>1</label>
-                        <input type="radio" name="memory3" id="memory32" value=2><label for='memory32'>2</label>
-                        <input type="radio" name="memory3" id="memory33" value=3><label for='memory33'>3</label>
-                        <input type="radio" name="memory3" id="memory34" value=4><label for='memory34'>4</label>
+                    <legend>Number</legend>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryNumber" value="1" autocomplete="off"/> 1
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryNumber" value="2" autocomplete="off"/> 2
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryNumber" value="3" autocomplete="off"/> 3
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modMemoryNumber" value="4" autocomplete="off"/> 4
+                        </label>
                     </div>
                 </fieldset>
             </form>

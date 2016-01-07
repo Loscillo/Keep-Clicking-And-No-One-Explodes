@@ -67,3 +67,8 @@ $("input[name='frk']").change(function () {
     }
     $("#modalFRK").modal("toggle");
 });
+
+function removeChecked(element) {
+    element.prop("checked", false);
+    element.closest("label").removeClass("active");
+}

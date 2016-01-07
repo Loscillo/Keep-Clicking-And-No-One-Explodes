@@ -91,12 +91,10 @@ $("#modButtonSolve").click(function () {
 $("#modButtonReset").click(function () {
     modButtonHideAnswers();
     $("input[name='modButtonColor']:checked").each(function(){
-        $(this).prop("checked", false);
-        $(this).closest("label").removeClass("active");
+        removeChecked($(this));
     });
     $("input[name='modButtonText']:checked").each(function(){
-        $(this).prop("checked", false);
-        $(this).closest("label").removeClass("active");
+        removeChecked($(this));
     });
     $(this).blur();
 });
