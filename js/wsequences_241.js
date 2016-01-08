@@ -52,9 +52,7 @@ $("#modWireSReset").click(function(){
     $("#modWireSDoNotCut").hide();
 });
 
-$("#modWireSSolve").click(function(){
-    $(this).blur();
-
+function solve() {
     var wireColor = $('input[name="modWireSColor"]:checked').val();
     var wireConnected = $('input[name="modWireSEnd"]:checked').val();
     
@@ -77,4 +75,16 @@ $("#modWireSSolve").click(function(){
     $("input[name='modWireSEnd']:checked").each(function(){
         removeChecked($(this));
     });
+}
+
+$('input[name="modWireSColor"]').change(function() {
+    if($('input[name="modWireSEnd"]:checked').val() != undefined) {
+        solve();
+    }
+});
+
+$('input[name="modWireSEnd"]').change(function() {
+    if($('input[name="modWireSColor"]:checked').val() != undefined) {
+        solve();
+    }
 });
