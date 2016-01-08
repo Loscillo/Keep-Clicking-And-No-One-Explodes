@@ -143,16 +143,16 @@ function roundFour(screenVal) {
 function roundFive(screenVal) {
     switch (screenVal) {
         case 1:
-            showNumberForm(memory.positions[0]);
+            showPositionForm(memory.numbers[0]);
             break;
         case 2:
-            showNumberForm(memory.positions[1]);
+            showPositionForm(memory.numbers[1]);
             break;
         case 3:
-            showNumberForm(memory.positions[3]);
+            showPositionForm(memory.numbers[3]);
             break;
         case 4:
-            showNumberForm(memory.positions[2]);
+            showPositionForm(memory.numbers[2]);
             break;
     }
 }
