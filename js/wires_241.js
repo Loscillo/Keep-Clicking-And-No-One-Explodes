@@ -1,146 +1,149 @@
-$("#modSimpleReset").click(function(){
+$("#modSimpleReset").click(function () {
     $(this).blur();
-    for(var i =0;i < 6; i++){
-        $("input[name='modSimpleW" + i + "']:checked").each(function(){
+    for (var i = 0; i < 6; i++) {
+        $("input[name='modSimpleW" + i + "']:checked").each(function () {
             removeChecked($(this));
         });
     }
-    $("#modSimpleOutput").html("&nbsp;");
+    modSimpleWiresHideOutput();
 });
 
-$("#modSimpleSolve").click(function(){
-    $(this).blur();
-    var answer = "Answer: ";
-    // Get the serial suffix (odd or even).
-    var wireSerialSuffix = "";
-    if($('#serialEven').is(':checked')){
-        wireSerialSuffix = "even";
-    }else{
-        wireSerialSuffix = "odd";
-    }
-    var wiresArr = [];
-    
-    function checkWire(wiresArr,curWire){
-        if($("input[name='" + curWire + "']:checked").val() !== undefined) {
-            wiresArr.push($("input[name='" + curWire + "']:checked").val());
-        }
-        return wiresArr;
-    }
-    // Get the total number of wires.
-    
-    
-    for(var i =0;i < 6; i++){
-        var wireName = "modSimpleW"+i;
-        wiresArr = checkWire(wiresArr,wireName);
-    }
+function modSimpleWiresHideOutput() {
+    $("#modSimpleWireSuccess").hide();
+    $("#modSimpleWireError").hide();
+}
 
-    console.log(wiresArr);
-
-    switch(wiresArr.length) {
+function modSimpleWiresSolve(wiresArr) {
+    var answer = "";
+    switch (wiresArr.length) {
         case 3:
-            answer += wiresCalc3(wiresArr,wireSerialSuffix);
+            answer += wiresCalc3(wiresArr);
             break;
         case 4:
-            answer += wiresCalc4(wiresArr,wireSerialSuffix);
+            answer += wiresCalc4(wiresArr);
             break;
         case 5:
-            answer += wiresCalc5(wiresArr,wireSerialSuffix);
+            answer += wiresCalc5(wiresArr);
             break;
         case 6:
-            answer += wiresCalc6(wiresArr,wireSerialSuffix);
+            answer += wiresCalc6(wiresArr);
             break;
         default:
-            answer = "ERR - Wire count must be between 3 and 6.";
-            
+            $("#modSimpleWireError").show();
+            return;
     }
-    
-    
+
     // Calculate answer given 3 wires.
-    function wiresCalc3(wires,serialSuffix){
-        if(wires.indexOf('red') === -1){
-            return "Cut the Second Wire.";
+    function wiresCalc3(wires) {
+        if (wires.indexOf('red') === -1) {
+            return 2;
         }
-        
-        if(wires[wires.length-1]==="white"){
-            return "Cut the Last Wire.";
+        if (wires[wires.length - 1] === "white") {
+            return 3;
         }
-        // Count occurence of blue wires.
-        var countBlue = wires.reduce(function(n, val) {return n + (val === "blue");}, 0);
-        
-        if(countBlue > 1){
-            return "Cut the Last Blue Wire.";
-        }
-        
-        return "Cut the Last Wire.";
-    }
-    
 
-    
+        var countBlue = wires.reduce(function (n, val) {
+            return n + (val === "blue");
+        }, 0);
+
+        if (countBlue > 1) {
+            return wires.lastIndexOf("blue") + 1;
+        }
+        return 3;
+    }
+
+
     // Calculate answer given 4 wires.
-    function wiresCalc4(wires,serialSuffix){
+    function wiresCalc4(wires) {
         // Count occurence of red wires.
-        var countRed = wires.reduce(function(n, val) {return n + (val === "red");}, 0);
-        var countBlue = wires.reduce(function(n, val) {return n + (val === "blue");}, 0);
-        var countYellow = wires.reduce(function(n, val) {return n + (val === "yellow");}, 0);
-        if(countRed > 1 && serialSuffix === "odd"){
-            return "Cut the Last Red Wire.";
+        var countRed = wires.reduce(function (n, val) {
+            return n + (val === "red");
+        }, 0);
+        var countBlue = wires.reduce(function (n, val) {
+            return n + (val === "blue");
+        }, 0);
+        var countYellow = wires.reduce(function (n, val) {
+            return n + (val === "yellow");
+        }, 0);
+        if (countRed > 1 && !bomb.getSerialSuffixEven(modSimpleWiresSolve, [wires])) {
+            return wires.lastIndexOf("red") + 1;
         }
-        
-        if(wires[wires.length-1]==="yellow" && wires.indexOf('red') === -1){
-            return "Cut the First Wire.";
-        }
-        
-        if(countBlue == 1){
-            return "Cut the First Wire.";
-        }
-        
-        if(countYellow > 1){
-            return "Cut the Second Wire.";
-        }
-        return "Cut the Second Wire.";
-    }
-    // Calculate answer given 5 wires.
-    function wiresCalc5(wires,serialSuffix){
-        var countRed = wires.reduce(function(n, val) {return n + (val === "red");}, 0);
-        var countYellow = wires.reduce(function(n, val) {return n + (val === "yellow");}, 0);
 
-        if(wires[wires.length-1] == "black" && serialSuffix == "odd"){
-            return "Cut the Fourth Wire.";
+        if (wires[wires.length - 1] === "yellow" && countRed == 0) {
+            return 1;
         }
-        
-        if(countRed == 1 && countYellow > 1){
-            return "Cut the First Wire.";
+
+        if (countBlue == 1) {
+            return 1;
         }
-        
-        if(wires.indexOf('black') === -1){
-            return "Cut the Second Wire.";
+
+        if (countYellow > 1) {
+            return 4;
         }
-        
-        return "Cut the First Wire.";
-    }    
-    
+        return 2;
+    }
+
+    // Calculate answer given 5 wires.
+    function wiresCalc5(wires) {
+        var countRed = wires.reduce(function (n, val) {
+            return n + (val === "red");
+        }, 0);
+        var countYellow = wires.reduce(function (n, val) {
+            return n + (val === "yellow");
+        }, 0);
+
+        if (wires[wires.length - 1] == "black" && !bomb.getSerialSuffixEven(modSimpleWiresSolve, [wiresArr])) {
+            return 4;
+        }
+
+        if (countRed == 1 && countYellow > 1) {
+            return 1;
+        }
+
+        if (wires.indexOf('black') === -1) {
+            return 2;
+        }
+
+        return 1;
+    }
+
     // Calculate answer given 6 wires.
-    function wiresCalc6(wires,serialSuffix){
-        var countWhite = wires.reduce(function(n, val) {return n + (val === "white");}, 0);
-        var countYellow = wires.reduce(function(n, val) {return n + (val === "yellow");}, 0);       
-        
-        if(wires.indexOf('yellow') === -1 && serialSuffix === "odd"){
-            return "Cut the Third Wire.";
+    function wiresCalc6(wires) {
+        var countWhite = wires.reduce(function (n, val) {
+            return n + (val === "white");
+        }, 0);
+        var countYellow = wires.reduce(function (n, val) {
+            return n + (val === "yellow");
+        }, 0);
+
+        if (countYellow == 0 && !bomb.getSerialSuffixEven(modSimpleWiresSolve, [wiresArr])) {
+            return 3;
         }
-        
-        if(countYellow == 1 && countWhite > 1){
-            return "Cut the Fourth Wire."
+
+        if (countYellow == 1 && countWhite > 1) {
+            return 4;
         }
-        
-        if(wires.indexOf('red') === -1){
-            return "Cut the Last Wire.";
+
+        if (wires.indexOf('red') === -1) {
+            return 6;
         }
-        
-        return "Cut the Fourth Wire.";
-    }   
-    
-    
-    
-    
-    $("#modSimpleOutput").html(answer);
+
+        return 4;
+    }
+
+    $("#modSimpleWireAnswer").html(answer);
+    $("#modSimpleWireSuccess").show();
+}
+
+$("#modSimpleSolve").click(function () {
+    $(this).blur();
+    modSimpleWiresHideOutput();
+
+    var wiresArr = [];
+    for (var i = 0; i < 6; i++) {
+        if ($("input[name='modSimpleW" + i + "']:checked").val() !== undefined) {
+            wiresArr.push($("input[name='modSimpleW" + i + "']:checked").val());
+        }
+    }
+    modSimpleWiresSolve(wiresArr);
 });
