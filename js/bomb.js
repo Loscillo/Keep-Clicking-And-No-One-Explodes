@@ -1,5 +1,5 @@
 var bomb = {
-    serialWithVowel: undefined,
+    serialVowel: undefined,
     serialSuffixEven: undefined,
     batteries: undefined,
     parallelPort: undefined,
@@ -9,8 +9,16 @@ var bomb = {
     callback: undefined,
     parameters: undefined,
 
-    serialVowelModal: function (callback, parameters) {
-
+    serialContainsVowel: function (callback, parameters) {
+        if (this.serialVowel === undefined) {
+            $("#modalSerialVowel").modal("toggle");
+            this.callback = callback;
+            this.parameters = parameters;
+            throw "SerialSVowelUndefined";
+        }
+        else {
+            return this.serialVowel;
+        }
     },
 
     getSerialSuffixEven: function (callback, parameters) {
@@ -102,9 +110,16 @@ $("input[name='frk']").change(function () {
     $("#modalFRK").modal("toggle");
 });
 
+$("input[name='vowel']").change(function () {
+    bomb.serialVowel = ($(this).val() == "true");
+    if (bomb.callback != undefined) {
+        bomb.callback.apply(this, bomb.parameters);
+    }
+    $("#modalSerialVowel").modal("toggle");
+});
+
 $("input[name='suffix']").change(function () {
     bomb.serialSuffixEven = ($(this).val() == "true");
-    console.log(bomb.serialSuffixEven);
     if (bomb.callback != undefined) {
         bomb.callback.apply(this, bomb.parameters);
     }
@@ -117,6 +132,24 @@ $("input[name='parallel']").change(function () {
         bomb.callback.apply(this, bomb.parameters);
     }
     $("#modalParallel").modal("toggle");
+});
+
+$("#strikesIncrement").click(function() {
+    $(this).blur();
+    if(bomb.strikes < 2) {
+        bomb.strikes++;
+        $("#strikesValue").html(bomb.strikes);
+        modSimonResolve();
+    }
+});
+
+$("#strikesDecrement").click(function() {
+    $(this).blur();
+    if(bomb.strikes > 0) {
+        bomb.strikes--;
+        $("#strikesValue").html(bomb.strikes);
+        modSimonResolve();
+    }
 });
 
 function removeChecked(element) {

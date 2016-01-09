@@ -1,52 +1,75 @@
 var simonSequence = [];
-$(document).ready(function(){
-    $('#simonReset').button(); 
-    $('#simonRed').button();
-    $('#simonBlue').button();
-    $('#simonGreen').button();
-    $('#simonYellow').button();
-});
 
-$("#simonReset").click(function(){
-
+$("#modSimonReset").click(function () {
+    $(this).blur();
     simonSequence = [];
-    $("#simonOutput").html("&nbsp;<br/>");
+    $("#modSimonAnswer").empty();
 });
 
-$('#simonRed').click(function(){getNextColor('red');});
-$('#simonBlue').click(function(){getNextColor('blue');});
-$('#simonGreen').click(function(){getNextColor('green');});
-$('#simonYellow').click(function(){getNextColor('yellow');});
+$('#simonRed').click(function () {
+    $(this).blur();
+    simonSequence.push("red");
+    getNextColor('red');
+});
+$('#simonBlue').click(function () {
+    $(this).blur();
+    simonSequence.push("blue");
+    getNextColor('blue');
+});
+$('#simonGreen').click(function () {
+    $(this).blur();
+    simonSequence.push("green");
+    getNextColor('green');
+});
+$('#simonYellow').click(function () {
+    $(this).blur();
+    simonSequence.push("yellow");
+    getNextColor('yellow');
+});
 
-function getNextColor(inputColor){
+function modSimonResolve() {
+    if(simonSequence.length != 0) {
+        $("#modSimonAnswer").empty();
+        for(var i = 0; i < simonSequence.length; i++) {
+            getNextColor(simonSequence[i]);
+        }
+    }
+}
+
+function getNextColor(inputColor) {
     var ssDB = {
-        red:{
-            0:{true:"Blue",false:"Blue"},
-            1:{true:"Yellow",false:"Red"},
-            2:{true:"Green",false:"Yellow"}
+        red: {
+            0: {true: "primary", false: "primary"},
+            1: {true: "warning", false: "danger"},
+            2: {true: "success", false: "warning"}
         },
-        blue:{
-            0:{true:"Red",false:"Yellow"},
-            1:{true:"Green",false:"Blue"},
-            2:{true:"Red",false:"Green"}        
+        blue: {
+            0: {true: "danger", false: "warning"},
+            1: {true: "success", false: "primary"},
+            2: {true: "danger", false: "success"}
         },
-        green:{
-            0:{true:"Yellow",false:"Green"},
-            1:{true:"Blue",false:"Yellow"},
-            2:{true:"Yellow",false:"Blue"}              
+        green: {
+            0: {true: "warning", false: "success"},
+            1: {true: "primary", false: "warning"},
+            2: {true: "warning", false: "primary"}
         },
-        yellow:{
-            0:{true:"Green",false:"Red"},
-            1:{true:"Red",false:"Green"},
-            2:{true:"Blue",false:"Red"}             
+        yellow: {
+            0: {true: "success", false: "danger"},
+            1: {true: "danger", false: "success"},
+            2: {true: "primary", false: "danger"}
         }
     };
 
+    var resultColor = ssDB[inputColor][bomb.strikes][bomb.serialContainsVowel(undefined, undefined)];
+    $("#modSimonAnswer").append("<button class='btn btn-" + resultColor + "'>&nbsp;</button>");
+}
 
-    var serialVowel = $('#serialVowelYes').is(':checked');
-    var numStrikes = parseInt($('input[name=numStrikes]:checked').val());
+function modSimonShowView() {
+    $("#modSimonStart").hide();
+    $("#modSimonView").show();
+}
 
-    var resultColor = ssDB[inputColor][numStrikes][serialVowel];
-    simonSequence.push(" "+resultColor);
-    $("#simonOutput").html(simonSequence);
-};
+$("#modSimonStartButton").click(function () {
+    $(this).blur();
+    bomb.serialContainsVowel(modSimonShowView, undefined);
+});

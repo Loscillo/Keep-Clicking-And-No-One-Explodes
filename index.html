@@ -44,81 +44,6 @@
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <!-- Bomb Info Section -->
-        <fieldset>
-            <legend>Bomb Info</legend>
-            <fieldset>
-                <legend>Serial Vowel?</legend>
-                <div id='serialVowel'>
-                    <input type='radio' id='serialVowelNo' name='serialVowel' value=false checked/>
-                    <label for='serialVowelNo'>NO</label>
-                    <input type='radio' id='serialVowelYes' name='serialVowel' value=true/>
-                    <label for='serialVowelYes'>YES</label>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>Serial Suffix?</legend>
-                <div id='serialSuffix'>
-                    <input type='radio' id='serialEven' name='serialSuffix' value='even' checked/>
-                    <label for='serialEven'>EVEN</label>
-                    <input type='radio' id='serialOdd' name='serialSuffix' value='odd'/>
-                    <label for='serialOdd'>ODD</label>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>Batteries</legend>
-                <div id='numBatteriesButtons'>
-                    <input type='radio' name='numBatteries' id='batteries0' id='numBatteries' value=0
-                           checked='checked'/>
-                    <label for='batteries0'>0</label>
-                    <input type='radio' id='batteries1' id='numBatteries' value=1 name='numBatteries'/>
-                    <label for='batteries1'>1</label>
-                    <input type='radio' id='batteries2' id='numBatteries' value=2 name='numBatteries'/>
-                    <label for='batteries2'>2</label>
-                    <input type='radio' id='batteries2_' id='numBatteries' value=3 name='numBatteries'/>
-                    <label for='batteries2_' name='numBatteries'>+</label>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>Parallel Port?</legend>
-                <div id='parallelPort'>
-                    <input type='radio' id='parallelPortNo' name='parallelPort' value=false checked/>
-                    <label for='parallelPortNo'>NO</label>
-                    <input type='radio' id='parallelPortYes' name='parallelPort' value=true/>
-                    <label for='parallelPortYes'>YES</label>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>CAR Indicator Lit?</legend>
-                <div id='indicatorCARLit'>
-                    <input type='radio' id='indicatorCARNo' name='indicatorCARLit' value=false checked/>
-                    <label for='indicatorCARNo'>NO</label>
-                    <input type='radio' id='indicatorCARYes' name='indicatorCARLit' value=true/>
-                    <label for='indicatorCARYes'>YES</label>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>FRK Indicator Lit?</legend>
-                <div id='indicatorFRKLit'>
-                    <input type='radio' id='indicatorFRKNo' name='indicatorFRKLit' value=false checked/>
-                    <label for='indicatorFRKNo'>NO</label>
-                    <input type='radio' id='indicatorFRKYes' name='indicatorFRKLit' value=true/>
-                    <label for='indicatorFRKYes'>YES</label>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>Number of Strikes</legend>
-                <div id='numStrikes'>
-                    <input type='radio' id='numStrikes0' name='numStrikes' value=0 checked/>
-                    <label for='numStrikes0'>0</label>
-                    <input type='radio' id='numStrikes1' name='numStrikes' value=1/>
-                    <label for='numStrikes1'>1</label>
-                    <input type='radio' id='numStrikes2' name='numStrikes' value=2/>
-                    <label for='numStrikes2'>2</label>
-                </div>
-            </fieldset>
-        </fieldset>
-        <hr/>
         <!-- Module Panels -->
         <div id='modSimple' class="well">
             <!-- Wires -->
@@ -570,30 +495,42 @@
                 </table>
             </form>
         </div>
-        <div id='modSimon'>
+        <hr>
+        <div id='modSimon' class="well">
             <!-- Simon Says -->
-            <h4>Simon Says Module</h4>
-            <p id='simonOutput'>&nbsp;<br/></p>
-            <input id='simonReset' type='button' value='Reset'/><br/>
-            <fieldset>
-                <legend>Next Color in Sequence</legend>
-                <table>
-                    <tr>
-                        <td>
-                            <button class='redButton' id='simonRed'>R</button>
-                        </td>
-                        <td>
-                            <button class='blueButton' id='simonBlue'>B</button>
-                        </td>
-                        <td>
-                            <button class='greenButton' id='simonGreen'>G</button>
-                        </td>
-                        <td>
-                            <button class='yellowButton' id='simonYellow'>Y</button>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
+            <h2 class="text-center">Simon Says Module</h2>
+            <div id="modSimonStart">
+                <button class="btn btn-success btn-block" id="modSimonStartButton">Start</button>
+            </div>
+            <div class="row" id="modSimonView" style="display: none;">
+                <div class="col-md-10">
+                    <h4 class="text-center">Next color in sequence</h4>
+                    <button id="modSimonReset" class="btn btn-danger btn-block">Reset</button>
+                    <br/>
+                    <fieldset>
+                        <div class="text-center">
+                            <div class="btn-group">
+                                <button class="btn btn-danger" id="simonRed">&nbsp;</button>
+                                <button class="btn btn-primary" id="simonBlue">&nbsp;</button>
+                                <button class="btn btn-success" id="simonGreen">&nbsp;</button>
+                                <button class="btn btn-warning" id="simonYellow">&nbsp;</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <h4 class="text-center">Answer</h4>
+                    <div class="text-center">
+                        <div class="btn-group" id="modSimonAnswer"></div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-center">
+                    <h4>Strikes</h4>
+                    <div class="btn-group-vertical">
+                        <button class="btn btn-default" id="strikesIncrement">+</button>
+                        <button class="btn btn-default disabled" id="strikesValue">0</button>
+                        <button class="btn btn-default" id="strikesDecrement">-</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <hr>
         <div id='modFirst' class="well">
@@ -1351,13 +1288,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Vowel in serial number ?</h4>
+                    <h4 class="modal-title">Vowel in serial ?</h4>
                 </div>
-                <div class="modal-body">
-                    <p>One fine body&hellip;</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-body text-center">
+                    <form>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-success">
+                                <input type="radio" name="vowel" value="true" autocomplete="off"/> Yes
+                            </label>
+                            <label class="btn btn-danger">
+                                <input type="radio" name="vowel" value="false" autocomplete="off"/> No
+                            </label>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
