@@ -38,10 +38,7 @@ function modComplexSolve(number) {
         case 3:
         case 9:
         case 11:
-            if(bomb.batteries === undefined) {
-                bomb.batteriesModal(modComplexSolve, [number]);
-            }
-            else if(bomb.batteries > 1) {
+            if(bomb.getBatteriesCount(modComplexSolve, [number]) > 1) {
                 $("#modComplexCut").show();
             }
             else {
@@ -53,10 +50,7 @@ function modComplexSolve(number) {
         case 8:
         case 12:
         case 13:
-            if(bomb.serialSuffixEven === undefined) {
-                bomb.serialSuffixModal(modComplexSolve, [number]);
-            }
-            else if(bomb.serialSuffixEven) {
+            if(bomb.getSerialSuffixEven(modComplexSolve, [number])) {
                 $("#modComplexCut").show();
             }
             else {
@@ -67,10 +61,7 @@ function modComplexSolve(number) {
         case 5:
         case 7:
         case 14:
-            if(bomb.parallelPort === undefined) {
-                bomb.parallelPortModal(modComplexSolve, [number]);
-            }
-            else if(bomb.parallelPort) {
+            if(bomb.haveParallelPort(modComplexSolve, [number])) {
                 $("#modComplexCut").show();
             }
             else {

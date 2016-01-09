@@ -8,32 +8,17 @@ function modButtonSolve(buttonColor, buttonText) {
         return;
     }
 
-    if (bomb.batteries === undefined) {
-        bomb.batteriesModal(modButtonSolve, [buttonColor, buttonText]);
-        return;
-    }
-
-    if (bomb.batteries > 1 && buttonText === "detonate") {
+    if (buttonText === "detonate" && bomb.getBatteriesCount(modButtonSolve, [buttonColor, buttonText]) > 1) {
         modButtonShowAnswer("click");
         return;
     }
 
-    if (bomb.indicatorCARLit === undefined) {
-        bomb.CARModal(modButtonSolve, [buttonColor, buttonText]);
-        return;
-    }
-
-    if (buttonColor === "white" && bomb.indicatorCARLit) {
+    if (buttonColor === "white" && bomb.haveCARIndicator(modButtonSolve, [buttonColor, buttonText])) {
         modButtonShowAnswer("hold");
         return;
     }
 
-    if (bomb.indicatorFRKLit === undefined) {
-        bomb.FRKModal(modButtonSolve, [buttonColor, buttonText]);
-        return;
-    }
-
-    if (bomb.batteries > 2 && bomb.indicatorFRKLit) {
+    if (bomb.getBatteriesCount(modButtonSolve, [buttonColor, buttonText]) > 2 && bomb.haveFRKIndicator(modButtonSolve, [buttonColor, buttonText])) {
         modButtonShowAnswer("click");
         return;
     }

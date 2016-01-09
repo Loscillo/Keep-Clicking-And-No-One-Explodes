@@ -1,5 +1,5 @@
 var bomb = {
-    serialVowel: undefined,
+    serialWithVowel: undefined,
     serialSuffixEven: undefined,
     batteries: undefined,
     parallelPort: undefined,
@@ -13,39 +13,69 @@ var bomb = {
 
     },
 
-    serialSuffixModal: function (callback, parameters) {
-        $("#modalSerialSuffix").modal("toggle");
-        this.callback = callback;
-        this.parameters = parameters;
+    getSerialSuffixEven: function (callback, parameters) {
+        if (this.serialSuffixEven === undefined) {
+            $("#modalSerialSuffix").modal("toggle");
+            this.callback = callback;
+            this.parameters = parameters;
+            throw "SerialSuffixUndefined";
+        }
+        else {
+            return this.serialSuffixEven;
+        }
     },
 
-    batteriesModal: function (callback, parameters) {
-        $("#modalBatteries").modal("toggle");
-        this.callback = callback;
-        this.parameters = parameters;
+    getBatteriesCount: function (callback, parameters) {
+        if (this.batteries === undefined) {
+            $("#modalBatteries").modal("toggle");
+            this.callback = callback;
+            this.parameters = parameters;
+            throw "BatteriesUndefined";
+        }
+        else {
+            return this.batteries;
+        }
     },
 
-    parallelPortModal: function (callback, parameters) {
-        $("#modalParallel").modal("toggle");
-        this.callback = callback;
-        this.parameters = parameters;
+    haveParallelPort: function (callback, parameters) {
+        if (this.parallelPort === undefined) {
+            $("#modalParallel").modal("toggle");
+            this.callback = callback;
+            this.parameters = parameters;
+            throw "ParallelPortUndefined";
+        }
+        else {
+            return this.parallelPort;
+        }
     },
 
-    CARModal: function (callback, parameters) {
-        $("#modalCAR").modal("toggle");
-        this.callback = callback;
-        this.parameters = parameters;
+    haveCARIndicator: function (callback, parameters) {
+        if (this.CAR === undefined) {
+            $("#modalCAR").modal("toggle");
+            this.callback = callback;
+            this.parameters = parameters;
+            throw "CARIndicatorUndefined";
+        }
+        else {
+            return this.CAR;
+        }
     },
 
-    FRKModal: function (callback, parameters) {
-        $("#modalFRK").modal("toggle");
-        this.callback = callback;
-        this.parameters = parameters;
-    }
+    haveFRKIndicator: function (callback, parameters) {
+        if (this.FRK === undefined) {
+            $("#modalFRK").modal("toggle");
+            this.callback = callback;
+            this.parameters = parameters;
+            throw "FRKIndicatorUndefined";
+        }
+        else {
+            return this.FRK;
+        }
+    },
 };
 
 $("#test").click(function () {
-    bomb.CARModal(undefined, undefined);
+    bomb.haveCARIndicator(undefined, undefined);
 });
 
 $("input[name='batteries']").change(function () {
