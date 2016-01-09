@@ -124,112 +124,142 @@
             <h2>Simple Wires Module</h2>
             <p id='modSimpleOutput'>&nbsp;</p>
 
-            <button id='modSimpleSolve'>Solve</button>
-            <button id='modSimpleReset'>Reset</button>
+            <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" role="group">
+                    <button id="modSimpleSolve" class="btn btn-success">Solve</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button id="modSimpleReset" class="btn btn-danger">Reset</button>
+                </div>
+            </div>
+
             <form id='modSimpleForm'>
                 <fieldset>
                     <legend>Wire 1</legend>
-                    <input type='radio' id='modSimpleW0Red' name='modSimpleW0'><label style='background-color:red;'
-                                                                                      for='modSimpleW0Red'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW0Blue' name='modSimpleW0'><label style='background-color:blue;'
-                                                                                       for='modSimpleW0Blue'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW0Yellow' name='modSimpleW0'><label
-                        style='background-color:yellow;' for='modSimpleW0Yellow'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW0White' name='modSimpleW0'><label
-                        style='background-color:white;color:black;' for='modSimpleW0White'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW0Black' name='modSimpleW0'><label style='background-color:black;'
-                                                                                        for='modSimpleW0Black'>
-                    &nbsp;</label>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                        <label class="btn btn-warning">
+                            <input type="radio" name="modSimpleW0" value="yellow" autocomplete="off"/> Yellow
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="modSimpleW0" value="blue" autocomplete="off"/> Blue
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="modSimpleW0" value="red" autocomplete="off"/> Red
+                        </label>
+                        <label class="btn btn-blank">
+                            <input type="radio" name="modSimpleW0" value="white" autocomplete="off"/> White
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modSimpleW0" value="black" autocomplete="off"/> Black
+                        </label>
+                    </div>
                 </fieldset>
 
                 <fieldset>
                     <legend>Wire 2</legend>
-                    <input type='radio' id='modSimpleW1Red' name='modSimpleW1'><label style='background-color:red;'
-                                                                                      for='modSimpleW1Red'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW1Blue' name='modSimpleW1'><label style='background-color:blue;'
-                                                                                       for='modSimpleW1Blue'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW1Yellow' name='modSimpleW1'><label
-                        style='background-color:yellow;' for='modSimpleW1Yellow'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW1White' name='modSimpleW1'><label
-                        style='background-color:white;color:black;' for='modSimpleW1White'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW1Black' name='modSimpleW1'><label style='background-color:black;'
-                                                                                        for='modSimpleW1Black'>
-                    &nbsp;</label>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                        <label class="btn btn-warning">
+                            <input type="radio" name="modSimpleW1" value="yellow" autocomplete="off"/> Yellow
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="modSimpleW1" value="blue" autocomplete="off"/> Blue
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="modSimpleW1" value="red" autocomplete="off"/> Red
+                        </label>
+                        <label class="btn btn-blank">
+                            <input type="radio" name="modSimpleW1" value="white" autocomplete="off"/> White
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modSimpleW1" value="black" autocomplete="off"/> Black
+                        </label>
+                    </div>
                 </fieldset>
 
                 <fieldset>
                     <legend>Wire 3</legend>
-                    <input type='radio' id='modSimpleW2Red' name='modSimpleW2'><label style='background-color:red;'
-                                                                                      for='modSimpleW2Red'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW2Blue' name='modSimpleW2'><label style='background-color:blue;'
-                                                                                       for='modSimpleW2Blue'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW2Yellow' name='modSimpleW2'><label
-                        style='background-color:yellow;' for='modSimpleW2Yellow'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW2White' name='modSimpleW2'><label
-                        style='background-color:white;color:black;' for='modSimpleW2White'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW2Black' name='modSimpleW2'><label style='background-color:black;'
-                                                                                        for='modSimpleW2Black'>
-                    &nbsp;</label>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                        <label class="btn btn-warning">
+                            <input type="radio" name="modSimpleW2" value="yellow" autocomplete="off"/> Yellow
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="modSimpleW2" value="blue" autocomplete="off"/> Blue
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="modSimpleW2" value="red" autocomplete="off"/> Red
+                        </label>
+                        <label class="btn btn-blank">
+                            <input type="radio" name="modSimpleW2" value="white" autocomplete="off"/> White
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modSimpleW2" value="black" autocomplete="off"/> Black
+                        </label>
+                    </div>
                 </fieldset>
 
                 <fieldset>
                     <legend>Wire 4</legend>
-                    <input type='radio' id='modSimpleW3Red' name='modSimpleW3'><label style='background-color:red;'
-                                                                                      for='modSimpleW3Red'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW3Blue' name='modSimpleW3'><label style='background-color:blue;'
-                                                                                       for='modSimpleW3Blue'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW3Yellow' name='modSimpleW3'><label
-                        style='background-color:yellow;' for='modSimpleW3Yellow'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW3White' name='modSimpleW3'><label
-                        style='background-color:white;color:black;' for='modSimpleW3White'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW3Black' name='modSimpleW3'><label style='background-color:black;'
-                                                                                        for='modSimpleW3Black'>
-                    &nbsp;</label>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                        <label class="btn btn-warning">
+                            <input type="radio" name="modSimpleW3" value="yellow" autocomplete="off"/> Yellow
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="modSimpleW3" value="blue" autocomplete="off"/> Blue
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="modSimpleW3" value="red" autocomplete="off"/> Red
+                        </label>
+                        <label class="btn btn-blank">
+                            <input type="radio" name="modSimpleW3" value="white" autocomplete="off"/> White
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modSimpleW3" value="black" autocomplete="off"/> Black
+                        </label>
+                    </div>
                 </fieldset>
 
                 <fieldset>
                     <legend>Wire 5</legend>
-                    <input type='radio' id='modSimpleW4Red' name='modSimpleW4'><label style='background-color:red;'
-                                                                                      for='modSimpleW4Red'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW4Blue' name='modSimpleW4'><label style='background-color:blue;'
-                                                                                       for='modSimpleW4Blue'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW4Yellow' name='modSimpleW4'><label
-                        style='background-color:yellow;' for='modSimpleW4Yellow'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW4White' name='modSimpleW4'><label
-                        style='background-color:white;color:black;' for='modSimpleW4White'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW4Black' name='modSimpleW4'><label style='background-color:black;'
-                                                                                        for='modSimpleW4Black'>
-                    &nbsp;</label>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                        <label class="btn btn-warning">
+                            <input type="radio" name="modSimpleW4" value="yellow" autocomplete="off"/> Yellow
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="modSimpleW4" value="blue" autocomplete="off"/> Blue
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="modSimpleW4" value="red" autocomplete="off"/> Red
+                        </label>
+                        <label class="btn btn-blank">
+                            <input type="radio" name="modSimpleW4" value="white" autocomplete="off"/> White
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modSimpleW4" value="black" autocomplete="off"/> Black
+                        </label>
+                    </div>
                 </fieldset>
 
                 <fieldset>
                     <legend>Wire 6</legend>
-                    <input type='radio' id='modSimpleW5Red' name='modSimpleW5'><label style='background-color:red;'
-                                                                                      for='modSimpleW5Red'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW5Blue' name='modSimpleW5'><label style='background-color:blue;'
-                                                                                       for='modSimpleW5Blue'>
-                    &nbsp;</label>
-                    <input type='radio' id='modSimpleW5Yellow' name='modSimpleW5'><label
-                        style='background-color:yellow;' for='modSimpleW5Yellow'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW5White' name='modSimpleW5'><label
-                        style='background-color:white;color:black;' for='modSimpleW5White'>&nbsp;</label>
-                    <input type='radio' id='modSimpleW5Black' name='modSimpleW5'><label style='background-color:black;'
-                                                                                        for='modSimpleW5Black'>
-                    &nbsp;</label>
+                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                        <label class="btn btn-warning">
+                            <input type="radio" name="modSimpleW5" value="yellow" autocomplete="off"/> Yellow
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="modSimpleW5" value="blue" autocomplete="off"/> Blue
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="modSimpleW5" value="red" autocomplete="off"/> Red
+                        </label>
+                        <label class="btn btn-blank">
+                            <input type="radio" name="modSimpleW5" value="white" autocomplete="off"/> White
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="modSimpleW5" value="black" autocomplete="off"/> Black
+                        </label>
+                    </div>
                 </fieldset>
             </form>
-
         </div>
         <hr>
         <div id='modButton' class="well">
@@ -764,53 +794,6 @@
                     </div>
                 </fieldset>
             </form>
-            <!--<form id='firstForm'>
-                <div id='firstSet'>
-                    <fieldset>
-                        <legend>Word From Button</legend>
-                        <input type="radio" name="firstWord" id='fs2blank' value="BLANK"><label
-                            for='fs2blank'>BLANK</label>
-                        <input type="radio" name="firstWord" id='fs2done' value="DONE"><label for='fs2done'>DONE</label>
-                        <input type="radio" name="firstWord" id='fs2first' value="FIRST"><label
-                            for='fs2first'>FIRST</label>
-                        <input type="radio" name="firstWord" id='fs2hold' value="HOLD"><label for='fs2hold'>HOLD</label>
-                        <input type="radio" name="firstWord" id='fs2left' value="LEFT"><label for='fs2left'>LEFT</label>
-                        <input type="radio" name="firstWord" id='fs2like' value="LIKE"><label for='fs2like'>LIKE</label>
-                        <input type="radio" name="firstWord" id='fs2middle' value="MIDDLE"><label
-                            for='fs2middle'>MIDDLE</label>
-                        <input type="radio" name="firstWord" id='fs2next' value="NEXT"><label for='fs2next'>NEXT</label>
-                        <input type="radio" name="firstWord" id='fs2no' value="NO"><label for='fs2no'>NO</label>
-                        <input type="radio" name="firstWord" id='fs2nothing' value="NOTHING"><label for='fs2nothing'>NOTHING</label>
-                        <input type="radio" name="firstWord" id='fs2okay' value="OKAY"><label for='fs2okay'>OKAY</label>
-                        <input type="radio" name="firstWord" id='fs2press' value="PRESS"><label
-                            for='fs2press'>PRESS</label>
-                        <input type="radio" name="firstWord" id='fs2ready' value="READY"><label
-                            for='fs2ready'>READY</label>
-                        <input type="radio" name="firstWord" id='fs2right' value="RIGHT"><label
-                            for='fs2right'>RIGHT</label>
-                        <input type="radio" name="firstWord" id='fs2sure' value="SURE"><label for='fs2sure'>SURE</label>
-                        <input type="radio" name="firstWord" id='fs2u' value="U"><label for='fs2u'>U</label>
-                        <input type="radio" name="firstWord" id='fs2uhhuh' value="UH HUH"><label for='fs2uhhuh'>UH
-                        HUH</label>
-                        <input type="radio" name="firstWord" id='fs2uhuh' value="UH UH"><label for='fs2uhuh'>UH
-                        UH</label>
-                        <input type="radio" name="firstWord" id='fs2uhhh' value="UHHH"><label for='fs2uhhh'>UHHH</label>
-                        <input type="radio" name="firstWord" id='fs2ur' value="UR"><label for='fs2ur'>UR</label>
-                        <input type="radio" name="firstWord" id='fs2wait' value="WAIT"><label for='fs2wait'>WAIT</label>
-                        <input type="radio" name="firstWord" id='fs2what' value="WHAT"><label for='fs2what'>WHAT</label>
-                        <input type="radio" name="firstWord" id='fs2what_' value="WHAT?"><label
-                            for='fs2what_'>WHAT?</label>
-                        <input type="radio" name="firstWord" id='fs2yes' value="YES"><label for='fs2yes'>YES</label>
-                        <input type="radio" name="firstWord" id='fs2youare' value="YOU ARE"><label for='fs2youare'>YOU
-                        ARE</label>
-                        <input type="radio" name="firstWord" id='fs2you' value="YOU"><label for='fs2you'>YOU</label>
-                        <input type="radio" name="firstWord" id='fs2youre' value="YOU'RE"><label
-                            for='fs2youre'>YOU'RE</label>
-                        <input type="radio" name="firstWord" id='fs2your' value="YOUR"><label for='fs2your'>YOUR</label>
-                    </fieldset>
-                </div>
-            </form>-->
-
         </div>
         <hr>
         <div id='modMemory' class="well">

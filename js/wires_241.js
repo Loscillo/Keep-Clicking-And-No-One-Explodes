@@ -1,22 +1,15 @@
-$(document).ready(function(){
-    for(var i=0;i<7;i++){
-        $('#modSimpleW'+i+'Red').button();
-        $('#modSimpleW'+i+'Blue').button();
-        $('#modSimpleW'+i+'Yellow').button();
-        $('#modSimpleW'+i+'White').button();
-        $('#modSimpleW'+i+'Black').button();
-    }
-    $('#modSimpleSolve').button();
-    $('#modSimpleReset').button();
-});
-
 $("#modSimpleReset").click(function(){
-    $("#modSimpleForm")[0].reset();
+    $(this).blur();
+    for(var i =0;i < 6; i++){
+        $("input[name='modSimpleW" + i + "']:checked").each(function(){
+            removeChecked($(this));
+        });
+    }
     $("#modSimpleOutput").html("&nbsp;");
-    
 });
 
 $("#modSimpleSolve").click(function(){
+    $(this).blur();
     var answer = "Answer: ";
     // Get the serial suffix (odd or even).
     var wireSerialSuffix = "";
@@ -28,35 +21,20 @@ $("#modSimpleSolve").click(function(){
     var wiresArr = [];
     
     function checkWire(wiresArr,curWire){
-        if($("#"+curWire+'Red').is(':checked')){
-            wiresArr.push("red");
-            return wiresArr;
+        if($("input[name='" + curWire + "']:checked").val() !== undefined) {
+            wiresArr.push($("input[name='" + curWire + "']:checked").val());
         }
-        if($("#"+curWire+'Blue').is(':checked')){
-            wiresArr.push("blue");
-            return wiresArr;
-        }
-        if($("#"+curWire+'Yellow').is(':checked')){
-            wiresArr.push("yellow");
-            return wiresArr;
-        }
-        if($("#"+curWire+'White').is(':checked')){
-            wiresArr.push("white");
-            return wiresArr;
-        }
-        if($("#"+curWire+'Black').is(':checked')){
-            wiresArr.push("black");
-            return wiresArr;
-        }       
         return wiresArr;
-    };
+    }
     // Get the total number of wires.
     
     
-    for(var i =0;i < 7; i++){
+    for(var i =0;i < 6; i++){
         var wireName = "modSimpleW"+i;
         wiresArr = checkWire(wiresArr,wireName);
     }
+
+    console.log(wiresArr);
 
     switch(wiresArr.length) {
         case 3:
