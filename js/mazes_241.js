@@ -16,6 +16,14 @@ var wall_db = [
         5, 14, 2, 3, 14, 1,
         4, 10, 9, 12, 11, 5,
         6, 11, 6, 3, 14, 3
+        ],
+        "edges": [
+            [[1, 10],[0, 20], [10, 21], [31, 40], [30, 50], [40]],
+            [[0, 2], [12, 21], [11, 20], [30, 41], [31, 51], [41, 52]],
+            [[1, 3], [11, 22], [12, 23], [42, 33], [32, 52], [42, 51, 53]],
+            [[2, 4], [23], [13, 22, 33], [23, 32], [53], [43, 52, 54]],
+            [[3, 14, 5], [4, 24], [14, 25], [44, 35], [34],[53, 55]],
+            [[4, 15], [5], [24, 35], [25, 34], [55], [45, 54]]
         ]
     },
     {
@@ -428,6 +436,29 @@ function build_walls(maze_number) {
     });
 }
 
+function build_walls2(maze_number) {
+    console.debug('building walls for #' + maze_number);
+    $('td.mazeCell').each(function(idx, elem) {
+        var x = parseInt(elem.dataset.x);
+        var y = parseInt(elem.dataset.y);
+        var total = x * 10 + y;
+        var edges = wall_db[maze_number].edges[x][y];
+        console.debug("Cell " + x + "" + y + " (" + total + ") : " + edges);
+        if (edges.indexOf(total - 1) == -1) {
+            $(elem).css("border-top", "1px solid #fff");
+        }
+        if (edges.indexOf(total - 10) == -1) {
+            $(elem).css("border-left", "1px solid #fff");
+        }
+        if (edges.indexOf(total + 1) == -1) {
+            $(elem).css("border-bottom", "1px solid #fff");
+        }
+        if (edges.indexOf(total + 10) == -1) {
+            $(elem).css("border-right", "1px solid #fff");
+        }
+    });
+}
+
 function attempt_render_maze() {
 	var maze_scaffold = -1;
 	var placements = placements_made();
@@ -467,3 +498,7 @@ function reset_pane() {
 populate_maze_db();
 reset_pane();
 $("td.mazeCell").click(__circle_placement_callback);
+
+$(document).ready(function() {
+   build_walls2(0);
+});
