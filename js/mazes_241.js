@@ -2,108 +2,95 @@ var maze_db1 = [[], [], [], [], [], []];
 var maze_db2 = [[], [], [], [], [], []];
 var maze_populated = false;
 
-// 4 bits to represent the walls
-// 1   1    1     1
-// up left down right
-
 var wall_db = [
     {
-        // 6x6 --> 36x1
-        "walls": [
-        12, 10, 9, 12, 10, 11,
-        5, 12, 3, 6, 10, 9,
-        5, 6, 9, 12, 10, 1,
-        5, 14, 2, 3, 14, 1,
-        4, 10, 9, 12, 11, 5,
-        6, 11, 6, 3, 14, 3
-        ],
         "edges": [
-            [[1, 10],[0, 20], [10, 21], [31, 40], [30, 50], [40]],
+            [[1, 10], [0, 20], [10, 21], [31, 40], [30, 50], [40]],
             [[0, 2], [12, 21], [11, 20], [30, 41], [31, 51], [41, 52]],
             [[1, 3], [11, 22], [12, 23], [42, 33], [32, 52], [42, 51, 53]],
             [[2, 4], [23], [13, 22, 33], [23, 32], [53], [43, 52, 54]],
-            [[3, 14, 5], [4, 24], [14, 25], [44, 35], [34],[53, 55]],
+            [[3, 14, 5], [4, 24], [14, 25], [44, 35], [34], [53, 55]],
             [[4, 15], [5], [24, 35], [25, 34], [55], [45, 54]]
         ]
     },
     {
-        "walls": [
-        14, 8, 11, 12, 8, 11,
-        12, 3, 12, 3, 6, 9,
-        5, 12, 3, 12, 10, 1,
-        4, 3, 12, 3, 13, 5,
-        5, 13, 5, 12, 3, 5,
-        7, 6, 3, 6, 10, 3
+        "edges": [
+            [[10], [0, 20, 11], [10], [40, 31], [30, 50, 41], [40]],
+            [[11, 2], [1, 10], [31, 22], [21, 30], [40, 51], [41, 52]],
+            [[1, 3], [22, 13], [12, 21], [42, 33], [32, 52], [42, 51, 53]],
+            [[2, 13, 4], [3, 12], [33, 24], [23, 32], [44], [52, 54]],
+            [[3, 5], [15], [23, 25], [44, 35], [34, 43], [53, 55]],
+            [[4], [14, 25], [15, 24], [34, 45], [35, 55], [45, 54]]
         ]
     },
     {
-        "walls": [
-        12, 10, 9, 13, 12, 9,
-        7, 13, 5, 6, 3, 5,
-        12, 1, 5, 12, 9, 5,
-        5, 5, 5, 5, 5, 5,
-        5, 6, 3, 5, 5, 5,
-        6, 10, 10, 3, 6, 3
+        "edges": [
+            [[1, 10], [0, 20], [10, 21], [31], [50, 41], [40, 51]],
+            [[0], [12], [20, 22], [30, 41], [31, 40], [50, 52]],
+            [[12, 3], [2, 11, 13], [21, 23], [42, 33], [32, 43], [51, 53]],
+            [[2, 4], [12, 14], [22, 24], [32, 34], [42, 44], [52, 54]],
+            [[3, 5], [13, 24], [14, 23], [33, 35], [43, 45], [53, 55]],
+            [[4, 15], [5, 25], [15, 35], [25, 34], [44, 55], [45, 54]]
         ]
     },
     {
-        "walls": [
-        12, 9, 14, 10, 10, 9,
-        5, 5, 12, 10, 10, 1,
-        5, 6, 3, 12, 11, 5,
-        5, 14, 10, 2, 10, 1,
-        4, 10, 10, 10, 9, 5,
-        6, 10, 11, 14, 3, 7
-        ],
-    },
-    {
-        "walls": [
-        14, 10, 10, 10, 8, 9,
-        12, 10, 10, 8, 3, 7,
-        4, 9, 14, 3, 12, 9,
-        5, 6, 10, 9, 7, 5,
-        5, 12, 10, 2, 11, 5,
-        7, 6, 10, 10, 10, 3
+        "edges": [
+            [[1, 10], [0, 11], [30], [20, 40], [30, 50], [40, 51]],
+            [[0, 2], [10, 12], [31, 22], [21, 41], [31, 51], [41, 50, 52]],
+            [[1, 3], [11, 22], [12, 21], [42, 33], [32], [51, 53]],
+            [[2, 4], [23], [13, 33], [23, 32, 43], [33, 53], [43, 52, 54]],
+            [[3, 14, 5], [4, 24], [14, 34], [24, 44], [34, 45], [53, 55]],
+            [[4, 15], [5, 25], [15], [45], [35, 44], [54]]
         ]
     },
     {
-        "walls": [
-        13, 12, 9, 14, 8, 9,
-        5, 5, 5, 12, 3, 5,
-        4, 3, 7, 5, 12, 3,
-        6, 9, 12, 1, 5, 13,
-        12, 3, 7, 5, 6, 1,
-        6, 10, 10, 3, 14, 3
+        "edges": [
+            [[10], [0, 20], [10, 30], [20, 40], [30, 50, 41], [40, 51]],
+            [[2, 11], [1, 21], [11, 31], [21, 41, 32], [31, 40], [50]],
+            [[1, 12, 3], [2, 13], [32], [22, 31], [52, 43], [42, 53]],
+            [[2, 4], [12, 23], [13, 33], [23, 34], [42], [52, 54]],
+            [[3, 5], [24, 15], [14, 34], [24, 33, 44], [34], [53, 55]],
+            [[4], [14, 25], [15, 35], [25, 45], [35, 55], [45, 54]]
         ]
     },
     {
-        "walls": [
-        12, 10, 10, 9, 12, 9,
-        5, 12, 11, 6, 3, 5,
-        6, 3, 12, 11, 12, 3,
-        12, 9, 4, 10, 3, 13,
-        5, 7, 6, 10, 9, 5,
-        6, 10, 10, 10, 2, 3
+        "edges": [
+            [[1], [20, 11], [10, 21], [40], [30, 50, 41], [40, 51]],
+            [[0, 2], [10, 12], [20, 22], [41, 32], [31, 40], [50, 52]],
+            [[1, 12, 3], [2, 11], [21], [31, 33], [52, 43], [42, 51]],
+            [[2, 13], [3, 14], [33, 24], [23, 32, 34], [42, 44], [54]],
+            [[14, 5], [4, 13], [23], [33, 35], [43, 54], [44, 53, 55]],
+            [[4, 15], [5, 25], [15, 35], [25, 34], [55], [45, 54]]
         ]
     },
     {
-        "walls": [
-        13, 12, 10, 9, 12, 9,
-        4, 2, 11, 6, 3, 5,
-        5, 12, 10, 10, 9, 5,
-        5, 6, 9, 14, 2, 3,
-        5, 13, 6, 10, 10, 11,
-        6, 2, 10, 10, 10, 11
+        "edges": [
+            [[1, 10], [0, 20], [10, 30], [20, 31], [50, 41], [40, 51]],
+            [[0, 2], [21, 12], [11], [30, 41], [31, 40], [50, 52]],
+            [[1, 12], [2, 11], [32, 23], [22], [52, 43], [42, 51]],
+            [[13, 4], [3, 14], [22, 33, 24], [23, 43], [33, 42], [54]],
+            [[3, 5], [13], [23, 34], [24, 44], [34, 45], [53, 55]],
+            [[4, 15], [5, 25], [15, 35], [25, 45], [35, 44, 55], [45, 54]]
         ]
     },
     {
-        "walls": [
-        13, 12, 10, 10, 8, 9,
-        5, 5, 12, 11, 5, 5,
-        4, 2, 3, 12, 3, 5,
-        5, 13, 12, 3, 14, 1,
-        5, 5, 5, 12, 9, 7,
-        6, 3, 6, 3, 6, 11
+        "edges": [
+            [[1], [20, 11], [10, 30], [20, 31], [50, 41], [40, 51]],
+            [[0, 11, 2], [1, 10, 21], [11], [30, 41], [31, 40], [50, 52]],
+            [[1, 3], [22, 13], [12, 32], [22, 42], [32, 43], [51, 53]],
+            [[2, 4], [12, 23], [13, 24], [43], [33, 42, 53], [43, 52]],
+            [[3, 5], [15], [23, 34], [24, 44], [34, 54], [44]],
+            [[4, 15], [5, 14, 25], [15, 35], [25, 45], [35, 55], [45]]
+        ]
+    },
+    {
+        "edges": [
+            [[1], [20, 11], [10, 30], [20, 40], [30, 50, 41], [40, 51]],
+            [[0, 2], [10, 12], [31, 22], [21], [40, 42], [50, 52]],
+            [[1, 12, 3], [2, 11, 22], [12, 21], [42, 33], [32, 41], [51, 53]],
+            [[2, 4], [14], [33, 24], [23, 32], [53], [43, 52, 54]],
+            [[3, 5], [13, 15], [23, 25], [44, 35], [34, 45], [53]],
+            [[4, 15], [5, 14], [24, 35], [25, 34], [44, 55], [45]]
         ]
     }
 ];
@@ -136,30 +123,30 @@ var start_marker = {x: -1, y: -1},
     stop_marker = {x: -1, y: -1};
 
 function _object_count(obj) {
-	var count = 0;
-	for (var k in obj) {
-		if (obj.hasOwnProperty(k)) {
-		   ++count;
-		}
-	}
-	return count;
+    var count = 0;
+    for (var k in obj) {
+        if (obj.hasOwnProperty(k)) {
+            ++count;
+        }
+    }
+    return count;
 }
 
 function placements_made() {
-	var placements = Array();
-	for (var k in placed) {
-		if (placed.hasOwnProperty(k)) {
-			placements.push(k);
-		}
-	}
-	return placements;
+    var placements = Array();
+    for (var k in placed) {
+        if (placed.hasOwnProperty(k)) {
+            placements.push(k);
+        }
+    }
+    return placements;
 }
 
 function _parse_placement(placestr) {
-	var f = Object();
-	f.x = parseInt(placestr[0]);
-	f.y = parseInt(placestr[2]);
-	return f;
+    var f = Object();
+    f.x = parseInt(placestr[0]);
+    f.y = parseInt(placestr[2]);
+    return f;
 }
 
 function __circle_placement_callback(e) {
@@ -182,151 +169,35 @@ function __circle_placement_callback(e) {
     }
 }
 
-// rotate mask right
-function ror(dirmask) {
-    return (dirmask == 8) ? 1 : (dirmask * 2);
-}
-
-// rotate mask left
-function rol(dirmask) {
-    return (dirmask == 1) ? 8 : (dirmask / 2);
-}
-
-function within_bounds(where, dirmask) {
-    switch(dirmask) {
-        case 1:
-            return where[0] < 5;
-        case 2:
-            return where[1] < 5;
-        case 4:
-            return where[0] > 0;
-        case 8:
-            return where[1] > 0;
-        default:
-            alert('what');
-    }
-}
-
-function _advance(dirmask) {
-    return [
-            ((dirmask & 5) > 0 ? 0 : 1),
-            ((dirmask & 3) > 0 ? 1 : -1)
-            ];
-}
-
-function _can_move_right(where, dirmask, maze_num) {
-    return within_bounds(where, ror(dirmask)) && (wall_db[maze_num].walls[where[1]*6 + where[0]] & ror(dirmask)) == 0;
-}
-
-function _can_move_left(where, dirmask, maze_num) {
-    return within_bounds(where, rol(dirmask)) && (wall_db[maze_num].walls[where[1]*6 + where[0]] & rol(dirmask)) == 0;
-}
-
-function _visited(where) {
-    return $('#mazeCell_'+where[0]+'_'+where[1]).data('visited') != null;
-}
-
-function _can_move_forward(where, dirmask, maze_num) {
-    return within_bounds(where, dirmask) && (wall_db[maze_num].walls[where[1]*6 + where[0]] & dirmask) == 0;
-    }
-
-function _build_path_segment(path_stack, dirmask, stop_marker, maze_num, level) {
+function _build_path_segment(path, currentPosition, stopPosition, maze_num, level) {
     if (level > 36) {
         // we're doing something wrong if we go beyond 6x6 traversals
         console.log('recursion bugs ahoy');
         return null;
     }
-    var head = path_stack[path_stack.length-1];
-    console.debug('_build_path_segment -- ' + head);
-    if (head[0] == stop_marker.x && head[1] == stop_marker.y) {
-        return path_stack;
-    }
 
-    $('#mazeCell_'+head[0]+'_'+head[1]).data('visited', 1);
+    path.push(currentPosition);
 
-    var substack = clone(path_stack), target_node = null;
-    head = substack[substack.length-1];
-    if (_can_move_right(head, dirmask, maze_num)) {
-        console.debug('\t wanna move right, dirmask: ' + dirmask);
-        var d = _advance(ror(dirmask));
-        target_node = head.slice(0, 2);
-        target_node[d[0]] += d[1];
-        if (!_visited(target_node)) {
-            console.debug('\t moving right to ' + target_node);
-            console.debug('\t new dirmask: ' + ror(dirmask));
-            substack.push(target_node);
-            substack = _build_path_segment(substack, ror(dirmask), stop_marker, maze_num, level+1);
-            if (!substack) {
-                substack = path_stack;
-            } else {
-                return substack;
-            }
-        } else {
-            console.debug('\t already visited ' + target_node);
-        }
+    if (currentPosition == stopPosition) {
+        return path;
     }
-    if (_can_move_left(head, dirmask, maze_num)) {
-        console.debug('\t wanna move left, dirmask: '+ dirmask);
-        var d = _advance(rol(dirmask));
-        console.debug('\t dimension: ' + d);
-        target_node = head.slice(0, 2);
-        target_node[d[0]] += d[1];
-        if (!_visited(target_node)) {
-            console.debug('\t moving left to ' + target_node);
-            console.debug('\t new dirmask: ' + rol(dirmask));
-            substack.push(target_node);
-            substack = _build_path_segment(substack, rol(dirmask), stop_marker, maze_num, level+1);
-            if (!substack) {
-                substack = path_stack;
-            } else {
-                return substack;
-            }
-        } else {
-            console.debug('\t already visited ' + target_node);
-        }
-    }
-    if (_can_move_forward(head, dirmask, maze_num)) {
-        console.debug('\t wanna move forward');
-        var d = _advance(dirmask);
-        target_node = head.slice(0, 2);
-        target_node[d[0]] += d[1];
-        if (!_visited(target_node)) {
-            console.debug('\t moving forward to ' + target_node);
-            substack.push(target_node);
-            substack = _build_path_segment(substack, dirmask, stop_marker, maze_num, level+1);
-            if (!substack) {
-                substack = path_stack;
-            } else {
-                return substack;
+    else {
+        for (var i = 0; i < wall_db[maze_num].edges[currentPosition % 10][Math.floor(currentPosition / 10)].length; i++) {
+            var nextPosition = wall_db[maze_num].edges[currentPosition % 10][Math.floor(currentPosition / 10)][i];
+            if (path.indexOf(nextPosition) == -1) {
+                var result = _build_path_segment(path.slice(0), nextPosition, stopPosition, maze_num, level + 1);
+                if (result != null) {
+                    return result;
+                }
             }
         }
+        return null;
     }
-    var dirmask_180 = rol(rol(dirmask));
-    if (_can_move_forward(head, dirmask_180, maze_num)) {
-        console.debug('\t wanna move backward: dirmask = ' + dirmask_180);
-        console.debug('\t current stack: ' + substack);
-        var d = _advance(dirmask_180);
-        target_node = head.slice(0, 2);
-        target_node[d[0]] += d[1];
-        if (!_visited(target_node)) {
-            console.debug('\t moving backwards to ' + target_node);
-            console.debug('\t new dirmask: ' + dirmask_180);
-            substack.push(target_node);
-            substack = _build_path_segment(substack, dirmask_180, stop_marker, maze_num, level+1);
-            if (!substack) {
-                substack = path_stack;
-            } else {
-                return substack;
-            }
-        }
-    }
-
-    return null;
 }
 
 function clone(arr) {
     var newarr = Array();
-    arr.forEach(function(val, idx) {
+    arr.forEach(function (val, idx) {
         newarr.push(val);
     });
     return newarr;
@@ -336,39 +207,34 @@ function build_and_show_path() {
     console.debug("This is the part where I build out a maze at " +
         "(" + start_marker.x + ", " + start_marker.y + ") and " +
         "(" + stop_marker.x + ", " + stop_marker.y + ")");
-    var path_stack = Array(), spoken_directions = Array();
-    var previous_node = null;
-    path_stack.push([start_marker.x, start_marker.y]);
-    path_stack = _build_path_segment(path_stack, 1, stop_marker, cur_maze, 0);
-    console.debug(path_stack);
-    if (path_stack) {
-        path_stack.forEach(function(val, idx) {
-            $('#mazeCell_'+val[0]+'_'+val[1]).addClass('path-segment');
-            if (previous_node) {
-                switch([val[0]-previous_node[0], val[1]-previous_node[1]].toString()) {
-                    case "-1,0":
-                        spoken_directions.push("left");
-                        break;
-                    case "0,-1":
-                        spoken_directions.push("up");
-                        break;
-                    case "1,0":
-                        spoken_directions.push("right");
-                        break;
-                    case "0,1":
-                        spoken_directions.push("down");
-                        break;
-                }
+    var spoken_directions = Array();
+    var path = _build_path_segment([], start_marker.x * 10 + start_marker.y, stop_marker.x * 10 + stop_marker.y, cur_maze, 0);
+    console.debug(path);
+    if (path) {
+        for (var i = 0; i < path.length - 1; i++) {
+            $('#mazeCell_' + Math.floor(path[i] / 10) + '_' + Math.floor(path[i] % 10)).addClass('path-segment');
+            console.log(path[i] - path[i + 1]);
+            switch (path[i + 1] - path[i]) {
+                case -1:
+                    spoken_directions.push("up");
+                    break;
+                case -10:
+                    spoken_directions.push("left");
+                    break;
+                case 1:
+                    spoken_directions.push("down");
+                    break;
+                case 10:
+                    spoken_directions.push("right");
+                    break;
             }
-            previous_node = val;
-        });
+        }
+        $('#mazeCell_' + stop_marker.x + '_' + stop_marker.y).addClass('path-segment');
         $('#mazeDirections').text(spoken_directions.join(', '));
     } else {
         console.log('we fail');
     }
-    window.setTimeout(function() {
-        $('td.mazeCell').unbind('click').click(reset_pane);
-    }, 3000);
+    $('td.mazeCell').unbind('click').click(reset_pane);
 }
 
 function place_start_marker(cell) {
@@ -395,55 +261,33 @@ function __stop_placement_callback(e) {
 
 function stop_placement_transition() {
     $('td.mazeCell').addClass('place-stop')
-                    .unbind('click')
-                    .click(__stop_placement_callback);
+        .unbind('click')
+        .click(__stop_placement_callback);
 }
 
 function start_placement_transition() {
     $('td.mazeCell').addClass('start-stop')
-                    .unbind('click')
-                    .click(__start_placement_callback);
+        .unbind('click')
+        .click(__start_placement_callback);
 }
 
 
 function reset_maze_walls() {
     console.debug('resetting walls...');
     $('td.mazeCell').css("border-top", "none")
-                    .css("border-left", "none")
-                    .css("border-bottom", "none")
-                    .css("border-right", "none")
-                    .data('mask', null);
+        .css("border-left", "none")
+        .css("border-bottom", "none")
+        .css("border-right", "none")
+        .data('mask', null);
 }
 
 function build_walls(maze_number) {
     console.debug('building walls for #' + maze_number);
-    $('td.mazeCell').each(function(idx, elem) {
-        var x = parseInt(elem.dataset.x), y = parseInt(elem.dataset.y);
-        var wall_mask = wall_db[maze_number].walls[y*6 + x];
-        elem.dataset['mask'] = wall_mask;
-        if (wall_mask & 8) {
-            $(elem).css("border-top", "1px solid #fff");
-        }
-        if (wall_mask & 4) {
-            $(elem).css("border-left", "1px solid #fff");
-        }
-        if (wall_mask & 2) {
-            $(elem).css("border-bottom", "1px solid #fff");
-        }
-        if (wall_mask & 1) {
-            $(elem).css("border-right", "1px solid #fff");
-        }
-    });
-}
-
-function build_walls2(maze_number) {
-    console.debug('building walls for #' + maze_number);
-    $('td.mazeCell').each(function(idx, elem) {
+    $('td.mazeCell').each(function (idx, elem) {
         var x = parseInt(elem.dataset.x);
         var y = parseInt(elem.dataset.y);
         var total = x * 10 + y;
-        var edges = wall_db[maze_number].edges[x][y];
-        console.debug("Cell " + x + "" + y + " (" + total + ") : " + edges);
+        var edges = wall_db[maze_number].edges[y][x];
         if (edges.indexOf(total - 1) == -1) {
             $(elem).css("border-top", "1px solid #fff");
         }
@@ -460,25 +304,25 @@ function build_walls2(maze_number) {
 }
 
 function attempt_render_maze() {
-	var maze_scaffold = -1;
-	var placements = placements_made();
-	if (placements.length != 1) {
-		return;
-	}
-	placements.forEach(function(c, i, arr) {
-		var pcoords = _parse_placement(c);
-		if (maze_db1[pcoords.x][pcoords.y] !== undefined) {
-			maze_scaffold = maze_db1[pcoords.x][pcoords.y];
-		} else if (maze_db2[pcoords.x][pcoords.y] !== undefined) {
-			maze_scaffold = maze_db2[pcoords.x][pcoords.y];
-		}
-	});
-	if (maze_scaffold != -1) {
-		// we have a match, render it
+    var maze_scaffold = -1;
+    var placements = placements_made();
+    if (placements.length != 1) {
+        return;
+    }
+    placements.forEach(function (c, i, arr) {
+        var pcoords = _parse_placement(c);
+        if (maze_db1[pcoords.x][pcoords.y] !== undefined) {
+            maze_scaffold = maze_db1[pcoords.x][pcoords.y];
+        } else if (maze_db2[pcoords.x][pcoords.y] !== undefined) {
+            maze_scaffold = maze_db2[pcoords.x][pcoords.y];
+        }
+    });
+    if (maze_scaffold != -1) {
+        // we have a match, render it
         cur_maze = maze_scaffold;
         build_walls(parseInt(maze_scaffold));
         start_placement_transition();
-	}
+    }
 }
 
 function reset_pane() {
@@ -488,17 +332,12 @@ function reset_pane() {
     cur_maze = -1;
     start_marker.x = start_marker.y = -1;
     stop_marker.x = stop_marker.y = -1;
-    $('#mazeDirections').text('Place an indicator by clicking on one of the maze cells, followed by the begin and end markers.');
+    $('#mazeDirections').html('&nbsp;');
     $('td.mazeCell').removeClass('path-segment start-stop place-stop placed start-marker stop-marker')
-                    .data('visited', null)
-                    .unbind('click')
-                    .click(__circle_placement_callback);
+        .unbind('click')
+        .click(__circle_placement_callback);
 }
 
 populate_maze_db();
 reset_pane();
 $("td.mazeCell").click(__circle_placement_callback);
-
-$(document).ready(function() {
-   build_walls2(0);
-});
