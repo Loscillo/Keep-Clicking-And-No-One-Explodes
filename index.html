@@ -1,7 +1,5 @@
 <html>
 <head>
-    <!--<link rel="stylesheet" href="css/jquery-ui.css"/>-->
-    <!--<link rel="stylesheet" href="css/expert.css"/>-->
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/edit.css"/>
     <link rel="stylesheet" href="css/maze.css"/>
@@ -981,6 +979,7 @@
         <div id='modMazes' class="well">
             <!-- Mazes -->
             <h2 class="text-center">Mazes Module</h2>
+            <h4 class="text-center">Place an indicator by clicking on one of the maze cells, followed by the begin and end markers.</h4>
             <div id="mazePane">
                 <table id="mazeTable">
                     <tr>
@@ -1140,7 +1139,7 @@
                         </td>
                     </tr>
                 </table>
-                <div id="mazeDirections"></div>
+                <div id="mazeDirections" class="text-center"></div>
             </div>
         </div>
         <hr>
@@ -1198,6 +1197,7 @@
                 </div>
             </form>
         </div>
+        <hr>
         <div id='modKnobs' class="well">
             <!-- Knobs -->
             <h2 class="text-center">Knobs Module</h2>
@@ -1450,20 +1450,8 @@
 </div>
 <!-- Misc Scripts -->
 <script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
 <script src="js/d3.min.js"></script>
 <script src="js/bootstrap.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#numBatteriesButtons").buttonset();
-        $("#serialSuffix").buttonset();
-        $("#serialVowel").buttonset();
-        $("#parallelPort").buttonset();
-        $("#indicatorCARLit").buttonset();
-        $("#indicatorFRKLit").buttonset();
-        $("#numStrikes").buttonset();
-    });
-</script>
 
 <!-- Module Scripts -->
 <script src="js/checkboxButtons.js"></script>

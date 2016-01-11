@@ -1,5 +1,9 @@
 #mazeTable {
     border: 1px solid #fff;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: separate;
+    border-spacing: 2px;
 }
 
 #mazeDirections {   
@@ -21,23 +25,24 @@
 
 .mazeDot {
     position: absolute;
-    top: -2px;
-    left: 10px;
+    top: -5px;
+    left: 11px;
 }
 
 .mazeCircle {
     display: none;
     position: absolute;
-    top: -2px;
+    top: -3px;
     left: 3px;
+    color: #81F781;
 }
 
 .mazeCell.start-stop:hover {
-    background-color: #00ff00;
+    background-color: #fff;
 }
 
 .mazeCell.start-marker {
-    background-color: #33ee33;
+    background-color: #fff;
 }
 
 .mazeCell.stop-marker {
@@ -52,16 +57,11 @@
     background-color: red;
 }
 
-.mazeCell:hover .mazeCircle {
+.mazeCell:hover .mazeCircle,
+.mazeCell.placed .mazeCircle{
     display: block;
-    color: #2211aa;
 }
 
 .mazeCell.start-stop:hover .mazeCircle {
     display: none;
-}
-
-.mazeCell.placed .mazeCircle {
-    color: #fff;
-    display: block;
 }
