@@ -92,42 +92,42 @@ $("input[name='batteries']").change(function () {
 
 $("input[name='car']").change(function () {
     bomb.CAR = ($(this).val() == "true");
+    $("#modalCAR").modal("toggle");
     if (bomb.callback != undefined) {
         bomb.callback.apply(this, bomb.parameters);
     }
-    $("#modalCAR").modal("toggle");
 });
 
 $("input[name='frk']").change(function () {
     bomb.FRK = ($(this).val() == "true");
+    $("#modalFRK").modal("toggle");
     if (bomb.callback != undefined) {
         bomb.callback.apply(this, bomb.parameters);
     }
-    $("#modalFRK").modal("toggle");
 });
 
 $("input[name='vowel']").change(function () {
     bomb.serialVowel = ($(this).val() == "true");
+    $("#modalSerialVowel").modal("toggle");
     if (bomb.callback != undefined) {
         bomb.callback.apply(this, bomb.parameters);
     }
-    $("#modalSerialVowel").modal("toggle");
 });
 
 $("input[name='suffix']").change(function () {
     bomb.serialSuffixEven = ($(this).val() == "true");
+    $("#modalSerialSuffix").modal("toggle");
     if (bomb.callback != undefined) {
         bomb.callback.apply(this, bomb.parameters);
     }
-    $("#modalSerialSuffix").modal("toggle");
 });
 
 $("input[name='parallel']").change(function () {
     bomb.parallelPort = ($(this).val() == "true");
+    $("#modalParallel").modal("toggle");
     if (bomb.callback != undefined) {
         bomb.callback.apply(this, bomb.parameters);
     }
-    $("#modalParallel").modal("toggle");
 });
 
 $("#strikesIncrement").click(function() {
