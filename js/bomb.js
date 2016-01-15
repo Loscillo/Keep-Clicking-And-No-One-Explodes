@@ -82,10 +82,6 @@ var bomb = {
     },
 };
 
-$("#test").click(function () {
-    bomb.haveCARIndicator(undefined, undefined);
-});
-
 $("input[name='batteries']").change(function () {
     bomb.batteries = $(this).val();
     $("#modalBatteries").modal("toggle");
@@ -95,7 +91,7 @@ $("input[name='batteries']").change(function () {
 });
 
 $("input[name='car']").change(function () {
-    bomb.indicatorCARLit = ($(this).val() == "true");
+    bomb.CAR = ($(this).val() == "true");
     if (bomb.callback != undefined) {
         bomb.callback.apply(this, bomb.parameters);
     }
@@ -103,7 +99,7 @@ $("input[name='car']").change(function () {
 });
 
 $("input[name='frk']").change(function () {
-    bomb.indicatorFRKLit = ($(this).val() == "true");
+    bomb.FRK = ($(this).val() == "true");
     if (bomb.callback != undefined) {
         bomb.callback.apply(this, bomb.parameters);
     }
